@@ -1,0 +1,251 @@
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color: #eecec3;
+}
+/*tìm kiếm*/
+.Timkiem {
+    margin-top: 5px;
+    background-color: rgb(240, 240, 255); 
+    position: sticky;
+    padding: 10px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    z-index: 1000;
+    display: flex;
+    align-items: center; 
+    text-transform: uppercase; 
+}
+
+.Timkiem input[type="text"] {
+    border: none; 
+    outline: none;
+    padding: 8px; 
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-size: 14px; 
+    margin-right: 10px; 
+    flex-grow: 1; 
+}
+
+.btn-timkiem {
+    border: 1px solid black;
+    background-color: rgb(255, 255, 255);
+    color: black; 
+    padding: 8px 15px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s; 
+    text-transform: uppercase; 
+}
+
+.btn-timkiem:hover {
+    background-color: rgb(214, 207, 221); 
+    color: black; 
+}
+
+
+/*danh sách*/
+.tieude{
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: bold;
+    color: #f62900;
+}
+.danhsachnguoidung{
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 2px;
+    margin: 0;
+    height: 80vh;
+    width: 100vw;
+    border: 1px solid black;
+    padding: 2px;
+    justify-content: space-between;
+    overflow-y: auto;
+    background-color: rgb(227, 231, 235);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    grid-auto-rows: 350px; 
+    grid-gap: 10px; 
+    overflow: hidden;
+}
+
+/**/
+.card{
+    background-color: #d2c6c2;
+    margin: 0;
+    border: 1px solid rgb(208, 202, 202);
+    height: 350px;
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+.anh{
+    text-align: center;
+    height: 50px;
+    flex: 0 0 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thongtin{
+    padding: 2px;
+    margin: 2px;
+    height: 200px;
+    overflow: hidden;
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/*nút*/
+.btn-nut{
+    text-align: center;
+    flex: 0 0 100px;
+    height: 100px;
+
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    color: #fff; 
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+.btn.btn-chitiet {
+    background-color: #007BFF;
+}
+
+.btn.btn-chitiet:hover {
+    background-color: #064283; 
+}
+
+.btn.btn-sua {
+    background-color: #28a745; 
+}
+
+.btn.btn-sua:hover {
+    background-color: #0c7522; 
+}
+
+.btn.btn-xoa {
+    background-color: #ff7f50; 
+}
+
+.btn.btn-xoa:hover {
+    background-color: #db2602; 
+}
+
+.btn.btn-them{
+    background-color: #db2602;
+    min-width: 300px;
+    max-width: 500px;
+}
+.btn.btn-them:hover{
+    background-color: #7f1a06;
+}
+
+/**form*/
+h2{
+    margin: 20px;
+    display: flex;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+}
+form {
+    background-color: #f9f9f9; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    margin: 20px auto; /* Để căn giữa trên màn hình */
+    max-width: 600px; /* Giới hạn chiều rộng của form */
+}
+
+form h2 {
+    text-transform: uppercase; 
+    margin-bottom: 20px; 
+}
+
+form label {
+    font-weight: bold; 
+    margin-top: 10px; 
+    display: block; 
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="date"],
+form input[type="number"] {
+    width: calc(100% - 22px); /* Để trừ đi padding và border */
+    padding: 10px; 
+    margin: 5px 0 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+
+form button[type="submit"] {
+    background-color: #007bff; /* Màu xanh nước biển */
+    color: white;
+    border: none; 
+    padding: 10px 20px; 
+    margin-right: 10px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    transition: background-color 0.3s; 
+    width: auto; /* Để nút có chiều rộng tự động */
+}
+
+form button[type="button"] {
+    background-color: #dd761b; /* Màu cam */
+    color: white;
+    border: none; 
+    padding: 10px 20px; 
+    margin-right: 10px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    transition: background-color 0.3s; 
+    width: auto; /* Để nút có chiều rộng tự động */
+}
+
+form button[type="submit"]:hover {
+    background-color: #0056b3; /* Đổi màu khi hover */
+}
+
+form button[type="button"]:hover {
+    background-color: #f50606; /* Đổi màu khi hover */
+}
+
+/* CSS cho form chi tiết người dùng */
+form input[disabled] {
+    background-color: #e9ecef; 
+    cursor: not-allowed; 
+}

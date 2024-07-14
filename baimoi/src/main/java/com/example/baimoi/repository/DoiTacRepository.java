@@ -1,5 +1,7 @@
 package com.example.baimoi.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,4 +13,6 @@ import com.example.baimoi.model.DoiTac;
 public interface DoiTacRepository extends JpaRepository<DoiTac, Long> {
     @Query("SELECT d FROM DoiTac d LEFT JOIN FETCH d.imgDoiTacs WHERE d.madt = :id")
     DoiTac findDoiTacWithImages(@Param("id") Long id);
+
+    List<DoiTac> findByMadt(Long madt);
 }
