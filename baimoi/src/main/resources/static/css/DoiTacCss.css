@@ -273,11 +273,7 @@ padding-bottom: 5px;
     display: flex;
     flex-direction: column;
     width: 100%;
-<<<<<<< HEAD
-    height: 90%;
-=======
     height: 100%;
->>>>>>> 41a83d0daf2058df6fb9a3444713c15d4ca791bb
     padding-top: 10px;
     background-color: rgb(255, 240, 211);
 }
@@ -333,20 +329,12 @@ padding-bottom: 5px;
     display: flex;
     flex-direction: column;
     width: 60%;
-<<<<<<< HEAD
-    height: 600px;
-    background-color: bisque;
-    border-radius: 10px;
-}
-    .dt-12 h2{
-=======
     height: 700px;
     background-color: bisque;
     border-radius: 10px;
     justify-content: center;
 }
 .dt-12 h2{
->>>>>>> 41a83d0daf2058df6fb9a3444713c15d4ca791bb
     color: red;
     text-align: start;
     margin: 5px;
