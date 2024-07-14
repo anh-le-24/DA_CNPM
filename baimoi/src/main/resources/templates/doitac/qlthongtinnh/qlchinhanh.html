@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head">
+
+</head>
+    <body onload="toggleSidebar()">
+        <div class="container">
+            <div th:replace="/fragments/left :: left"></div>
+            <div class="content" id="content">
+                <div id="DoiTacContent" class="content-item">
+                    <div class="box-bg1">
+                        <h1>THÔNG TIN CHI NHÁNH</h1>
+                        <div class="box-bg2 scroll-list">
+                            <h2 th:text="${chiNhanh.macn == null ? 'Thêm Chi Nhánh Mới' : 'Sửa Chi Nhánh'}"></h2>   
+                            <form class="fm-fatt" th:action="@{/doitac/qlchinhanh/save}" th:object="${chiNhanh}" method="post">
+                                <input type="hidden" th:field="*{macn}" />
+
+                                <div class="fm-addthongtin">
+                                    <label>Tên Chi Nhánh:</label>
+                                    <input type="text" th:field="*{tencn}" required />
+                                </div>
+                                <div class="fm-addthongtin">
+                                    <label>Địa chị:</label>
+                                    <input type="text" th:field="*{sonhacn}" />
+                                </div>
+                                <div class="fm-addthongtin">
+                                    <label>Tên Đường:</label>
+                                    <input type="text" th:field="*{duongcn}" />
+                                </div>
+                                <div class="fm-addthongtin">
+                                    <label>Tên Quận:</label>
+                                    <input type="text" th:field="*{quancn}" />
+                                </div>
+                                <div class="fm-addthongtin">
+                                    <label>Tên Thành Phố:</label>
+                                    <input type="text" th:field="*{thanhphocn}" />
+                                </div>
+                                <div class="fm-addthongtin">
+                                    <label>Số Chỗ Ngồi của nhà hàng:</label>
+                                    <input type="number" min="10" th:field="*{sochongoi}" required />
+                                </div>
+                                
+                                <input type="hidden" name="madt" th:value="${doiTac.madt != null ? doiTac.madt : ''}" />
+
+                                <button style="padding: 10px 30px;" class="fm-btn-CSTT" type="submit">Lưu</button>
+                            </form>
+
+                            <h2 style="border-top: 3px solid red; padding-top: 10px;">Danh sách Chi Nhánh</h2>
+                            <div style="margin-bottom: 50px;" class="fm-table-QLDH">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Mã Chi Nhánh</th>
+                                            <th>Tên Chi Nhánh</th>
+                                            <th>Địa Chỉ</th>
+                                            <th>Số Chỗ Ngồi</th>
+                                            <th>Mã ĐT</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="chinhanh : ${chiNhanhs}">
+                                            <td th:text="${chinhanh.macn}"></td>
+                                            <td th:text="${chinhanh.tencn}"></td>
+                                            <td th:text="${chinhanh.getFullAddress()}"></td>
+                                            <td th:text="${chinhanh.sochongoi}"></td>
+                                            <td th:text="${chinhanh.madt}"></td>
+                                            <td style="padding: 10px 0;">
+                                                <a class="btnXN" th:href="@{/doitac/qlchinhanh/edit/{id}(id=${chinhanh.macn})}">Sửa</a>
+                                                <a class="btnHuy" th:href="@{/doitac/chinhanh/delete/{id}(id=${chinhanh.macn})}">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

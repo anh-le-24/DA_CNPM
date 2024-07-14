@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trangthai</title>
+</head>
+<body>
+    <h1>Danh dich vu</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Mã dịch vụ</th>
+                <th>nội dung</th>
+                <th>Số lượng</th>
+                <th>giá dịch vụ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="dichvu : ${dichvuccs}" th:if="${dichvu != null}">
+                <td th:text="${dichvu.madv}"></td>
+                <td th:text="${dichvu.noidung}"></td>
+                <td th:text="${dichvu.soluong}"></td>
+                <td th:text="${dichvu.giadv}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Mã dịch vụ</th>
+                <th>nội dung</th>
+                <th>Số lượng</th>
+                <th>giá dịch vụ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${dichvucc != null}">
+                <td th:text="${dichvucc.madv}"></td>
+                <td th:text="${dichvucc.noidung}"></td>
+                <td th:text="${dichvucc.soluong}"></td>
+                <td th:text="${dichvucc.giadv}"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Mã dịch vụ</th>
+                <th>nội dung</th>
+                <th>Số lượng</th>
+                <th>giá dịch vụ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${dichvucc != null}">
+                <td th:text="${dichvucc.madv}"></td>
+                <td th:text="${dichvucc.noidung}"></td>
+                <td th:text="${dichvucc.soluong}"></td>
+                <td th:text="${dichvucc.giadv}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <label for="imageName">Upload Image</label>
+        <input type="file" class="form-control-file" id="imageName" name="imageName" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</body>
+</html>

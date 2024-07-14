@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head">
+
+</head>
+    <body onload="toggleSidebar()">
+        <div class="container">
+            <div th:replace="/fragments/left :: left"></div>
+            <div class="content" id="content">
+                <div id="DoiTacContent" class="content-item">
+                    <div class="box-bg1">
+                        <h1>THÔNG TIN COMBO MÓN ĂN</h1>
+                        <div class="box-bg2 scroll-list">
+                            <h2 th:text="${comBoMonAn.macb == null ? 'Thêm Combo Món Ăn Mới' : 'Sửa Combo Món Ăn'}"></h2>
+                            <form class="fm-fatt" th:action="@{/doitac/qlcombo/save}" th:object="${comBoMonAn}" method="post">
+                                <input type="hidden" th:field="*{macb}" />
+
+                                <div class="fm-addthongtin">
+                                    <label>Tên Combo Món Ăn:</label>
+                                    <input type="text" placeholder="(Set Lẩu Cua ....)" th:field="*{tencb}" required />
+                                </div>
+                                <div class="fm-addthongtin">
+                                    <label>Mô Tả:</label>
+                                    <input type="text" placeholder="(Nước lẩu 100% từ cua đồng nguyên ...)"  th:field="*{mota}"></input>
+                                </div>
+                                <div class="fm-addthongtin">
+                                    <label>Giá Tiền:</label>
+                                    <input type="number" min="0" th:field="*{giatien}" required />
+                                </div>
+                                <div class="fm-addthongtin">
+                                    <label>Số Lượng Người Dùng:</label>
+                                    <input type="number" min="1" th:field="*{solgngdung}" required />
+                                </div>
+                                <input type="hidden" name="madt" th:value="${doiTac.madt != null ? doiTac.madt : ''}" />
+                                <button type="submit" class="fm-btn-CSTT">Lưu</button>
+                            </form>
+
+                            <h2 style="border-top: 3px solid red; padding-top: 10px;">Danh sách Combo Món Ăn</h2>
+                            <div style="margin-bottom: 50px;" class="fm-table-QLDH">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Mã Combo</th>
+                                            <th>Tên Combo</th>
+                                            <th>Mô Tả</th>
+                                            <th>Giá Tiền</th>
+                                            <th>Số Lượng Người</th>
+                                            <th>Mã ĐT</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="combo : ${doiTac.comBoMonAns}">
+                                            <td th:text="${combo.macb}"></td>
+                                            <td th:text="${combo.tencb}"></td>
+                                            <td th:text="${combo.mota}"></td>
+                                            <td th:text="${combo.giatien}"></td>
+                                            <td th:text="${combo.solgngdung}"></td>
+                                            <td th:text="${combo.madt}"></td>
+                                            <td style="padding: 10px 0;">
+                                                <a class="btnXN" th:href="@{/doitac/qlcombo/edit/{id}(id=${combo.macb})}">Sửa</a>
+                                                <a class="btnHuy" th:href="@{/doitac/qlcombo/delete/{id}(id=${combo.macb})}">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

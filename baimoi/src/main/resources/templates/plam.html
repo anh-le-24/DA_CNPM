@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phan Loai AT</title>
+</head>
+<body>
+    <h1>Danh sach phan loai am thuc</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Mã </th>
+                <th>Ten plat</th>
+                <th>Img mo ta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="loaiamthuc : ${loaiamthucs}" th:if="${loaiamthuc != null}">
+                <td th:text="${loaiamthuc.malat}"></td>
+                <td th:text="${loaiamthuc.tenlat}"></td>
+                <td th:text="${loaiamthuc.imgmota}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Mã </th>
+                <th>Ten plnh</th>
+                <th>Img mo ta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${loaiamthucid != null}">
+                <td th:text="${loaiamthucid.malat}"></td>
+                <td th:text="${loaiamthucid.tenlat}"></td>
+                <td th:text="${loaiamthucid.imgmota}"></td> 
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>

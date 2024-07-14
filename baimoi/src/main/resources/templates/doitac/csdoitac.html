@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head"></head>
+<body onload="toggleSidebar()">
+    <div class="container">
+        <div th:replace="/fragments/left :: left"></div>
+        <div class="content" id="content">
+            <div id="DoiTacContent" class="content-item">
+                <div class="box-bg1">
+                    <h1>CHỈNH SỬA THÔNG TIN ĐỐI TÁC</h1>
+                    <div class="box-bg2">
+                        <form th:action="@{/doitac/update}" method="post" enctype="multipart/form-data" th:object="${doiTac}">
+                            <div class="dt-1">
+                                <div class="dt-11">
+                                    <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}" />
+                                    <button class="fm-btn-CSTT" type="submit">LƯU THÔNG TIN</button>
+                                    <div class="form-group">
+                                        <label for="file">Ảnh mô tả</label>
+                                        <input type="file" class="form-control-file" id="file" name="file" />
+                                    </div>
+                                </div>
+                                <div class="dt-12 scroll-list" th:if="${doiTac != null}">
+                                    <div class="info-DoiTac">
+                                        <h2>Thông tin nhà hàng</h2>                                        
+
+                                        <div class="infoDT-item" style="display: none;">
+                                            <input class="infoDT-value" type="text" th:value="${doiTac.madt}" th:field="*{madt}" required ></input>
+                                        </div>
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Tên Nhà Hàng: </span>
+                                            <input class="infoDT-value" type="text" th:value="${doiTac.tennhahang}" th:field="*{tennhahang}" required ></input>
+                                        </div>
+                                        
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Địa chỉ Nhà Hàng: </span>
+                                            <input class="infoDT-value"  type="text"th:value="${doiTac.sonhanh}" th:field="*{sonhanh}" required  />
+                                        </div>
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Đường: </span>
+                                            <input class="infoDT-value" type="text"  th:value="${doiTac.duongnh}"  th:field="*{duongnh}" required />
+                                        </div>
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Quận: </span>
+                                            <input class="infoDT-value" type="text" th:value="${doiTac.quannh}"  th:field="*{quannh}" required />
+                                        </div>
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Thành Phố: </span>
+                                            <input class="infoDT-value" type="text" th:value="${doiTac.thanhphonh}" th:field="*{thanhphonh}" required />
+                                        </div>
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Số chỗ ngồi: </span>
+                                            <input class="infoDT-value" th:text="${doiTac.sochongoi}" th:field="*{sochongoi}" required></input>
+                                        </div>   
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Mô tả: </span>
+                                            <input class="infoDT-value" type="text" th:value="${doiTac.mota}"th:field="*{mota}" required  ></input>
+                                        </div>
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Link Liên kết: </span>
+                                            <input class="infoDT-value" type="text" th:value="${doiTac.linklienket}" th:field="*{linklienket}" required ></input>
+                                        </div>
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Link Google Map: </span>
+                                            <input class="infoDT-value" type="text" th:value="${doiTac.linkggmap}"th:field="*{linkggmap}" required ></input>
+                                        </div>
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Giờ mở cửa: </span>
+                                            <input class="infoDT-value" type="time" step="1" th:value="${doiTac.giomo}" th:field="*{giomo}" required ></input>
+                                        </div>
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Giờ đóng cửa: </span>
+                                            <input class="infoDT-value" type="time" step="1" th:value="${doiTac.giodong}" th:field="*{giodong}" required ></input>
+                                        </div>
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Hóa Đơn trung bình: </span>
+                                            <input class="infoDT-value" type="text" th:value="${doiTac.hoadontb}" th:field="*{hoadontb}" required ></input>
+                                        </div>
+
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Ngày đăng ký: </span>
+                                            <input class="infoDT-value" type="date" th:value="${doiTac.ngaydk}" th:field="*{ngaydk}" readonly />
+                                        </div>
+
+                                        <div class="infoDT-item">
+                                            <span class="infoDT-label">Dịch vụ đăng ký với Admin: </span>
+                                            <span class="infoDT-value" th:text="${doiTac.dichVuCC.noidung}" style="color: red; font-weight: bold;"></span>
+                                            <input type="hidden" th:field="*{madv}" th:value="${doiTac.dichVuCC.madv}" />
+                                        </div>
+
+                                        <div class="infoDT-item" th:if="${not #lists.isEmpty(doiTac.loaiNhaHangs)}">
+                                            <span class="infoDT-label">Loại Nhà Hàng: </span>
+                                            <span class="infoDT-value">
+                                                <ul class="fm-ulinfor">
+                                                    <li th:each="loaiNhaHang : ${doiTac.loaiNhaHangs}" th:text="${loaiNhaHang.tenlnh}"></li>
+                                                </ul>
+                                            </span>
+                                        </div>
+                                        
+                                        <input type="hidden" th:field="*{madt}" />
+                                        <div class="infoDT-item" >
+                                            <span class="infoDT-label">Loại Nhà Hàng: </span>
+                                            <div class="infoDT-value" style="display: flex; flex-direction: column;">
+                                                <div th:each="loaiNhaHang : ${loainhahangs}" style="display: block; margin-bottom: 5px;">
+                                                    <input type="checkbox" 
+                                                           th:id="${'loaiNhaHang_' + loaiNhaHang.malnh}"
+                                                           th:value="${loaiNhaHang.malnh}" 
+                                                           name="selectedLoaiNhaHangs"
+                                                           th:checked="${doiTac.loaiNhaHangs.contains(loaiNhaHang)}"/>
+                                                    <label th:for="${'loaiNhaHang_' + loaiNhaHang.malnh}" th:text="${loaiNhaHang.tenlnh}"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head"></head>
+<body onload="toggleSidebar()">
+    <div class="container">
+        <div th:replace="/fragments/left :: left"></div>
+        <div class="content" id="content">
+            <div id="DoiTacContent" class="content-item">
+                <div class="box-bg1">
+                    <h1>THÔNG TIN ĐỐI TÁC</h1>
+                    <div class="box-bg2">
+                        <div class="dt-1">
+                            <div class="dt-11">
+                                <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}" />
+                                <a class="fm-btn-CSTT" type="button" th:href="@{/doitac/ctdoitac/csdoitac/{id}(id = ${doiTac.madt})}">
+                                    CHỈNH SỬA
+                                </a>
+                            </div>
+                            <div class="dt-12 scroll-list" th:if="${doiTac != null}">
+                                <div class="info-DoiTac">
+                                    <h2>Thông tin đối tác</h2>
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Tên người đại diện: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.nguoiDung.hoten}"></span>
+                                    </div>  
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Số điện thoại: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.nguoiDung.sdt}"></span>
+                                    </div>                
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Email: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.nguoiDung.email}"></span>
+                                    </div>
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Địa chỉ đối tác: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.nguoiDung.getFullAddress()}"></span>
+                                    </div>
+                                </div>
+                                <div class="info-DoiTac">
+                                    <h2>Thông tin nhà hàng</h2>
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Tên Nhà Hàng: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.tennhahang}"></span>
+                                    </div>
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Địa chỉ: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.getFullAddress()}"></span>
+                                    </div>   
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Số chỗ ngồi: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.sochongoi}"></span>
+                                    </div>   
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Ngày đăng ký: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.ngaydk}"></span>
+                                    </div>
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Dịch vụ đăng ký với Admin: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.dichVuCC.noidung}" style="color: red; font-weight: bold;"></span>
+                                    </div>
+                                    
+                                    <div class="infoDT-item" th:if="${not #lists.isEmpty(doiTac.loaiNhaHangs)}" >
+                                        <span class="infoDT-label">Loại nhà hàng: </span>
+                                        <span class="infoDT-value">
+                                            <ul class="fm-ulinfor">
+                                                <li th:each="loainhahang : ${doiTac.loaiNhaHangs}"  th:text="${loainhahang.tenlnh}"></li>
+                                            </ul>
+                                        </span>
+                                    </div>
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Mô tả: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.mota}"></span>
+                                    </div>
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Link Liên kết: </span>
+                                        <span class="infoDT-value"><a th:href="${doiTac.linklienket}" th:text="${doiTac.linklienket}"></a></span>
+                                    </div>
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Link Google Map: </span>
+                                        <span class="infoDT-value"><a th:href="${doiTac.linkggmap}" th:text="${doiTac.linkggmap}"></a></span>
+                                    </div>
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Giờ mở cửa: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.giomo}"></span>
+                                    </div> 
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Giờ đóng cửa: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.giodong}"></span>
+                                    </div> 
+                                    <div class="infoDT-item">
+                                        <span class="infoDT-label">Hóa Đơn trung bình: </span>
+                                        <span class="infoDT-value" th:text="${doiTac.hoadontb}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

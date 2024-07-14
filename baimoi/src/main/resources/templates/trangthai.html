@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trangthai</title>
+</head>
+<body>
+    <h1>Danh sachs trangj thai</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Mã trạng thái</th>
+                <th>nội dung</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="trangthai : ${trangthaidons}" th:if="${trangthai != null}">
+                <td th:text="${trangthai.mattd}"></td>
+                <td th:text="${trangthai.noidung}"></td>
+                <!-- <td>
+                    <button type="button" th:onclick="'xemChiTiet(' + ${nguoidung.mand} + ')'">Xem chi tiết</button>
+                    <button type="button" th:onclick="'suaNguoiDung(' + ${nguoidung.mand} + ')'">Sửa</button>
+                   
+                    <button type="button" th:onclick="'xoaNguoiDung(' + ${nguoidung.mand} + ')'">Xóa</button>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>
