@@ -452,6 +452,7 @@ public class DoiTacController {
     }
 
     @Transactional
+<<<<<<< HEAD
     @GetMapping("/qlchinhanh/delete/{id}")
     public String deleteChiNhanhCtrl(@PathVariable Long id) {
         chiNhanhService.deleteChiNhanh(id);    
@@ -465,6 +466,17 @@ public class DoiTacController {
         // DoiTac doiTac = chiNhanh.getDoiTac();
         // Long doiTacId = doiTac.getMadt();
            
+=======
+    @GetMapping("/chinhanh/delete/{id}")
+    public String deleteChiNhanhCtrl(@PathVariable Long id) {
+        chiNhanhService.deleteChiNhanh(id);    
+        Optional <ChiNhanh> chiNhanhOtp = chiNhanhService.getChiNhanhById(id);
+        ChiNhanh chiNhanh = chiNhanhOtp.get();
+        
+        
+        DoiTac doiTac = chiNhanh.getDoiTac();
+        
+>>>>>>> 41a83d0daf2058df6fb9a3444713c15d4ca791bb
         return "redirect:/doitac/qlchinhanh/";
     }
 
