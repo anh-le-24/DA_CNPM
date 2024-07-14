@@ -6,7 +6,7 @@
         <title>Đặt bàn Boss </title>
         <link th:href="@{/css/main.css}" rel="stylesheet" />
         <script th:src="@{https://example.com/fontawesome/vVERSION/js/all.js}"></script>
-       
+ 
         <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}"/>
         <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
         <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
@@ -15,44 +15,7 @@
 
     <body>
         <!--NAV BAR-->
-        <header>
-            <div class="navfixtop">
-                <div class="contenttop">
-                    <div class="topnav" id="myTopnav">
-                        <a th:href="@{/trangchu}" class="active">Trang chủ</a>
-                        <a href="#news">News</a>
-                        <a href="#contact">Contact</a>
-                        <a href="./admin.html">Admin</a>
-                    </div>
-                </div>
-                <div class="nav_button">
-                    <button class="btn" >
-                        <a th:href="@{/register}">Đăng ký</a>
-                    </button>
-                    <button class="btn white-btn">
-                        <a th:href="@{/login}">Đăng nhập</a>
-                    </button>
-                    <div class="account-menu">
-                        <a href="#">
-                            <button class="btnac"><i class="bx bx-user"></i></button>
-                        </a>
-                        <div class="dropdown-content">
-                            <a th:href="@{/info}">Thông tin cá nhân</a>
-                            <a href="resetpw.html">Quản lý mật khẩu</a>
-                            <a href="Login.html" class="logout">Đăng xuất</a>
-                        </div>
-                    </div>
-                    
-                </div>
-                    <div class="nav-menu-btn">
-                        <i class="bx bx-menu"></i>
-                    </div>
-                        
-                </div>
-                
-            </div>
-           
-        </header>
+        <header th:replace="/fragments/top :: top"></header>
 
         <!-- BODY Content  -->
         <div class="fixcontent">
@@ -83,10 +46,10 @@
                         <ul class="option"> <!--menu -->
                             <li class="active">Khu vực</li>
                             <li>Quận 1</li>
-                            <li>Quận 1</li>
-                            <li>Quận 1</li>
-                            <li>Quận 1</li>
-                            <li>Quận 1</li>
+                            <li>Quận 2</li>
+                            <li>Quận 3</li>
+                            <li>Thủ Đức</li>
+                            <li>Quận 10</li>
                         </ul>
                     </div>
                     <div class="dropdown">
@@ -102,14 +65,14 @@
                             <li>Quận 1</li>
                         </ul>
                     </div>
-
                     <button class="filter-btn">Lọc</button>
                 </div>
+                <!---------  Loại Nhà Hàng  --------->
                 <div class="menu-container">
-                    <div class="menu">
+                    <div class="menu" th:each="loainhahang : ${loainhahangs}" th:if="${loainhahang != null}">
                         <div class="menu-item">
-                            <img th:src="@{https://cdn-icons-png.flaticon.com/128/2414/2414423.png}">
-                            <p>Buffet</p>
+                            <img th:src="@{/uploads/{imgmota}(imgmota=${loainhahang.imgmota})}" alt="Mô tả ảnh">
+                            <p th:text="${loainhahang.tenlnh}"></p>
                         </div>
                       
                     </div>
@@ -124,19 +87,15 @@
                 </div>
                 
                 <div class="pagebox manhinh2 scroll-list ">
-                    <div class="box1">
+                    <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac != null}">
                         <div class="box2">
-                            <img class="fix-img" src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_75,s_828x828/https://cdn.tgdd.vn/Files/2022/01/16/1411172/10-nha-hang-buffet-hai-san-sai-gon-sang-xin-min-202201161801218516.jpg"/>
+                            <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
                         </div>
-                        <a th:href="@{/ctnhahang}">
-                            <h4 class="tieuDe-nhaHang">
-                                THỚT - Nhà hàng hải sản ngắm công viên 23/09
-                            </h4>
+                        <a th:href="@{/ctnhahang/{id} (id = ${doiTac.madt})}">
+                            <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
                         </a>
                         
-                        <p class="diaChi-nhaHang">
-                            103A Phạm Ngũ Lão, Phường Phạm Ngũ Lão, Quận 1, Thành phố Hồ Chí Minh
-                        </p>
+                        <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
                         <div style="display: flex;width: 150px; margin: 3px; align-items: start;">
                             <button type="button" class="fm-btn">Đặt bàn</button>
                         </div>

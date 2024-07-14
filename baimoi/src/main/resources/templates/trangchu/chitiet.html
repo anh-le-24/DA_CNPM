@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale= 1.0" />
     <title>Chi Tiết</title>
     <link rel="stylesheet" th:href="@{/css/chitiet.css}">
-    
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
     
 </head>
 <body>
+    <header th:replace="/fragments/top :: top">
+    </header>
     <div class="fixcontent">
         <div class="content">
             <section class="container">
@@ -35,11 +37,12 @@
             </section>
             <div class="item-left">
                 <div  class="detail-box">
-                    <h2>THỚT - Nhà hàng hải sản ngắm công viên 23/09</h2>
-                    <p class="address"><i class="fas fa-map-marker-alt"></i> 103A Phạm Ngũ Lão, Phường Phạm Ngũ Lão, Quận 1</p>
+                    <h2 th:text="${doiTac.tennhahang}"></h2>
+                    <p class="address" th:text="${doiTac.getFullAddress()}"><i class="fas fa-map-marker-alt"></i> </p>
                     <p class="category"><i class="fas fa-utensils"></i> Loại hình: <span>Buffet, gọi món Việt, Hải Sản</span></p>
-                    <p class="price"><i class="fas fa-dollar-sign"></i> Khoảng giá: <span>200.000 - 500.000 đ/người</span></p>
-                    <p class="status closed"><i class="fas fa-clock"></i> Đóng cửa</p>
+                    <p class="price" th:text="'Khoảng giá: ' + ${doiTac.hoadontb} + ' / người'"><i class="fas fa-dollar-sign"></i><span>200.000 - 500.000 đ/người</span></p>
+                    <p class="status closed" th:text="'Mở cửa: ' + ${doiTac.giomo}"><i class="fas fa-clock"></i></p>
+                    <p class="status closed" th:text="'Đóng cửa: ' + ${doiTac.giodong}"><i class="fas fa-clock"></i></p>
                 </div>
                 <div class="menu-detail">
                     <a href="#de-xuat" class="active">Đề xuất</a>
