@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Khách hàng</title>
+    <link rel="stylesheet" th:href="@{/css/Khachhang.css}">
+</head>
+<body>
+    <!-- thanh điều hướng trên -->
+    <nav class="navbar">
+        <div class="Logo">
+            <a href="#">VANH</a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a th:href="@{/admin/home}">Quản lý website</a></li>
+            <li><a th:href="@{/admin/khachhang}">Khách hàng</a></li>            
+            <li><a th:href="@{/admin/doitac}">Đối tác</a></li>
+            <li><a th:href="@{/admin/thongke}">Thống kê</a></li>
+        </ul>
+    </nav>
+
+    <div class="Timkiem">
+        <input type="text" id="search" placeholder="Tìm kiếm...">
+        <img th:src="@{/img/search.png}" alt="Search image">
+    </div>
+
+    <button type="button" onclick="toggleForm('themKhachHangForm')">Thêm khách hàng</button>
+    
+    <!-- Form thêm khách hàng -->
+    <div id="themKhachHangForm" style="display:none;">
+        <h2>Thêm khách hàng</h2>
+        <form th:action="@{/nguoidung/them}" method="post">
+            <label for="hotenThem">Tên Người Dùng:</label>
+            <input type="text" id="hotenThem" name="hoten"><br><br>
+            <label for="sdtThem">Số Điện Thoại:</label>
+            <input type="text" id="sdtThem" name="sdt"><br><br>
+            <label for="emailThem">Email:</label>
+            <input type="text" id="emailThem" name="email"><br><br>
+            <label for="passwordThem">Password:</label>
+            <input type="password" id="passwordThem" name="password"><br><br>
+            <label for="sonhaThem">Số Nhà:</label>
+            <input type="text" id="sonhaThem" name="sonha"><br><br>
+            <label for="duongThem">Đường:</label>
+            <input type="text" id="duongThem" name="duong"><br><br>
+            <label for="quanThem">Quận:</label>
+            <input type="text" id="quanThem" name="quan"><br><br>
+            <label for="thanhphoThem">Thành Phố:</label>
+            <input type="text" id="thanhphoThem" name="thanhpho"><br><br>
+            <label for="ngaytaotkThem">Ngày Tạo Tài Khoản:</label>
+            <input type="date" id="ngaytaotkThem" name="ngaytaotk"><br><br>
+            <label for="solandatbanThem">Số Lần Đặt Bàn:</label>
+            <input type="number" id="solandatbanThem" name="solandatban"><br><br>
+            <label for="mapqThem">Mã Phân Quyền:</label>
+            <input type="text" id="mapqThem" name="mapq"><br><br>
+            <button type="submit">Lưu</button>
+            <button type="button" onclick="quaylaithem()">Hủy</button>
+        </form>
+    </div>
+
+    
+    <!--tất cả khách hàng hiện có-->
+    <div class="danhsachnguoidung">
+    <h1>Danh sách người dùng</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Mã người dùng</th>
+                <th>Tên người dùng</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Số nhà</th>
+                <th>Đường</th>
+                <th>Quận</th>
+                <th>Thành phố</th>
+                <th>Ngày tạo tài khoản</th>
+                <th>Số lần đặt bàn</th>
+                <th>Mã phân quyền</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="nguoidung : ${nguoidungs}" th:if="${nguoidung != null}">
+                <td th:text="${nguoidung.mand}"></td>
+                <td th:text="${nguoidung.hoten}"></td>
+                <td th:text="${nguoidung.sdt}"></td>
+                <td th:text="${nguoidung.email}"></td>
+                <td th:text="${nguoidung.password}"></td>
+                <td th:text="${nguoidung.sonha}"></td>
+                <td th:text="${nguoidung.duong}"></td>
+                <td th:text="${nguoidung.quan}"></td>
+                <td th:text="${nguoidung.thanhpho}"></td>
+                <td th:text="${#dates.format(nguoidung.ngaytaotk, 'dd/MM/yyyy')}"></td>
+                <td th:text="${nguoidung.solandatban}"></td>
+                <td th:text="${nguoidung.mapq}"></td>
+                <td>
+                    <button type="button" th:onclick="'xemChiTiet(' + ${nguoidung.mand} + ')'">Xem chi tiết</button>
+                    <button type="button" th:onclick="'suaNguoiDung(' + ${nguoidung.mand} + ')'">Sửa</button>
+                    <!--<a th:href="@{/nguoidung/capnhat/{id}(id=${nguoidung.id})}" class="btn-capnhat">sửa</a>-->
+                    <button type="button" th:onclick="'xoaNguoiDung(' + ${nguoidung.mand} + ')'">Xóa</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    
+    <!-- Form sửa người dùng -->
+    <div id="suaNguoiDungForm" style="display:none;">
+        <h2>Sửa thông tin khách hàng</h2>
+        <form th:action="@{/nguoidung/sua}" method="post">
+            <input type="hidden" id="mandSua" name="mand"/>
+            <label for="hotenSua">Tên Người Dùng:</label>
+            <input type="text" id="hotenSua" name="hoten"><br><br>
+            <label for="sdtSua">Số Điện Thoại:</label>
+            <input type="text" id="sdtSua" name="sdt"><br><br>
+            <label for="emailSua">Email:</label>
+            <input type="text" id="emailSua" name="email"><br><br>
+            <label for="passwordSua">Password:</label>
+            <input type="password" id="passwordSua" name="password"><br><br>
+            <label for="sonhaSua">Số Nhà:</label>
+            <input type="text" id="sonhaSua" name="sonha"><br><br>
+            <label for="duongSua">Đường:</label>
+            <input type="text" id="duongSua" name="duong"><br><br>
+            <label for="quanSua">Quận:</label>
+            <input type="text" id="quanSua" name="quan"><br><br>
+            <label for="thanhphoSua">Thành Phố:</label>
+            <input type="text" id="thanhphoSua" name="thanhpho"><br><br>
+            <label for="ngaytaotkSua">Ngày Tạo Tài Khoản:</label>
+            <input type="date" id="ngaytaotkSua" name="ngaytaotk"><br><br>
+            <label for="solandatbanSua">Số Lần Đặt Bàn:</label>
+            <input type="number" id="solandatbanSua" name="solandatban"><br><br>
+            <label for="mapqSua">Mã Phân Quyền:</label>
+            <input type="text" id="mapqSua" name="mapq"><br><br>
+            <button type="submit">Lưu thay đổi</button>
+            <button type="button" onclick="huySua()">Hủy</button>
+        </form>
+    </div>
+
+    <!-- Form chi tiết người dùng -->
+    <div id="chiTietNguoiDungForm" style="display:none;">
+        <h2>Chi tiết khách hàng</h2>
+        <form>
+            <label for="hotenChiTiet">Tên Người Dùng:</label>
+            <input type="text" id="hotenChiTiet" name="hoten" disabled><br><br>
+            <label for="sdtChiTiet">Số Điện Thoại:</label>
+            <input type="text" id="sdtChiTiet" name="sdt" disabled><br><br>
+            <label for="emailChiTiet">Email:</label>
+            <input type="text" id="emailChiTiet" name="email" disabled><br><br>
+            <label for="sonhaChiTiet">Số Nhà:</label>
+            <input type="text" id="sonhaChiTiet" name="sonha" disabled><br><br>
+            <label for="duongChiTiet">Đường:</label>
+            <input type="text" id="duongChiTiet" name="duong" disabled><br><br>
+            <label for="quanChiTiet">Quận:</label>
+            <input type="text" id="quanChiTiet" name="quan" disabled><br><br>
+            <label for="thanhphoChiTiet">Thành Phố:</label>
+            <input type="text" id="thanhphoChiTiet" name="thanhpho" disabled><br><br>
+            <label for="ngaytaotkChiTiet">Ngày Tạo Tài Khoản:</label>
+            <input type="text" id="ngaytaotkChiTiet" name="ngaytaotk" disabled><br><br>
+            <label for="solandatbanChiTiet">Số Lần Đặt Bàn:</label>
+            <input type="text" id="solandatbanChiTiet" name="solandatban" disabled><br><br>
+            <label for="mapqChiTiet">Mã Phân Quyền:</label>
+            <input type="text" id="mapqChiTiet" name="mapq" disabled><br><br>
+            <button type="button" onclick="quaylai()">quay lại</button>
+        </form>
+    </div>
+    <div th:if="${successMessage}">
+        <div class="alert alert-success">
+            <p th:text="${successMessage}"></p>
+        </div>
+    </div>
+
+    <script th:src="@{/js/khachhang.js}"></script>
+</body>
+</html>
