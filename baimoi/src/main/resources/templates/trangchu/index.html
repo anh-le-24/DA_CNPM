@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale= 1.0" />
+        <title>Đặt bàn Boss </title>
+        <link th:href="@{/css/main.css}" rel="stylesheet" />
+        <script th:src="@{https://example.com/fontawesome/vVERSION/js/all.js}"></script>
+       
+        <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+        <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
+        <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/script.js}" defer></script>
+    </head>
+
+    <body>
+        <!--NAV BAR-->
+        <header>
+            <div class="navfixtop">
+                <div class="contenttop">
+                    <div class="topnav" id="myTopnav">
+                        <a th:href="@{/trangchu}" class="active">Trang chủ</a>
+                        <a href="#news">News</a>
+                        <a href="#contact">Contact</a>
+                        <a href="./admin.html">Admin</a>
+                    </div>
+                </div>
+                <div class="nav_button">
+                    <button class="btn" >
+                        <a th:href="@{/register}">Đăng ký</a>
+                    </button>
+                    <button class="btn white-btn">
+                        <a th:href="@{/login}">Đăng nhập</a>
+                    </button>
+                    <div class="account-menu">
+                        <a href="#">
+                            <button class="btnac"><i class="bx bx-user"></i></button>
+                        </a>
+                        <div class="dropdown-content">
+                            <a th:href="@{/info}">Thông tin cá nhân</a>
+                            <a href="resetpw.html">Quản lý mật khẩu</a>
+                            <a href="Login.html" class="logout">Đăng xuất</a>
+                        </div>
+                    </div>
+                    
+                </div>
+                    <div class="nav-menu-btn">
+                        <i class="bx bx-menu"></i>
+                    </div>
+                        
+                </div>
+                
+            </div>
+           
+        </header>
+
+        <!-- BODY Content  -->
+        <div class="fixcontent">
+            <div class="content">
+                <div class="search-box">
+                    <input type="search" name="Tìm kiếm" placeholder="Tìm kiếm của bạn...">
+                    <a th:href="@{#}" class="search-btn">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                </div>
+                <div class="menu-filter">
+                    <div class="dropdown">
+                        <div class="select">
+                            <span class="selected">Thành phố</span>
+                            <div class="caret"></div>
+                        </div>
+                        <ul class="option"> <!--menu -->
+                            <li class="active">Thành phố</li>
+                            <li>Hồ Chí Minh</li>
+                            <li>Hà Nội</li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <div class="select">
+                            <span class="selected">Khu vực</span>
+                            <div class="caret"></div>
+                        </div>
+                        <ul class="option"> <!--menu -->
+                            <li class="active">Khu vực</li>
+                            <li>Quận 1</li>
+                            <li>Quận 1</li>
+                            <li>Quận 1</li>
+                            <li>Quận 1</li>
+                            <li>Quận 1</li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <div class="select">
+                            <span class="selected">Giá trung bình</span>
+                            <div class="caret"></div>
+                        </div>
+                        <ul class="option"> <!--menu -->
+                            <li class="active">Giá trung bình</li>
+                            <li>Hồ Chí Minh</li>
+                            <li>Hà Nội</li>
+                            <li>Quận 1</li>
+                            <li>Quận 1</li>
+                        </ul>
+                    </div>
+
+                    <button class="filter-btn">Lọc</button>
+                </div>
+                <div class="menu-container">
+                    <div class="menu">
+                        <div class="menu-item">
+                            <img th:src="@{https://cdn-icons-png.flaticon.com/128/2414/2414423.png}">
+                            <p>Buffet</p>
+                        </div>
+                      
+                    </div>
+                </div>
+
+                <!--CHOICE-->
+
+                <!--Box1-->
+                <div>
+                    <h2>Buffet hải sản</h2>
+                    <p>Menu cực nhiều món ngon từ tôm, cua, ốc, ghẹ,... với nhiều mức giá.Một số Nhà hàng còn có tôm hùm, cua biển. Từ bình dân đến sang chảnh.</p>
+                </div>
+                
+                <div class="pagebox manhinh2 scroll-list ">
+                    <div class="box1">
+                        <div class="box2">
+                            <img class="fix-img" src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_75,s_828x828/https://cdn.tgdd.vn/Files/2022/01/16/1411172/10-nha-hang-buffet-hai-san-sai-gon-sang-xin-min-202201161801218516.jpg"/>
+                        </div>
+                        <a th:href="@{/ctnhahang}">
+                            <h4 class="tieuDe-nhaHang">
+                                THỚT - Nhà hàng hải sản ngắm công viên 23/09
+                            </h4>
+                        </a>
+                        
+                        <p class="diaChi-nhaHang">
+                            103A Phạm Ngũ Lão, Phường Phạm Ngũ Lão, Quận 1, Thành phố Hồ Chí Minh
+                        </p>
+                        <div style="display: flex;width: 150px; margin: 3px; align-items: start;">
+                            <button type="button" class="fm-btn">Đặt bàn</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <!-- -----Tool Box ------- -->
+        <div class="pagebox manhinh3">
+            <div class="div-main-ele div-right-footer">
+                <h3>FOLLOW US</h3>
+                <div class="div-follow">
+                    <div class="wrapper">
+                        <a class="facebook icon fm-link" th:href="@{https://www.facebook.com/thoitrangivymoda}" target="_blank">f</a>                        
+                        <a class="icon zalo fm-link" th:href="@{https://www.facebook.com/thoitrangivymoda}" target="_blank">Z</a>                       
+                        <a class="icon instagram fm-link" th:href="@{https://instagram.com/ivy_moda?igshid=OGQ5ZDc2ODk2ZA==}" target="_blank">Ig</a>      
+                    </div>
+                </div>
+            </div>   
+        </div>           
+    </body>
+</html>

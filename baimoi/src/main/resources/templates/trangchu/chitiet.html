@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale= 1.0" />
+    <title>Chi Tiết</title>
+    <link rel="stylesheet" th:href="@{/css/chitiet.css}">
+    
+    
+</head>
+<body>
+    <div class="fixcontent">
+        <div class="content">
+            <section class="container">
+                <div class="content-wrapper">
+                    <div class="slider-wrapper">
+                        <div class="slider">
+                            <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_75,s_828x828/https://cdn.tgdd.vn/Files/2022/01/16/1411172/10-nha-hang-buffet-hai-san-sai-gon-sang-xin-min-202201161801218516.jpg" alt="" id="slider-1" />
+                            <img src="https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwdusm6thmu176@resize_ss576x330" alt="" id="slider-2" />
+                            <img src="https://mms.img.susercontent.com/vn-11134517-7r98o-lqy0xzqinav8f4@resize_ss400x400!@crop_w400_h400_cT" alt="" id="slider-3" />
+                            <img src="https://mms.img.susercontent.com/vn-11134517-7r98o-lqy0d29v8xw9f7@resize_ss400x400!@crop_w400_h400_cT " alt="" id="slider-4" />
+                            <img src="https://mms.img.susercontent.com/vn-11134517-7r98o-lr375iz9g7tl34@resize_ss400x400!@crop_w400_h400_cT" alt="" id="slider-5" />
+                        </div>
+                        <button class="slider-button prev" onclick="prevSlide()">&#10094;</button>
+                        <button class="slider-button next" onclick="nextSlide()">&#10095;</button>
+                    </div>
+                    <div class="slider-nav">
+                        <a href="#slider-1"><img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_75,s_828x828/https://cdn.tgdd.vn/Files/2022/01/16/1411172/10-nha-hang-buffet-hai-san-sai-gon-sang-xin-min-202201161801218516.jpg" alt="" /></a>
+                        <a href="#slider-2"><img src="https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwdusm6thmu176@resize_ss576x330" alt="" /></a>
+                        <a href="#slider-3"><img src="https://mms.img.susercontent.com/vn-11134517-7r98o-lqy0xzqinav8f4@resize_ss400x400!@crop_w400_h400_cT" alt="" /></a>
+                        <a href="#slider-4"><img src="https://mms.img.susercontent.com/vn-11134517-7r98o-lqy0d29v8xw9f7@resize_ss400x400!@crop_w400_h400_cT" alt="" /></a>
+                        <a href="#slider-5"><img src="https://mms.img.susercontent.com/vn-11134517-7r98o-lr375iz9g7tl34@resize_ss400x400!@crop_w400_h400_cT" alt="" /></a>
+                    </div>
+                </div>
+            </section>
+            <div class="item-left">
+                <div  class="detail-box">
+                    <h2>THỚT - Nhà hàng hải sản ngắm công viên 23/09</h2>
+                    <p class="address"><i class="fas fa-map-marker-alt"></i> 103A Phạm Ngũ Lão, Phường Phạm Ngũ Lão, Quận 1</p>
+                    <p class="category"><i class="fas fa-utensils"></i> Loại hình: <span>Buffet, gọi món Việt, Hải Sản</span></p>
+                    <p class="price"><i class="fas fa-dollar-sign"></i> Khoảng giá: <span>200.000 - 500.000 đ/người</span></p>
+                    <p class="status closed"><i class="fas fa-clock"></i> Đóng cửa</p>
+                </div>
+                <div class="menu-detail">
+                    <a href="#de-xuat" class="active">Đề xuất</a>
+                    <a href="#tom-tat">Tóm tắt</a>
+                    <a href="#bang-gia">Bảng giá</a>
+                    <a href="#quy-dinh">Quy định</a>
+                    <a href="#de-xe">Để xe</a>
+                    <a href="#tien-ich">Tiện ích</a>
+                </div>
+                <div class="menu-content">
+                    <section id="de-xuat">
+                        <h2>Đề xuất</h2>
+                        <div class="card-scroll">
+                            <a href="#">
+                                <div class="card">
+                                    <div class="card-img">
+                                        <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_75,s_828x828/https://cdn.tgdd.vn/Files/2022/01/16/1411172/10-nha-hang-buffet-hai-san-sai-gon-sang-xin-min-202201161801218516.jpg" />
+                                    </div>
+                                    <div class="card-info">
+                                    <p class="text-title">Suất Buffet Trưa T5-CN, Giá 299K - Buffet Liberty Level 9 Phạm Ngũ Lão </p>
+                                    <p class="text-body">Menu hơn 50 món: Khai vị, Món thuần Việt, Hải sản nướng, Salad, Tráng miệng</p>
+                                    </div>
+                                    <div class="card-footer">
+                                    <span class="text-title">259.000</span>
+                                    <a href="#" class="card-button">
+                                    Chọn ngay
+                                    </a> 
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="card">
+                                    <div class="card-img">
+                                        <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_75,s_828x828/https://cdn.tgdd.vn/Files/2022/01/16/1411172/10-nha-hang-buffet-hai-san-sai-gon-sang-xin-min-202201161801218516.jpg" />
+                                    </div>
+                                    <div class="card-info">
+                                    <p class="text-title">Suất Buffet Trưa T5-CN, Giá 299K - Buffet Liberty Level 9 Phạm Ngũ Lão </p>
+                                    <p class="text-body">Menu hơn 50 món: Khai vị, Món thuần Việt, Hải sản nướng, Salad, Tráng miệng</p>
+                                    </div>
+                                    <div class="card-footer">
+                                    <span class="text-title">259.000</span>
+                                    <a href="#" class="card-button">
+                                        Chọn ngay
+                                    </a> 
+                                    </div>
+                                </div>
+                            </a><a href="#">
+                                <div class="card">
+                                    <div class="card-img">
+                                        <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_75,s_828x828/https://cdn.tgdd.vn/Files/2022/01/16/1411172/10-nha-hang-buffet-hai-san-sai-gon-sang-xin-min-202201161801218516.jpg" />
+                                    </div>
+                                    <div class="card-info">
+                                    <p class="text-title">Suất Buffet Trưa T5-CN, Giá 299K - Buffet Liberty Level 9 Phạm Ngũ Lão </p>
+                                    <p class="text-body">Menu hơn 50 món: Khai vị, Món thuần Việt, Hải sản nướng, Salad, Tráng miệng</p>
+                                    </div>
+                                    <div class="card-footer">
+                                    <span class="text-title">259.000</span>
+                                    <a href="#" class="card-button">
+                                    Chọn ngay
+                                    </a> 
+                                    </div>
+                                </div>
+                            </a><a href="#">
+                                <div class="card">
+                                    <div class="card-img">
+                                        <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_75,s_828x828/https://cdn.tgdd.vn/Files/2022/01/16/1411172/10-nha-hang-buffet-hai-san-sai-gon-sang-xin-min-202201161801218516.jpg" />
+                                    </div>
+                                    <div class="card-info">
+                                    <p class="text-title">Suất Buffet Trưa T5-CN, Giá 299K - Buffet Liberty Level 9 Phạm Ngũ Lão </p>
+                                    <p class="text-body">Menu hơn 50 món: Khai vị, Món thuần Việt, Hải sản nướng, Salad, Tráng miệng</p>
+                                    </div>
+                                    <div class="card-footer">
+                                    <span class="text-title">259.000</span>
+                                    <a href="#" class="card-button">
+                                    Chọn ngay
+                                    </a> 
+                                    </div>
+                                </div>
+                            </a>
+                        </div> 
+                    </section>
+                    <section id="tom-tat">
+                        <h2>Tóm tắt</h2>
+                        <p>PHÙ HỢP: Văn phòng, gia đình, tụ họp, gặp mặt liên hoan bạn bè, khách du lịch,...<br><br>
+
+                            MÓN ĐẶC SẮC:<br>
+                            - Hải sản nướng: Tôm nướng, Sò nướng, Cá hồi tẩm nướng muối ớt,...<br><br>
+                            
+                            - Lagu/cà ri bò gà, Gà/heo/bò quay, rô ti,...<br><br>
+                            
+                            - Món thuần Việt: Món cuốn các loại, lẩu, các loại bánh bèo, nậm, lọc,...<br><br>
+                            
+                            KHÔNG GIAN:<br>
+                            - Rộng, thoáng mát, kiến trúc hiện đại và ấm cúng. View toàn thành phố<br><br>
+                            
+                            - Lầu 9 sức chứa 170 khách. Phục vụ Buffet trưa T5-CN (11h - 13h30), phục vụ Gọi món thời gian còn lại.<br><br>
+                            
+                            - Phòng riêng tại lầu 2: 01 phòng (10 - 30 khách/phòng), chuyên phục vụ Gọi món.<br><br>
+                            
+                            ĐỂ Ô TÔ:<br>
+                            - Nơi gửi: Tại Khách sạn<br>
+                            - Phí gửi: 8000đ/chiếc<br><br>
+                            
+                            ĐỂ XE MÁY:<br>
+                            - Nơi gửi: Số 2 Phạm Ngũ Lão<br>
+                            - Phí gửi phụ thuộc đơn vị trông giữ xe<br><br>
+                            
+                            ĐIỂM ĐẶC TRƯNG:<br><br>
+                            - Đội ngũ đầu bếp giàu kinh nghiệm<br>
+                            - Nguyên liệu tại đây đều được tuyển chọn kỹ lưỡng từ các nhà cung cấp có giấy xác nhận an toàn vệ sinh thực phẩm.</p>
+                    </section>
+                    <section id="bang-gia">
+                        <h2>Bảng giá</h2>
+                        <!-- Nội dung Bảng giá -->
+                    </section>
+                    <section id="quy-dinh">
+                        <h2>Quy định</h2>
+                        <p>
+                            1. Quy định về đặt cọc: Thông tin đang được cập nhật, vui lòng liên hệ để biết chi tiết.<br><br>
+
+                            2. Quy định về ưu đãi: Có, cụ thể như sau:<br>
+                            - Ưu đãi không áp dụng các ngày: Tháng 1 (Ngày 1); Tháng 2 (Ngày 14); Tháng 3 (Ngày 8); Tháng 4 (Ngày 30); Tháng 5 (Ngày 1); Tháng 6 (Ngày 1); Tháng 9 (Ngày 2); Tháng 10 (Ngày 20); Tháng 11 (Ngày 20); Tháng 12 (Ngày 24, 25, 31) & 10/3 Âm Lịch<br><br>
+
+                            3. Quy định về thời gian nhận khách PasGo:<br>
+                            - Nhà hàng phục vụ Gọi món buổi trưa từ thứ 2 - thứ 4<br>
+                            - Buffet phục vụ vào buổi trưa từ Thứ 5 đến Chủ nhật hàng tuần.<br><br>
+
+                            4. Quy định về Thời gian đặt chỗ trước: Không quy định<br>
+                            - Lưu ý: Quý khách vui lòng đặt chỗ trước ít nhất 120 phút để được phục vụ tốt nhất<br><br>
+
+                            5. Quy định về Thời gian giữ chỗ tối đa: Có, cụ thể như sau:<br>
+                            - Thời gian nhà hàng giữ chỗ tối đa: 20 phút.<br><br>
+
+                            6. Quy định về số khách tối thiểu trên mỗi lượt đặt bàn: Thông tin đang được cập nhật, vui lòng liên hệ để biết chi tiết.<br><br>
+
+                            7. Quy định về Hoá đơn: Có, cụ thể như sau:<br>
+                            - Hoá đơn VAT: Nhà hàng xuất hóa đơn VAT ngay sau khi kết thúc bữa ăn.<br>
+                            + Với Gọi món: Nhà hàng luôn thu 10%VAT<br>
+                            + Với Buffet: Giá menu đã bao gồm VAT<br>
+                            - Hoá đơn trực tiếp: Nhà hàng không xuất hóa đơn trực tiếp.<br><br>
+
+                            8. Quy định Phí phòng riêng: Thông tin đang được cập nhật, vui lòng liên hệ để biết chi tiết.<br><br>
+
+                            9. Quy định về Phí phục vụ: Có, cụ thể như sau:<br>
+                            - Với Buffet: Miễn phí<br>
+                            - Với Gọi món: 5%<br><br>
+
+                            10. Quy định về phí mang đồ vào: Thông tin đang được cập nhật, vui lòng liên hệ để biết chi tiết.
+                        </p>
+                    </section>
+                    <section id="de-xe">
+                        <h2>Để xe</h2>
+                        <!-- Nội dung Để xe -->
+                    </section>
+                    <section id="tien-ich">
+                        <h2>Tiện ích</h2>
+                        <!-- Nội dung Tiện ích -->
+                    </section>
+                </div>
+            </div>
+            <div class="item-right">
+                
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+            <script>
+                
+                
+            </script>
+</body>
+</html>

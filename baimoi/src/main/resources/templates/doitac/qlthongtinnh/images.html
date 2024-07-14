@@ -15,11 +15,7 @@
                             <h2>Thêm hình ảnh: <span th:text="${doiTac.tennhahang}"></span></h2>
                             
                             <form th:action="@{/doitac/{id}/images(id=${doiTac.madt})}" method="post" enctype="multipart/form-data" class="mb-4">
-<<<<<<< HEAD
-                                <div class="form-group">
-=======
                                 <div class="fm-a">
->>>>>>> 41a83d0daf2058df6fb9a3444713c15d4ca791bb
                                     <label for="files">Chọn nhiều ảnh:</label>
                                     <input type="file" class="form-control-file" id="files" name="files" multiple>
                                 </div>
