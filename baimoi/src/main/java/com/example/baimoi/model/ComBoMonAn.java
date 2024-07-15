@@ -20,6 +20,7 @@ public class ComBoMonAn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long macb;
     private String tencb;
+    private String img;
     private String mota;
     private double giatien;
     private int solgngdung;
@@ -37,11 +38,12 @@ public class ComBoMonAn {
     public ComBoMonAn() {
     }
 
-    public ComBoMonAn(double giatien, Long macb, Long madt, String mota, int solgngdung, String tencb) {
+    public ComBoMonAn(double giatien, Long macb, Long madt, String mota, String img, int solgngdung, String tencb) {
         this.giatien = giatien;
         this.macb = macb;
         this.madt = madt;
         this.mota = mota;
+        this.img=img;
         this.solgngdung = solgngdung;
         this.tencb = tencb;
     }
@@ -116,5 +118,13 @@ public class ComBoMonAn {
     public static String formatCurrency(double amount) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
         return decimalFormat.format(amount);
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

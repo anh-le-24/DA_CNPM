@@ -12,7 +12,7 @@
                         <h1>THÔNG TIN COMBO MÓN ĂN</h1>
                         <div class="box-bg2 scroll-list">
                             <h2 th:text="${comBoMonAn.macb == null ? 'Thêm Combo Món Ăn Mới' : 'Sửa Combo Món Ăn'}"></h2>
-                            <form class="fm-fatt" th:action="@{/doitac/qlcombo/save}" th:object="${comBoMonAn}" method="post">
+                            <form class="fm-fatt" th:action="@{/doitac/qlcombo/save}" th:object="${comBoMonAn}" method="post" enctype="multipart/form-data">
                                 <input type="hidden" th:field="*{macb}" />
 
                                 <div class="fm-addthongtin">
@@ -30,6 +30,14 @@
                                 <div class="fm-addthongtin">
                                     <label>Số Lượng Người Dùng:</label>
                                     <input type="number" min="1" th:field="*{solgngdung}" required />
+                                </div>
+                                
+                                <div class="fm-addthongtin">
+                                    <label for="file">Ảnh mô tả</label>
+                                    <input type="file" class="form-control-file" id="file" name="file" required />
+                                </div>
+                                <div th:if="${comBoMonAn.img != null}">
+                                    <img th:src="@{'/uploads/' + ${comBoMonAn.img}}" alt="Current image" style="max-width: 200px;" />
                                 </div>
                                 <input type="hidden" name="madt" th:value="${doiTac.madt != null ? doiTac.madt : ''}" />
                                 <button type="submit" class="fm-btn-CSTT">Lưu</button>

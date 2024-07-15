@@ -29,5 +29,9 @@ public class NguoiDungService {
     public void deleteNguoiDung(Long id) {
         nguoidungRepository.deleteById(id);
     }
-    
+
+
+    public Optional<NguoiDung> findBySdtAndPassword(String sdt, String password) {
+        return nguoidungRepository.findBySdtAndPassword(sdt, password);
+    }
 }

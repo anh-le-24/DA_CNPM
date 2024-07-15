@@ -109,16 +109,23 @@
 
         <!-- -----Tool Box ------- -->
         <div class="pagebox manhinh3">
-            <div class="div-main-ele div-right-footer">
-                <h3>FOLLOW US</h3>
-                <div class="div-follow">
-                    <div class="wrapper">
-                        <a class="facebook icon fm-link" th:href="@{https://www.facebook.com/thoitrangivymoda}" target="_blank">f</a>                        
-                        <a class="icon zalo fm-link" th:href="@{https://www.facebook.com/thoitrangivymoda}" target="_blank">Z</a>                       
-                        <a class="icon instagram fm-link" th:href="@{https://instagram.com/ivy_moda?igshid=OGQ5ZDc2ODk2ZA==}" target="_blank">Ig</a>      
+            <div class="footer">
+                <div class="div-main-ele">
+                    <h3>FOLLOW US</h3>
+                    <div class="div-follow">
+                        <div class="wrapper">
+                            <a class="facebook icon fm-link" th:href="@{https://www.facebook.com/thoitrangivymoda}" target="_blank">f</a>                        
+                            <a class="icon zalo fm-link" th:href="@{https://www.facebook.com/thoitrangivymoda}" target="_blank">Z</a>                       
+                            <a class="icon instagram fm-link" th:href="@{https://instagram.com/ivy_moda?igshid=OGQ5ZDc2ODk2ZA==}" target="_blank">Ig</a>      
+                        </div>
+                    </div>
+                </div>   
+                <div class="div-main-ele"> 
+                    <div class="fmLogoDT">
+                        <a th:href="${session.loggedInUser != null ? '/doitac/dangkydoitac' : '/doitac/login-required'}" target="_blank">ĐĂNG KÝ ĐỐI TÁC</a>
                     </div>
                 </div>
-            </div>   
+            </div>
         </div>           
     </body>
 </html>

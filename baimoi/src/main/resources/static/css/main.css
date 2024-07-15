@@ -52,13 +52,14 @@ body {
 .navfixtop {
   display: flex;
   justify-content: center;
+  align-content: center;
   width: 100%;
+  height: auto;
   background-color: #FF8000;
   position: fixed;
   top: 0;
   z-index: 1000;
-  padding-bottom: 10px;
-  margin-bottom: 10px; /* Add this line */
+  padding: 10px;
 }
 
 .contenttop {
@@ -74,30 +75,46 @@ body {
 .nav_button{
   display: flex;
 }
-.nav_button .btn{
-  width: 130px;
-  height: 40px;
+.btn-dn{
+  display: flex;
+  width: 100px;
+  height: 50px;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.4);
+  background: #f73a40;
+  text-decoration: none;
+  color: white;
   border: none;
-  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
   cursor: pointer;
-  transition: .3 ease;
+  transition: 0.3s;
+}
+.btn-dn:hover{
+  background: white;
+  color: #f73a40;
+  text-decoration: none;
+}
 
-}
-.btn:hover{
-  background: rgba(255, 255, 255, 0.3);
-}
-#loginbtn{
-  margin-left: 15px;
 
+.btn-dk{
+  display: flex;
+  width: 100px;
+  height: 50px;
+  font-weight: 500;
+  background: white;
+  text-decoration: none;
+  color: #f73a40;
+  border: 1px solid #f73a40;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
 }
-.btn.white-btn{
-  background: rgba(255, 255, 255, 0.7);
-}
-.btn.white-btn:hover{
-  background: rgba(255, 255, 255, 0.5);
-  
+.btn-dk:hover{
+  background: white;
+  text-decoration: none;
 }
 .account-menu {
   position: relative;
@@ -106,7 +123,7 @@ body {
 /* tài khoản*/
 .btnac {
   padding: 10px 20px;
-  background-color: #28a745;
+  background-color: #003566;
   color: white;
   border: none;
   border-radius: 5px;
@@ -151,7 +168,7 @@ body {
 .topnav {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 60%;
 }
 
 .topnav a {
@@ -534,11 +551,17 @@ body {
     justify-content: center;
     align-items: center;
     padding: 10px;
-    width: 90%;
+    width: 100%;
     height: auto;
     background-color: #b0adac;
 }
-
+.footer{
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
 .div-main-ele h3{
   width:50%;
   padding-bottom :5px;
@@ -598,3 +621,32 @@ body {
   color: white;
 }
 
+.fm-topright{
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
+}
+
+.fmLogoDT a{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-size: 20px;
+  padding: 10px 0;
+  margin: 5px 10px;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: #f01b23;
+  font-weight: 600;
+  justify-content: center;
+  border-radius: 10px;
+  transition: 0.4s;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.fmLogoDT a:hover{
+  background-color:white ;
+  text-decoration: none;
+  color: red;
+}

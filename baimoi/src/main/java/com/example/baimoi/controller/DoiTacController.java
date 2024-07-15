@@ -46,6 +46,7 @@ import com.example.baimoi.service.LoaiNhaHangService;
 import com.example.baimoi.service.StorageService;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -178,7 +179,8 @@ public class DoiTacController {
                              @RequestParam("giomo") String giomo,
                              @RequestParam("giodong") String giodong,
                              @RequestParam("file") MultipartFile file,
-                             @RequestParam("madv") Long madv
+                             @RequestParam("madv") Long madv,
+                             HttpSession session
                              ) throws IOException, ParseException {
 
         if (bindingResult.hasErrors()) {
@@ -200,12 +202,12 @@ public class DoiTacController {
         DichVuCC dichVuCC = dichVuCCService.getDichVuCCById(madv).orElse(null);
         doitac.setDichVuCC(dichVuCC);
 
-        Long mand = (long) 2002;
+        Long mand = (long) session.getAttribute("mand");
         doitac.setMand(mand);
 
         doiTacService.saveDoiTac(doitac);
 
-        return "redirect:/doitac";
+        return "redirect:/doitac/" + doitac.getMadt();
     }
 
     @Transactional
@@ -215,6 +217,10 @@ public class DoiTacController {
         model.addAttribute("dichvuccs", dichVuCCService.getAllDichVuCC());
         model.addAttribute("loainhahangs", loaiNhaHangService.getAllLoaiNhaHang());
         return "dangkydoitac";
+    }
+    @GetMapping("/login-required")
+    public String getViewDangKyDoiTac(){
+        return "required";
     }
 
     //------------ Quản lý đơn đặt bàn---------//
@@ -323,27 +329,29 @@ public class DoiTacController {
 
     @Transactional
     @PostMapping("/baiviet/save")
-    public String saveBaiVietDT(@Valid @ModelAttribute("baiVietDT") BaiVietDT baiVietDT, 
+    public String saveBaiVietDT(@Valid @ModelAttribute("baiVietDT") BaiVietDT baiVietDT,
                                 BindingResult bindingResult,
-                                @RequestParam("madt") String doiTacIdStr
-                                ) throws IOException, ParseException {
+                                @RequestParam("madt") String doiTacIdStr) throws IOException, ParseException {
         if (bindingResult.hasErrors()) {
             return "/doitac/qlthongtinnh/qlbaiviet";
         }
-        
+
         Long doiTacId = Long.valueOf(doiTacIdStr.trim());
         Optional<DoiTac> doiTacOpt = doiTacService.getDoiTacById(doiTacId);
-        DoiTac doiTac = doiTacOpt.get();
-
+        DoiTac doiTac = doiTacOpt.orElseThrow(() -> new RuntimeException("Không tìm thấy đối tác"));
+        
         Long maBVXoa = doiTac.getMabv();
         baiVietDT.setDoiTac(doiTac);
         BaiVietDT savedBaiViet = baiVietDTService.saveBaiVietDT(baiVietDT);
-        
         doiTac.setBaiVietDT(savedBaiViet);
         doiTac.setMabv(savedBaiViet.getMaBV());
         doiTacService.saveDoiTac(doiTac);
         
-        baiVietDTService.deleteBaiVietDT(maBVXoa);
+        // Kiểm tra nếu maBVXoa không null và khác với mã bài viết mới
+        if (maBVXoa != null && !maBVXoa.equals(savedBaiViet.getMaBV())) {
+            baiVietDTService.deleteBaiVietDT(maBVXoa);
+        }
+    
         return "redirect:/doitac/qlbaiviet/" + doiTacId;
     }
     // --------- Thêm Ảnh cho đối tác---------//
@@ -454,8 +462,13 @@ public class DoiTacController {
     @Transactional
     @GetMapping("/chinhanh/delete/{id}")
     public String deleteChiNhanhCtrl(@PathVariable Long id) {
+        
+        Optional <ChiNhanh> chiNhanhOtp = chiNhanhService.getChiNhanhById(id);
+        ChiNhanh chiNhanh = chiNhanhOtp.get();
+        
+        DoiTac doiTac = chiNhanh.getDoiTac();
         chiNhanhService.deleteChiNhanh(id);    
-        return "redirect:/doitac/qlchinhanh/";
+        return "redirect:/doitac/qlchinhanh/" + doiTac.getMadt();
     }
 
     //---- Quản lý ComBo -----//
@@ -472,7 +485,8 @@ public class DoiTacController {
     @Transactional
     @PostMapping("/qlcombo/save")
     public String saveCombo(@ModelAttribute ComBoMonAn comBoMonAn,
-                                @RequestParam("madt") String doiTacIdStr
+                                @RequestParam("madt") String doiTacIdStr,
+                                @RequestParam("file") MultipartFile file
                                  ) throws IOException, ParseException {
 
         Long doiTacId = Long.valueOf(doiTacIdStr.trim());
@@ -480,6 +494,8 @@ public class DoiTacController {
         DoiTac doiTac = doiTacOpt.get();
 
         comBoMonAn.setDoiTac(doiTac);
+        this.storageService.store(file);
+        comBoMonAn.setImg(file.getOriginalFilename());
         comBoMonAnService.saveComboMonAn(comBoMonAn);
         return "redirect:/doitac/qlcombo/" + doiTac.getMadt();
     }
@@ -498,10 +514,15 @@ public class DoiTacController {
     }
 
     @Transactional
-    @GetMapping("")
+    @GetMapping("/qlcombo/delete/{id}")
     public String deleteComboCtrl(@PathVariable Long id) {
-        comBoMonAnService.deleteComboMonAn(id);    
-        return "redirect:/doitac/qlchinhanh/";
+           
+        Optional <ComBoMonAn> comBoMonAnOtp = comBoMonAnService.getComboMonAnById(id);
+        ComBoMonAn comBoMonAn = comBoMonAnOtp.get();
+        
+        DoiTac doiTac = comBoMonAn.getDoiTac();
+        comBoMonAnService.deleteComboMonAn(id); 
+        return "redirect:/doitac/qlcombo/" + doiTac.getMadt();
     }
 
 

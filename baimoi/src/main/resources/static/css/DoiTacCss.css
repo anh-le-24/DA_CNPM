@@ -568,7 +568,7 @@ button {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    background-color: #212529;
+    
 }
 .container-DKDT h1{
     background-image: linear-gradient(135deg, #f7750a 9%, #f73a40 85%);
@@ -580,10 +580,10 @@ button {
 }
 .fm-formDKDT{
     padding: 20px;
-    background-color: rgb(255, 240, 211);
+    background-color: aliceblue;
     margin: 10px;
     border-radius: 10px;
-    border: 5px solid #f7750a;
+    border: 2px solid #f7750a;
     margin-top: 50px;
 }
 .fm-layoutbaiviet{
@@ -732,3 +732,16 @@ button {
 	margin-right: 72px;
 }
 
+/* --------Danh sach anh------ */
+.fm-listimg{
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.fm-imgitem{
+    margin: 10px;
+}
+.fm-imgitem img{
+    width: 300px;
+}
