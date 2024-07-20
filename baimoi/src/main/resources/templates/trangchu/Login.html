@@ -3,47 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/Login.css}">
-    <link rel="stylesheet" th:href="@{fontawesome/css/all.min.css}">
-    <title>Login  | Ludiflex</title>
+    <title>Đăng nhập</title>
+    <link th:href="@{/css/Login.css}" rel="stylesheet" />
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
-       <div class="box">
-        <!--login box-->
-        <div class="box-login" id="login">
-            <div class="top-header">
-                <h3>Hello , Again !</h3>
-                <small>We are happy to have you back.</small>
-            </div>
-            <div class="input-group">
-                <div class="input-field">
-                    <input type="text" class="input-box" id="logusername" required>
-                    <label for="logusername"> Username</label>
+    <header th:replace="/fragments/top :: top"></header>
+    <div class="container-login">
+        <div class="box">
+            <div id="login" class="box-login">
+                <div class="top-header">
+                    <h2>Xin chào, mời đăng nhập!</h2>
+                    <p class="small">Chúng tôi rất vui khi bạn quay lại.</p>
                 </div>
+                <form th:action="@{/login/check}" method="post">
+                    <div class="input-field">
+                        <input type="text" name="sdt" placeholder="Số điện thoại" required>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="password" placeholder="Mật khẩu" required>
+                    </div>
+                    <div style="color: red;" th:if="${error}" class="error-message" th:text="${error}"></div>
+                    <div class="input-field">
+                        <button type="submit">Đăng nhập</button>
+                    </div>
+                </form>
                 <div class="input-field">
-                    <input type="password" class="input-box" id="logpassword" required>
-                    <label for="logpassword "> Password</label>
-                </div>
-               
-                <div class="input-field">
-                    <input type="submit" class="input-submit" value="Sign in">
-                </div>
-                <div class="forgot">
-                    <a th:href="@{/resetpw}">Forgot password ?</a>
+                    <a  class="register" th:href="@{/register}">Đăng ký</a>
                 </div>
             </div>
         </div>
-        
-        <!---Switch-->
-
-        <div class="switch">
-            <a th:href="@{/login}" class="login" >Login</a>
-            <a th:href="@{/register}" class="register">Register</a>
-            <div class="btn-active" id="btn"></div>
-        </div>
-       </div>
     </div>
-
 </body>
 </html>

@@ -6,27 +6,27 @@
             <a href="#contact">Contact</a>
             <a href="./admin.html">Admin</a>
         </div>
-    </div>
-    <div class="nav_button">
-        <button class="btn" >
-            <a th:href="@{/register}">Đăng ký</a>
-        </button>
-        <button class="btn white-btn">
-            <a th:href="@{/login}">Đăng nhập</a>
-        </button>
-        <div class="account-menu">
-            <a href="#">
-                <button class="btnac"><i class="bx bx-user"></i></button>
-            </a>
-            <div class="dropdown-content">
-                <a th:href="@{/info}">Thông tin cá nhân</a>
-                <a th:href="@{/resetpw}">Quản lý mật khẩu</a>
-                <a th:href="@{/login}" class="logout">Đăng xuất</a>
+        <div class="nav_button">
+            <div th:if="${session.loggedInUser}">
+                <div class="account-menu">
+                    <a href="#">
+                        <button class="btnac" th:text="${'Xin chào, ' + session.loggedInUser.hoten}"><i class="bx bx-user"></i></button>
+                    </a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/info}">Thông tin cá nhân</a>
+                        <a th:href="@{/resetpw}">Quản lý mật khẩu</a>
+                        <a th:href="@{/logout}">Đăng xuất</a>
+                    </div> 
+                </div>
             </div>
-        </div>
-    </div>
-        <div class="nav-menu-btn">
-            <i class="bx bx-menu"></i>
+            <div class="fm-topright" th:unless="${session.loggedInUser}">
+                <a class="btn-dn" th:href="@{/login}">
+                    Đăng nhập
+                </a>
+                <a class="btn-dk" th:href="@{/register}">
+                    Đăng ký
+                </a>
+            </div>
         </div>
     </div> 
 </div>
