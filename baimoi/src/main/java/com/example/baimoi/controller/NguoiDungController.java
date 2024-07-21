@@ -29,7 +29,7 @@ public class NguoiDungController {
     public String allNguoiDung(Model model){
         model.addAttribute("nguoidungs", nguoiDungService.getAllNguoiDung());
         model.addAttribute("nguoidung", new NguoiDung());
-        return "khachhang";
+        return "quanly/khachhang";
     }
 
     @PostMapping("/them")

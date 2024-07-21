@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Đối tác</title>
+    <link rel="stylesheet" th:href="@{/css/doitac.css}">
+</head>
+<body>
+    <h2>Đối tác</h2>
+
+    <h2>Đơn đăng ký làm đối tác </h2>
+    <table class="danhsachdangky">
+        <thead>
+            <tr>
+                <th>Mã</th>
+                <th>Tên nhà hàng</th>
+                <th>Địa chỉ</th>
+                <th>Mô tả</th>
+                <th>Giờ mở</th>
+                <th>Giờ đóng</th>
+                <th>Số chỗ ngồi</th>
+                <th>Ngày đăng ký</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="doitac : ${doitacs}" th:if="${doitac != null}">
+                <td th:text="${doitac.madt}"></td>
+                <td th:text="${doitac.tennhahang}"></td>
+                <td th:text="${doitac.sonhanh} + ' ' + doitac.duongnh + ' ' + doitac.quannh + ' ' + doitac.thanhphonh"></td>
+                <td th:text="${doitac.mota}"></td>
+                <td th:text="${#dates.format(doitac.giomo, 'HH:mm')}"></td>
+                <td th:text="${#dates.format(doitac.giodong, 'HH:mm')}"></td>
+                <td th:text="${doitac.sochongoi}"></td>
+                <td th:text="${#dates.format(doitac.ngaydk, 'dd/MM/yyyy')}"></td>
+                <td th:text="${doitac.mand}" ></td>
+                <td>
+                    <div class="btn-form">
+                        <div class="btn btn-chitiet" th:onclick="'xemChiTiet(' + ${doitac.madt} + ')'">Chi tiết</div>
+                        <div class="btn btn-xacnhan" th:onclick="'xacnhandk(' + ${doitac.mand} + ')'">Xác nhận</div>
+                        <div class="btn btn-huy" th:onclick="'huyxacnhan(' + ${doitac.madt} + ')'">Hủy</div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+ 
+    
+
+    <script th:src="@{/js/doitac.js}"></script>
+</body>
+</html>

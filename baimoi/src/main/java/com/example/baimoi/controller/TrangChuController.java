@@ -38,7 +38,6 @@ public class TrangChuController {
     
     @Autowired
     private DoiTacService doiTacService;
-    @Autowired 
     private NguoiDungService nguoiDungService;
     @Autowired
     private LoaiNhaHangService loaiNhaHangService;

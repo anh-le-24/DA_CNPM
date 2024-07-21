@@ -30,8 +30,16 @@ public class NguoiDungService {
         nguoidungRepository.deleteById(id);
     }
 
-
-    public Optional<NguoiDung> findBySdtAndPassword(String sdt, String password) {
-        return nguoidungRepository.findBySdtAndPassword(sdt, password);
+    public void updateMapq(Long mand, int newMapq) {
+        Optional<NguoiDung> optionalNguoidung = nguoidungRepository.findById(mand);
+        if (optionalNguoidung.isPresent()) {
+            NguoiDung nguoidung = optionalNguoidung.get();
+            nguoidung.setMapq(newMapq);
+            nguoidungRepository.save(nguoidung);
+        } else {
+            // Xử lý khi không tìm thấy người dùng
+            throw new RuntimeException("Không tìm thấy người dùng với mã: " + mand);
+        }
     }
+    
 }

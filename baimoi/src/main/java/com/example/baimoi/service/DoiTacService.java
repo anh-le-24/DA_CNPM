@@ -31,6 +31,14 @@ public class DoiTacService {
         doiTacRepository.save(doiTac);
     }
 
+    public void deleteByIdDT(long id){
+        doiTacRepository.deleteById(id);
+    }
+    
+    public List<DoiTac> getDoitacByMadt(Long madt) {
+        return doiTacRepository.findByMadt(madt);
+    }
+
     public void saveLoaiNh(LoaiNhaHang loaiNhaHang){
         loaiNhaHangService.save(loaiNhaHang);
     }
