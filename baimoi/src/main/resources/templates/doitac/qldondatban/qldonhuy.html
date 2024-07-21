@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="/fragments/head :: head">
+    </head>
+<body onload="toggleSidebar()">
+    <!-- phần thân -->
+    <div class="container">
+        <div th:replace="/fragments/left :: left"></div>
+        <div class="content" id="content">
+            <div id="QLDonHuyContent" class="content-item">
+                <div class="box-bg1">  
+                    <h1>Đơn Đặt Bị Hủy</h1>
+                    <div class="box-bg2">
+                        <div class="box-search">
+                            <img class="fm-icSearch" th:src="@{/images/icsearch.png}"/>
+                            <input class="input-search" placeholder="Search" type="search" >
+                        </div>
+                        <div class="fm-table-QLDH">
+                            <table>
+                            <tr>
+                                <th>Mã DDB</th>
+                                <th>Số điện thoại</th>
+                                <th>Ngày đặt</th>
+                                <th>Giờ đến</th>
+                                <th>Số lượng</th>
+                                <th>ComBo</th>
+                                <th style="background-color: #f0560e;">Lý do hủy</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                            <tr th:if="${donDatBan.trangThaiDon.mattd == 4}" th:each="donDatBan : ${doiTac.donDatBans}">
+                                <td th:text="${donDatBan.maddb}"></td>
+                                <td th:text="${donDatBan.nguoiDung.hoten}"></td>
+                                <td th:text="${#dates.format(donDatBan.ngaydat, 'dd/MM/yyyy')}"></td>
+                                <td th:text="${#dates.format(donDatBan.thoigiandat, 'HH:mm')}"></td>
+                                <td th:text="${donDatBan.solgnguoi}"></td>
+                                <td th:text="${donDatBan.comBoMonAn?.tencb ?: 'Null'}"></td>
+                                <td th:text="${donDatBan?.danhGia?.lydohuy ?: 'Chưa nhập lý do hủy'}"></td>
+                                <td>
+                                    <Button disabled class="btndis" type="button" style="background-color: #f01b23;">Bị hủy</Button>
+                                </td>
+                            </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</body>
+</html>

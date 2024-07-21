@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin thanh toán</title>
+</head>
+<body>
+    <h2>Thông tin thanh toán</h2>
+    <div th:if="${thanhtoan != null}">
+        <p>Mã đối tượng: <span th:text="${thanhtoan.getMadt}"></span></p>
+        <p>Số tiền thanh toán: <span th:text="${thanhtoan.getSotientt}"></span></p>
+        <p>Ngày thanh toán: <span th:text="${thanhtoan.getNgaytt}"></span></p>
+    </div>
+</body>
+</html>

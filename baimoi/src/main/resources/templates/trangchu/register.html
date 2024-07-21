@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký người dùng</title>
+    <link th:href="@{/css/register.css}" rel="stylesheet" />
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+    <header th:replace="/fragments/top :: top"></header>
+    <div class="container-regis">
+        <h1>Đăng ký người dùng</h1>
+        <form th:action="@{/register}" method="post" th:object="${nguoiDung}" onsubmit="return validateForm()">
+            <label for="hoten">Họ và tên:</label>
+            <input type="text" id="hoten" th:field="*{hoten}" required>
+
+            <label for="sdt">Số điện thoại:</label>
+            <input type="tel" id="sdt" th:field="*{sdt}" required>
+            <div id="sdt-error" class="error"></div>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" required>
+
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" th:field="*{password}" required>
+            <div id="password-error" class="error"></div>
+
+            <label for="sonha">Số nhà:</label>
+            <input type="text" id="sonha" th:field="*{sonha}" required>
+
+            <label for="duong">Đường:</label>
+            <input type="text" id="duong" th:field="*{duong}" required>
+
+            <label for="quan">Quận:</label>
+            <input type="text" id="quan" th:field="*{quan}" required>
+
+            <label for="thanhpho">Thành phố:</label>
+            <input type="text" id="thanhpho" th:field="*{thanhpho}" required>
+
+            <button type="submit">Đăng ký</button>
+        </form>
+        <div class="login-link">
+            Bạn đã có tài khoản? <a th:href="@{/login}">Đăng nhập tại đây</a>
+        </div>
+    </div>
+
+    <script>
+        function validatePassword(password) {
+            const minLength = 8;
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumber = /\d/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            
+            return password.length >= minLength && hasLowerCase && hasNumber && hasSpecialChar;
+        }
+
+        function validatePhoneNumber(phoneNumber) {
+            return /^[0-9]{10,11}$/.test(phoneNumber);
+        }
+
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const passwordError = document.getElementById('password-error');
+            const phoneNumber = document.getElementById('sdt').value;
+            const phoneError = document.getElementById('sdt-error');
+            let isValid = true;
+            
+            if (!validatePassword(password)) {
+                passwordError.textContent = 'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ thường, số và ký tự đặc biệt.';
+                isValid = false;
+            } else {
+                passwordError.textContent = '';
+            }
+
+            if (!validatePhoneNumber(phoneNumber)) {
+                phoneError.textContent = 'Vui lòng nhập đúng số điện thoại';
+                isValid = false;
+            } else {
+                phoneError.textContent = '';
+            }
+
+            return isValid;
+        }
+
+        // Kiểm tra mật khẩu khi người dùng nhập
+        document.getElementById('password').addEventListener('input', function() {
+            validateForm();
+        });
+
+        // Kiểm tra số điện thoại khi người dùng nhập
+        document.getElementById('sdt').addEventListener('input', function() {
+            validateForm();
+        });
+    </script>
+</body>
+</html>

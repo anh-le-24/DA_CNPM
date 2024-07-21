@@ -1,0 +1,33 @@
+<div class="sidebar" th:fragment="left">
+    <span id="sidebarToggle"  onclick="toggleSidebar()">☰</span>
+    <ul id="sidebarMenu" class="sidebar-menu">
+        <li class="fmLogoDT"><a th:href="@{/doitac/ctdoitac/{id}(id = ${doiTac.madt})}">ĐỐI TÁC</a></li>
+
+        <li class="fm-drop dropdown">
+            <a onclick="clickDrop1()">Quản lý đơn đặt bàn
+                <img th:src="@{/images/drop.png}" class="fm-icondrop"/>
+            </a>
+
+            <div id="drop-click1" class="dropdown-content">
+                <div class="row-sp"><a th:href="@{/doitac/quanlydon/qldonchoxn/{id}(id = ${doiTac.madt})}">Đơn chờ xác nhận</a></div>
+                <div class="row-sp"><a th:href="@{/doitac/quanlydon/qldondaxn/{id}(id = ${doiTac.madt})}">Đơn đã xác nhận</a></div>
+                <div class="row-sp"><a th:href="@{/doitac/quanlydon/qldondaht/{id}(id = ${doiTac.madt})}">Đơn đã hoàn thành</a></div>
+                <div class="row-sp"><a th:href="@{/doitac/quanlydon/qldonhuy/{id}(id = ${doiTac.madt})}">Đơn bị hủy</a></div>
+            </div>
+        </li>
+
+        <li class="fm-drop dropdown">
+            <a onclick="clickDrop2()" >Quản lý thông tin nhà hàng
+                <img th:src="@{/images/drop.png}" class="fm-icondrop"/>
+            </a>
+            
+            <div id="drop-click2" class="dropdown-content">
+                <div class="row-sp"><a th:href="@{/doitac/qlbaiviet/{id}(id = ${doiTac.madt})}">Quản lý bài viết</a></div>
+                <div class="row-sp"><a th:href="@{/doitac/qlchinhanh/{id}(id = ${doiTac.madt})}">Quản lý chi nhánh</a></div>
+                <div class="row-sp"><a th:href="@{/doitac/qlcombo/{id}(id = ${doiTac.madt})}">Quản lý Combo món ăn</a></div>
+            </div>
+            
+        </li>
+        <li><a th:href="@{/doitac/ThongKe}">Thống kê</a></li>
+    </ul>
+</div>

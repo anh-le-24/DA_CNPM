@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale= 1.0" />
+        <title>Đặt bàn Boss </title>
+        <link th:href="@{/css/main.css}" rel="stylesheet" />
+        <script th:src="@{https://example.com/fontawesome/vVERSION/js/all.js}"></script>
+ 
+        <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+        <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
+        <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/script.js}" defer></script>
+    </head>
+
+    <body>
+        <!--NAV BAR-->
+        <header th:replace="/fragments/top :: top"></header>
+
+        <!-- BODY Content  -->
+        <div class="fixcontent">
+            <div class="content">
+                <div class="search-box">
+                    <input type="search" name="Tìm kiếm" placeholder="Tìm kiếm của bạn...">
+                    <a th:href="@{#}" class="search-btn">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                </div>
+                <div class="menu-filter">
+                    <div class="dropdown">
+                        <div class="select">
+                            <span class="selected">Thành phố</span>
+                            <div class="caret"></div>
+                        </div>
+                        <ul class="option"> <!--menu -->
+                            <li class="active">Thành phố</li>
+                            <li>Hồ Chí Minh</li>
+                            <li>Hà Nội</li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <div class="select">
+                            <span class="selected">Khu vực</span>
+                            <div class="caret"></div>
+                        </div>
+                        <ul class="option"> <!--menu -->
+                            <li class="active">Khu vực</li>
+                            <li>Quận 1</li>
+                            <li>Quận 2</li>
+                            <li>Quận 3</li>
+                            <li>Thủ Đức</li>
+                            <li>Quận 10</li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <div class="select">
+                            <span class="selected">Giá trung bình</span>
+                            <div class="caret"></div>
+                        </div>
+                        <ul class="option"> <!--menu -->
+                            <li class="active">Giá trung bình</li>
+                            <li>Hồ Chí Minh</li>
+                            <li>Hà Nội</li>
+                            <li>Quận 1</li>
+                            <li>Quận 4</li>
+                        </ul>
+                    </div>
+                    <button class="filter-btn">Lọc</button>
+                </div>
+                <!---------  Loại Nhà Hàng  --------->
+                <div class="menu-container">
+                    <div class="menu" th:each="loainhahang : ${loainhahangs}" th:if="${loainhahang != null}">
+                        <div class="menu-item">
+                            <img th:src="@{/uploads/{imgmota}(imgmota=${loainhahang.imgmota})}" alt="Mô tả ảnh">
+                            <p th:text="${loainhahang.tenlnh}"></p>
+                        </div>
+                      
+                    </div>
+                </div>
+
+                <!--CHOICE-->
+
+                <!--Box1-->
+                <div>
+                    <h2>Buffet hải sản</h2>
+                    <p>Menu cực nhiều món ngon từ tôm, cua, ốc, ghẹ,... với nhiều mức giá.Một số Nhà hàng còn có tôm hùm, cua biển. Từ bình dân đến sang chảnh.</p>
+                </div>
+                
+                <div class="pagebox">
+                    <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac != null}">
+                        <a th:href="@{/ctnhahang/{id} (id = ${doiTac.madt})}">
+                            <div class="box2">
+                                <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
+                            </div>
+                            
+                                <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
+                            
+                            
+                            <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
+                            <div>
+                                <button type="button" class="fm-btn">Đặt bàn</button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <!-- -----Tool Box ------- -->
+        <div class="pagebox manhinh3">
+            <div class="footer">
+                <div class="div-main-ele">
+                    <h3>FOLLOW US</h3>
+                    <div class="div-follow">
+                        <div class="wrapper">
+                            <a class="facebook icon fm-link" th:href="@{https://www.facebook.com/pasgo.vn}" target="_blank">f</a>                        
+                            <a class="icon zalo fm-link" th:href="@{https://www.tiktok.com/@pasgovietnam}" target="_blank">Z</a>                       
+                            <a class="icon instagram fm-link" th:href="@{https://www.youtube.com/channel/UCZVrGI9UypsJxa-U_-DC2qg}" target="_blank">Ig</a>      
+                        </div>
+                    </div>
+                </div>   
+                <div class="div-main-ele"> 
+                    <div class="fmLogoDT">
+                        <a th:href="${session.loggedInUser != null ? '/doitac/dangkydoitac' : '/doitac/login-required'}" target="_blank">ĐĂNG KÝ ĐỐI TÁC</a>
+                    </div>
+                </div>
+            </div>
+        </div>           
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<div class="navfixtop" th:fragment="top">
+    <div class="contenttop">
+        <div class="topnav" id="myTopnav">
+            <a th:href="@{/trangchu}" class="active">Trang chủ</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+            <a href="./admin.html">Admin</a>
+        </div>
+        <div class="nav_button">
+            <div th:if="${session.loggedInUser}">
+                <div class="account-menu">
+                    <a th:href="@{/info}">
+                        <button  class="btnac" th:text="${'Xin chào, ' + session.loggedInUser.hoten}"></button>
+                    </a>
+                </div>
+            </div>
+            <div class="fm-topright" th:unless="${session.loggedInUser}">
+                <a class="btn-dn" th:href="@{/login}">
+                    Đăng nhập
+                </a>
+                <a class="btn-dk" th:href="@{/register}">
+                    Đăng ký
+                </a>
+            </div>
+        </div>
+    </div> 
+</div>

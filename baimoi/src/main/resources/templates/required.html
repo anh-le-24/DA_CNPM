@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký đối tác</title>
+    <style>
+
+.fm-topright{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.fm-topright a{
+  width: 20%;
+  
+  display: flex;
+  font-size: 20px;
+  padding: 10px 0;
+  margin: 5px 10px;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: #f01b23;
+  font-weight: 600;
+  justify-content: center;
+  border-radius: 10px;
+  transition: 0.4s;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <h1 style="color: red;border: 2px solid black; padding: 20px;text-align: center;">
+        VUI LÒNG ĐĂNG KÝ HOẶC ĐĂNG NHẬP TÀI KHOẢN 
+    </h1>
+    <div class="fm-topright">
+        <a class="btn-dn" th:href="@{/login}">
+            Đăng nhập
+        </a>
+        <a class="btn-dk" th:href="@{/register}">
+            Đăng ký
+        </a>
+    </div>
+</body>
+</html>

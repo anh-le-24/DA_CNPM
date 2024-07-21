@@ -1,0 +1,109 @@
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+h2{
+    text-align: center;
+    color: rgb(218, 15, 8);
+    font-weight: bold;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+table thead th {
+    background-color: #f2f2f2;
+}
+/* Kiểu cho các nút */
+.btn-form {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+/* Màu sắc cho các nút */
+.btn-chitiet {
+    background-color: rgb(7, 74, 231); /* Màu xanh cho nút 'Chi tiết' */
+}
+
+.btn-xacnhan {
+    background-color: rgb(7, 74, 231); /* Màu xanh lá cho nút 'Xác nhận' */
+}
+
+.btn-huy {
+    background-color: rgb(241, 125, 9); /* Màu cam cho nút 'Hủy' */
+}
+
+/* Hiệu ứng khi di chuột qua các nút */
+.btn:hover {
+    opacity: 0.8;
+}
+
+/**/
+/* CSS file: doitac.css */
+
+/* Thiết lập form chi tiết */
+#chitietdonxindangky {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Thiết lập tiêu đề của form */
+#chitietdonxindangky h2 {
+    color: #007bff; /* Màu chữ cho tiêu đề */
+    margin-bottom: 20px;
+}
+
+/* Thiết lập label cho từng trường nhập liệu */
+#chitietdonxindangky label {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+}
+
+/* Thiết lập input cho từng trường nhập liệu */
+#chitietdonxindangky input[type="text"] {
+    width: calc(100% - 160px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Thiết lập nút Quay Lại */
+#chitietdonxindangky button {
+    background-color: #dc3545; /* Màu nền nút Hủy */
+    color: #fff; /* Màu chữ cho nút */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Hiệu ứng khi di chuột qua nút */
+#chitietdonxindangky button:hover {
+    opacity: 0.8;
+}

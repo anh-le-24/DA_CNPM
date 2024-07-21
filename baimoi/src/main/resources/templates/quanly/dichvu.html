@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/dichvu.css}">
+    <title>Danh sách dịch vụ</title>
+</head>
+<body>
+    <h1>Danh sách dịch vụ</h1>
+    <table class="danhsachdichvu">
+        <thead>
+            <tr>
+                <th>Mã dịch vụ</th>
+                <th>Nội dung</th>
+                <th>Số lượng</th>
+                <th>Giá dịch vụ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="dichvu : ${dichvus}" th:if="${dichvu != null}">
+                <td th:text="${dichvu.madv}"></td>
+                <td th:text="${dichvu.noidung}"></td>
+                <td th:text="${dichvu.soluong}"></td>
+                <td th:text="${dichvu.giadv}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Thêm dịch vụ -->
+    <button class="btn-themdv" onclick="toggleForm('themdichvuForm')">Thêm dịch vụ</button>
+
+    <div id="themdichvuForm" style="display: none;">
+        <h2> Thêm dịch vụ</h2>
+        <form th:action="@{/dichvu/them}" method="post">
+            <label for="noidungthem">Nội dung</label>
+            <input type="text" id="noidungthem" name="noidung"><br><br>
+            <label for="soluongthem">Số lượng</label>
+            <input type="number" id="soluongthem" name="soluong"><br><br>
+            <label for="giadvthem">Giá Dịch vụ</label>
+            <input type="text" id="giadvthem" name="giadv">
+            <button type="submit">Thêm Dịch vụ</button>
+            <button type="button" onclick="quaylai()">Hủy</button>
+        </form>
+    </div>
+
+    <script th:src="@{/js/dichvu.js}"></script>
+</body>
+</html>

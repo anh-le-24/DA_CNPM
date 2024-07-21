@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head">
+    <title>Quản lý hình ảnh đối tác</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body onload="toggleSidebar()">
+    <div class="container">
+        <div th:replace="/fragments/left :: left"></div>
+        <div class="content" id="content">
+            <div id="DoiTacContent" class="content-item">
+                <div class="box-bg1">
+                    <h1>DANH MỤC HÌNH ẢNH</h1>
+                    <div class="box-bg2 scroll-list" >
+                        <div style="text-align: start; margin-left: 20px;">
+                            <h2>Thêm hình ảnh: <span th:text="${doiTac.tennhahang}"></span></h2>
+                            
+                            <form th:action="@{/doitac/{id}/images(id=${doiTac.madt})}" method="post" enctype="multipart/form-data" class="mb-4">
+                                <div class="fm-a">
+                                    <label for="files">Chọn nhiều ảnh:</label>
+                                    <input type="file" class="form-control-file" id="files" name="files" multiple>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Tải lên</button>
+                            </form>
+
+                            <h2>Danh sách hình ảnh:</h2>
+                            <div class="fm-listimg">
+                                <div class="fm-imgitem" th:each="image : ${images}">
+                                    <img th:src="@{/uploads/{img}(img=${image.img})}" class="card-img-top" alt="Hình ảnh đối tác">
+                                    <div>
+                                        <form th:action="@{/doitac/{doiTacId}/images/{imageId}/delete(doiTacId=${doiTac.madt},imageId=${image.maimg})}" method="post">
+                                            <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                                        </form>
+                                    </div>
+                                </div>    
+                            </div>
+                        </div>      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
