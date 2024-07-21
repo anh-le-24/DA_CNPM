@@ -34,17 +34,19 @@
                 </div>
             </section>
             <div class="item-left">
-                <div  class="detail-box">
+                <div class="detail-box" >
                     <h2 th:text="${doiTac.tennhahang}"></h2>
-                    <p class="address" th:text="${doiTac.getFullAddress()}"><i class="fas fa-map-marker-alt"></i> </p>
-                    <p class="category"><i class="fas fa-utensils"></i> <span>Loại nhà Hàng:</span>
-                        <ul>
-                            <li style="font-size: 20px;" class="category" th:each="loainhahang : ${doiTac.loaiNhaHangs}"  th:text="${loainhahang.tenlnh}"></li>
-                        </ul>
-                    </p>
-                    <p class="price" th:text="'Khoảng giá: ' + ${doiTac.hoadontb} + ' / người'"><i class="fas fa-dollar-sign"></i><span>200.000 - 500.000 đ/người</span></p>
-                    <p class="status closed" th:text="'Mở cửa: ' + ${doiTac.giomo}"><i class="fas fa-clock"></i></p>
-                    <p class="status closed" th:text="'Đóng cửa: ' + ${doiTac.giodong}"><i class="fas fa-clock"></i></p>
+                    <div style="margin-left: 10px; color: #888">
+                        <p th:text="${doiTac.getFullAddress()}"></p>
+                        <p><span>Loại nhà Hàng:</span>
+                            <ul>
+                                <li style="font-size: 20px;" class="category" th:each="loainhahang : ${doiTac.loaiNhaHangs}"  th:text="${loainhahang.tenlnh}"></li>
+                            </ul>
+                        </p>
+                        <p  th:text="'Khoảng giá: ' + ${doiTac.hoadontb} + ' / người'"><span>200.000 - 500.000 đ/người</span></p>
+                        <p style="color: red;" th:text="'Mở cửa: ' + ${doiTac.giomo}"></p>
+                        <p  th:text="'Đóng cửa: ' + ${doiTac.giodong}"></p>
+                    </div>
                 </div>
                 <div class="menu-detail">
                     <a href="#de-xuat" class="active">Đề xuất</a>
@@ -58,9 +60,9 @@
                 <div class="menu-content">
                     <section id="de-xuat">
                         <h2>Đề xuất</h2>
-                        <div class="card-scroll" th:each="combo : ${doiTac.comBoMonAns}">
-                            <a th:href="@{/doitac/ctcombo/{id}(id=${combo.macb})}">
-                                <div class="card">
+                        <div class="card-scroll"> 
+                            <div class="card" th:each="combo : ${doiTac.comBoMonAns}">
+                                <a th:href="@{/doitac/ctcombo/{id}(id=${combo.macb})}">
                                     <div class="card-img">
                                         <img th:src="@{/uploads/{imgmota}(imgmota=${combo.img})}" />
                                     </div>
@@ -70,12 +72,12 @@
                                     </div>
                                     <div class="card-footer">
                                     <span class="text-title" th:text="${combo.giatien}"></span>
-                                    <a class="card-button">
+                                    <a class="card-button" th:href="@{/doitac/ctcombo/{id}(id=${combo.macb})}">
                                     Chọn ngay
                                     </a> 
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div> 
                     </section>
                     <section id="tom-tat">
@@ -104,15 +106,10 @@
                     </section>
                 </div>
             </div>
-            <div class="item-right">
-                
-            </div>
+            <a class="fm-btndatban" th:if="${session.loggedInUser != null}" th:href="@{/datban/{id}(id=${doiTac.madt})}">Đặt Bàn</a>
+            <a class="fm-btndatban" th:if="${session.loggedInUser == null}" th:href="@{/doitac/login-required}">Đặt Bàn</a>
         </div>
     </div>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-            <script>
-                
-                
-            </script>
 </body>
 </html>

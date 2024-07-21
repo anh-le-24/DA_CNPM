@@ -62,7 +62,7 @@
                             <li>Hồ Chí Minh</li>
                             <li>Hà Nội</li>
                             <li>Quận 1</li>
-                            <li>Quận 1</li>
+                            <li>Quận 4</li>
                         </ul>
                     </div>
                     <button class="filter-btn">Lọc</button>
@@ -86,19 +86,21 @@
                     <p>Menu cực nhiều món ngon từ tôm, cua, ốc, ghẹ,... với nhiều mức giá.Một số Nhà hàng còn có tôm hùm, cua biển. Từ bình dân đến sang chảnh.</p>
                 </div>
                 
-                <div class="pagebox manhinh2 scroll-list ">
+                <div class="pagebox">
                     <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac != null}">
-                        <div class="box2">
-                            <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
-                        </div>
                         <a th:href="@{/ctnhahang/{id} (id = ${doiTac.madt})}">
-                            <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
+                            <div class="box2">
+                                <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
+                            </div>
+                            
+                                <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
+                            
+                            
+                            <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
+                            <div>
+                                <button type="button" class="fm-btn">Đặt bàn</button>
+                            </div>
                         </a>
-                        
-                        <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
-                        <div style="display: flex;width: 150px; margin: 3px; align-items: start;">
-                            <button type="button" class="fm-btn">Đặt bàn</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -114,9 +116,9 @@
                     <h3>FOLLOW US</h3>
                     <div class="div-follow">
                         <div class="wrapper">
-                            <a class="facebook icon fm-link" th:href="@{https://www.facebook.com/thoitrangivymoda}" target="_blank">f</a>                        
-                            <a class="icon zalo fm-link" th:href="@{https://www.facebook.com/thoitrangivymoda}" target="_blank">Z</a>                       
-                            <a class="icon instagram fm-link" th:href="@{https://instagram.com/ivy_moda?igshid=OGQ5ZDc2ODk2ZA==}" target="_blank">Ig</a>      
+                            <a class="facebook icon fm-link" th:href="@{https://www.facebook.com/pasgo.vn}" target="_blank">f</a>                        
+                            <a class="icon zalo fm-link" th:href="@{https://www.tiktok.com/@pasgovietnam}" target="_blank">Z</a>                       
+                            <a class="icon instagram fm-link" th:href="@{https://www.youtube.com/channel/UCZVrGI9UypsJxa-U_-DC2qg}" target="_blank">Ig</a>      
                         </div>
                     </div>
                 </div>   

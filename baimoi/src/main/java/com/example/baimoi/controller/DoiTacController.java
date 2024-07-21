@@ -192,8 +192,8 @@ public class DoiTacController {
 
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         Time giomoTime = new Time(format.parse(giomo).getTime());
-        Time giodongTime = new Time(format.parse(giodong).getTime());
         doitac.setGiomo(giomoTime);
+        Time giodongTime = new Time(format.parse(giodong).getTime());
         doitac.setGiodong(giodongTime);
 
         Date ngayHienTai = new Date(Calendar.getInstance().getTimeInMillis());

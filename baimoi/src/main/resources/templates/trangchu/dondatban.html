@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐẶT BÀN</title>
+    <link rel="stylesheet" th:href="@{/css/dondatban.css}">
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+    <header th:replace="~{/fragments/top :: top}"></header>
+    <div class="container-datban">
+        <h1 style="border: none; padding-bottom: 0; color: black;"> ĐẶT BÀN NHÀ HÀNG</h1>
+        <h1 th:if="${doiTac != null}" th:text="${doiTac.tennhahang}"></h1>
+        <div class="info-datban">
+            <h2 style="text-align: center;">Thông tin đặt bàn</h2>
+            <p style="color: red;text-align: center;">( * Không thể chỉnh sửa thông tin đặt bàn )</p>
+            <div class="form-group">
+                <label for="email">Tên khách hàng:</label>
+                <input type="email" id="email" name="email" th:if="${nguoiDung != null}" th:placeholder="${nguoiDung.hoten}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="phone">Số điện thoại:</label>
+                <input type="tel" id="phone" name="phone" th:if="${nguoiDung != null}"  th:placeholder="${nguoiDung.sdt}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="restaurant">Tên nhà hàng:</label>
+                <input type="text" id="restaurant" name="restaurant" th:if="${doiTac != null}"  th:placeholder="${doiTac.tennhahang}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="address">Địa chỉ nhà hàng:</label>
+                <input type="text" id="address" name="address" th:if="${doiTac != null}"  th:placeholder="${doiTac.getFullAddress()}" readonly>
+            </div>
+            
+        </div>
+        <form th:action="@{/save}" method="post" th:object="${donDatBan}" >
+            <input type="hidden" th:field="*{madt}" />
+            <input type="hidden" th:field="*{mand}" />
+            <div class="form-group">
+                <label for="date">Ngày quý khách muốn đặt:</label>
+                <input type="date" id="date" name="date" th:field="*{ngaydat}" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Thời gian quý khách đến:</label>
+                <input type="time" id="time" name="time" step="1" th:field="*{thoigiandat}" required>
+            </div>
+            <div class="form-group">
+                <label for="people">Số lượng người:</label>
+                <input type="number" id="people" name="people" min="1" max="20" th:field="*{solgnguoi}" required>
+            </div>
+            <div class="form-group">
+                <label for="notes">Ghi chú cho nhà hàng:</label>
+                <textarea id="notes" name="notes" rows="3" th:field="*{ghichu}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="special-requests">Yêu cầu đặc biệt:</label>
+                <textarea id="special-requests" name="special-requests" rows="3" th:field="*{yeucaudacbiet}"></textarea>
+            </div>
+            <button type="submit" >Đặt Bàn</button>
+        </form>
+    </div>
+    <script>
+        function kiemTraVaDatBan() {
+            const dateInput = document.getElementById('date');
+            const timeInput = document.getElementById('time');
+            const form = document.getElementById('booking-form');
+
+            const now = new Date();
+            const selectedDate = new Date(dateInput.value + 'T' + timeInput.value);
+            
+            // Thêm 12 giờ vào thời gian hiện tại
+            const minAllowedTime = new Date(now.getTime() + (12 * 60 * 60 * 1000));
+
+            if (selectedDate <= minAllowedTime) {
+                alert('Vui lòng chọn thời gian đặt bàn ít nhất 12 giờ kể từ bây giờ.');
+                return;
+            }
+
+            // Nếu điều kiện thỏa mãn, gửi form
+            form.submit();
+        }
+
+        // Đặt giá trị tối thiểu cho trường ngày
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('date');
+            const now = new Date();
+            const tomorrow = new Date(now.getTime() + (24 * 60 * 60 * 1000));
+            const tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+            dateInput.min = tomorrowFormatted;
+        });
+    </script>
+</body>
+</html>

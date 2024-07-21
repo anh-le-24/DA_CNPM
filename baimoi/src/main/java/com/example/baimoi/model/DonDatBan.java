@@ -1,5 +1,6 @@
 package com.example.baimoi.model;
 
+import java.sql.Time;
 import java.text.DecimalFormat;
 import java.util.Date;
 
@@ -23,7 +24,7 @@ public class DonDatBan {
     private Long mand;
     private Long madt;
     private Date ngaydat;
-    private Date thoigiandat;
+    private Time thoigiandat;
     private int solgnguoi;
     private String yeucaudacbiet;
     private String ghichu;
@@ -73,7 +74,7 @@ public class DonDatBan {
     public DonDatBan() {
     }
 
-    public DonDatBan(String ghichu, Long macb, Long macn, Long maddb, Long madt, Long mand, Long mattd, Date ngaydat, int solgnguoi, double sotien, Date thoigiandat, String yeucaudacbiet, Long madg) {
+    public DonDatBan(String ghichu, Long macb, Long macn, Long maddb, Long madt, Long mand, Long mattd, Date ngaydat, int solgnguoi, double sotien, Time thoigiandat, String yeucaudacbiet, Long madg) {
         this.ghichu = ghichu;
         this.macb = macb;
         this.macn = macn;
@@ -121,11 +122,11 @@ public class DonDatBan {
         this.ngaydat = ngaydat;
     }
 
-    public Date getThoigiandat() {
+    public Time getThoigiandat() {
         return thoigiandat;
     }
 
-    public void setThoigiandat(Date thoigiandat) {
+    public void setThoigiandat(Time thoigiandat) {
         this.thoigiandat = thoigiandat;
     }
 

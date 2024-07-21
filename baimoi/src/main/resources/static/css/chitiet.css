@@ -1,10 +1,11 @@
 body {
+    /* chinh lai margin */
     font-family: Arial, sans-serif;
     background-color: #f0f0f0; /* Light background color for better contrast */
+    margin:0px;
 }
-
+/* xoa margin */
 .fixcontent {
-    margin-top: 60px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -139,20 +140,8 @@ body {
 
 .detail-box p {
     margin: 0.25rem 0;
-    font-size: 1.5rem;
-    color: #666;
+    font-size: 1.5rem; 
 }
-
-.detail-box .address, .detail-box .category, .detail-box .price, .detail-box .status {
-    display: flex;
-    align-items: center;
-}
-
-.detail-box i {
-    margin-right: 0.5rem;
-    color: #888;
-}
-
 .menu-detail {
     display: flex;
     justify-content: space-between;
@@ -160,9 +149,9 @@ body {
     border-bottom: 1px solid #ddd;
     padding-bottom: 0.5rem;
     position: sticky;
-    top: 0;
+    top: 60px;
     background-color: white;
-    z-index: 1000;
+    z-index: 999;
     border-bottom: 1px solid #ddd;
     box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.1);
     padding-top: 0.5rem;
@@ -344,4 +333,31 @@ body {
     border: 1px solid red;
     background-color: red;
     color: white;
+}
+.fm-btndatban{
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+    position: fixed;
+    margin-top: 50px;
+    right: 5vh;
+    padding: 20px;
+    text-decoration: none;
+    font-size: 20px;
+    width: 150px;
+    font-weight: bold;
+    background-color: white;
+    color: red;
+    border: 5px solid red;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 30px 40px 2px rgba(236, 82, 74, 0.5);
+}
+.fm-btndatban:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 30px 20px -6px rgba(236, 82, 74, 0.5);
+    background-color: red;
+    color: white;
+    border: 5px solid red;
 }
