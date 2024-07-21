@@ -147,3 +147,9 @@ button[type="doitac"] {
 .item-phanquyen{
     margin-top: 10px;
 }
+.update-diachi{
+    display: flex;
+}
+.update-diachi label{
+    font-size: 16px;
+}

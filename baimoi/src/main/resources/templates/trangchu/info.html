@@ -26,24 +26,46 @@
         </nav>
         <div class="content">
             <h1>Thông Tin Tài Khoản</h1>
-            <form th:action="@{/capnhat-thongtin}" method="post" th:object="${nguoiDung}">
+            <form th:action="@{/update-info}" method="post" th:object="${nguoiDung}">
                 <div class="form-group">
                     <label for="hoten">Tên:</label>
                     <input type="text" id="hoten" name="hoten" th:value="${nguoiDung.hoten}" th:field="*{hoten}" required>
                 </div>
                 <div class="form-group">
+                    <label for="sdt">Số điện thoại:</label>
+                    <input type="text" id="sdt" name="sdt" th:value="${nguoiDung.sdt}" th:field="*{sdt}" required>
+                </div>
+                <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" th:value="${nguoiDung.email}" th:field="*{email}" required>
                 </div>
+                <div class="update-diachi">
+                    <div class="form-group">
+                        <label for="sonha">Số nhà:</label>
+                        <input type="text" id="sonha" name="sonha" th:value="${nguoiDung.sonha}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duong">Đường:</label>
+                        <input type="text" id="duong" name="duong" th:value="${nguoiDung.duong}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quan">Quận:</label>
+                        <input type="text" id="quan" name="quan" th:value="${nguoiDung.quan}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="thanhpho">Thành Phố:</label>
+                        <input type="text" id="thanhpho" name="thanhpho" th:value="${nguoiDung.thanhpho}" required>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="diachi">Địa chỉ:</label>
-                    <input type="text" id="diachi" name="diachi" th:value="${nguoiDung.getFullAddress()}" required>
+                    <input type="text" id="diachi" name="diachi" th:value="${nguoiDung.getFullAddress()}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="solandatban">Số lần đặt bàn:</label>
                     <input type="text" id="solandatban" name="solandatban" th:value="${nguoiDung.solandatban}" th:field="*{solandatban}" readonly>
                 </div>
-                <button  type="submit">Cập nhật</button>
+                <button type="submit">Cập nhật</button>
             </form>
             <div class="fm-phanquyen" style="margin-top: 20px;">
                 <div class="item-phanquyen" th:if="${nguoiDung.mapq == 1}">

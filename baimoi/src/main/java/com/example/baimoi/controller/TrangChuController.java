@@ -75,10 +75,30 @@ public class TrangChuController {
         Optional <NguoiDung> nguoiDungOtp = nguoiDungService.getNguoiDungById(mand);
         NguoiDung nguoiDung = nguoiDungOtp.get();
 
-
         model.addAttribute("nguoiDung", nguoiDung);
         return "trangchu/info";
     }
+    @PostMapping("/update-info")
+    public String updateInfo(@ModelAttribute NguoiDung updatedUser, HttpSession session) {
+        Long mand = (Long) session.getAttribute("mand");
+        if (mand == null) {
+            return "redirect:/login";
+        }
+        Optional<NguoiDung> nguOptional = nguoiDungService.getNguoiDungById(mand);
+        NguoiDung existingUser = nguOptional.get();
+        existingUser.setHoten(updatedUser.getHoten());
+        existingUser.setSdt(updatedUser.getSdt());
+        existingUser.setEmail(updatedUser.getEmail());
+        existingUser.setSonha(updatedUser.getSonha());
+        existingUser.setDuong(updatedUser.getDuong());
+        existingUser.setQuan(updatedUser.getQuan());
+        existingUser.setThanhpho(updatedUser.getThanhpho());
+
+        nguoiDungService.saveOrUpdate(existingUser);
+        return "redirect:/info";
+    }
+
+
     // -------- Đăng Nhập Tài khoản --------// 
     @GetMapping("/login")
     public String getViewLogin() {
