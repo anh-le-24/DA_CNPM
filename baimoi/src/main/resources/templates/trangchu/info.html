@@ -3,59 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Tài Khoản</title>
     <link rel="stylesheet" th:href="@{/css/info.css}">
-    <title>Thông tin cá nhân</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
 </head>
 <body>
-    <div class="account-info">
-        <h2>Thông Tin Tài Khoản</h2>
-        
-        <form action="#" method="POST">
-            <div class="info-item">
-                <label for="name">Tên:</label>
-                <input type="text" id="name" name="name" value="  " required>
-            </div>
-            
-            <div class="info-item">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="  " required>
-            </div>
-            
-            <div class="info-item">
-                <label for="day">Ngày sinh:</label>
-                <input type="number" id="day" name="day" value="01" required>
-                <label for="month">Tháng:</label>
-                <input type="number" id="month" name="month" value="01" required>
-                <label for="year">Năm:</label>
-                <input type="number" id="year" name="year" value="1900" required>
-            </div>
-            
-            <div class="info-item">
-                <label>Giới tính:</label>
-                <label><input type="radio" name="gender" value="Nam" checked> Nam</label>
-                <label><input type="radio" name="gender" value="Nữ"> Nữ</label>
-            </div>
-            
-            <!-- <div class="interest-section">
-                <label>Tích chọn những lĩnh vực mà bạn quan tâm:</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="interests" value="Nhà hàng"> Nhà hàng</label>
-                    <label><input type="checkbox" name="interests" value="Trà, Cafe"> Trà, Cafe</label>
-                    <label><input type="checkbox" name="interests" value="Quán ăn"> Quán ăn</label>
-                    <label><input type="checkbox" name="interests" value="Bar/Karaoke"> Bar/Karaoke</label>
-                    <label><input type="checkbox" name="interests" value="Làm đẹp"> Làm đẹp</label>
-                    <label><input type="checkbox" name="interests" value="Sức khỏe"> Sức khỏe</label>
-                    <label><input type="checkbox" name="interests" value="Khách sạn"> Khách sạn</label>
-                    <label><input type="checkbox" name="interests" value="Rạp phim"> Rạp phim</label>
-                    <label><input type="checkbox" name="interests" value="Vé máy bay"> Vé máy bay</label>
-                    <label><input type="checkbox" name="interests" value="Tổ chức sự kiện"> Tổ chức sự kiện</label>
-                    <label><input type="checkbox" name="interests" value="Thời trang"> Thời trang</label>
-                    <label><input type="checkbox" name="interests" value="Khác"> Khác</label>
+    <header th:replace="~{/fragments/top :: top}"></header>
+    <div class="container-info">
+        <nav class="sidebar">
+            <div class="profile">
+                <div class="profile-img">
+                    <img src="/images/canhan.png">
                 </div>
-            </div> -->
-            
-            <button class="update-btn" type="submit">Cập Nhật</button>
-        </form>
+                <p th:text="'SDT: ' + ${nguoiDung.sdt}"></p>
+            </div>
+            <ul class="menu" style="align-items: start;">
+                <li><a th:href="@{/info}">Thông tin tài khoản</a></li>
+                <li><a th:href="@{/resetpw}">Quản lý mật khẩu</a></li>
+                <li><a th:href="@{/booking-history}">Lịch sử đơn Đặt chỗ</a></li>
+            </ul>
+            <a style="margin-left: 20px;" class="button" th:href="@{/logout}">Đăng xuất</a>
+        </nav>
+        <div class="content">
+            <h1>Thông Tin Tài Khoản</h1>
+            <form th:action="@{/capnhat-thongtin}" method="post" th:object="${nguoiDung}">
+                <div class="form-group">
+                    <label for="hoten">Tên:</label>
+                    <input type="text" id="hoten" name="hoten" th:value="${nguoiDung.hoten}" th:field="*{hoten}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" th:value="${nguoiDung.email}" th:field="*{email}" required>
+                </div>
+                <div class="form-group">
+                    <label for="diachi">Địa chỉ:</label>
+                    <input type="text" id="diachi" name="diachi" th:value="${nguoiDung.getFullAddress()}" required>
+                </div>
+                <div class="form-group">
+                    <label for="solandatban">Số lần đặt bàn:</label>
+                    <input type="text" id="solandatban" name="solandatban" th:value="${nguoiDung.solandatban}" th:field="*{solandatban}" readonly>
+                </div>
+                <button  type="submit">Cập nhật</button>
+            </form>
+            <div class="fm-phanquyen" style="margin-top: 20px;">
+                <div class="item-phanquyen" th:if="${nguoiDung.mapq == 1}">
+                    <a th:href="@{/admin}" class="button">Quản lý Admin</a>
+                </div>
+                <div class="item-phanquyen" th:if="${nguoiDung.mapq == 3}">
+                    <a target="_blank" th:href = "@{/doitac/{id} (id = ${nguoiDung.doiTac.madt})}" class="button">Quản lý Đối tác</a>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

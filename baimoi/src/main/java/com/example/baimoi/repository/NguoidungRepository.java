@@ -10,6 +10,5 @@ import com.example.baimoi.model.NguoiDung;
 @Repository
 public interface NguoidungRepository extends JpaRepository<NguoiDung, Long> {
     Optional<NguoiDung> findBySdtAndPassword(String sdt, String password);
-    
-
+   
 }

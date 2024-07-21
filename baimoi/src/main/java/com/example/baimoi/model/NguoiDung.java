@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,7 +31,7 @@ public class NguoiDung {
     private int solandatban;
     private int mapq;
 
-    @OneToOne(mappedBy = "nguoiDung")
+    @OneToOne(mappedBy = "nguoiDung", fetch = FetchType.EAGER)
     private DoiTac doiTac;
 
     // kết nối với bảng đơn đặt bàn

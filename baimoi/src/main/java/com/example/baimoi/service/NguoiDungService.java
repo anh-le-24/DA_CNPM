@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.example.baimoi.model.NguoiDung;
 import com.example.baimoi.repository.NguoidungRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class NguoiDungService {
     @Autowired
@@ -17,7 +19,8 @@ public class NguoiDungService {
     public List<NguoiDung> getAllNguoiDung(){
         return nguoidungRepository.findAll();
     }
-
+    
+    @Transactional
     public Optional<NguoiDung> getNguoiDungById(Long id){
         return nguoidungRepository.findById(id);
     }
@@ -44,4 +47,5 @@ public class NguoiDungService {
     public Optional<NguoiDung> findBySdtAndPassword(String sdt, String password) {
         return nguoidungRepository.findBySdtAndPassword(sdt, password);
     }
+
 }

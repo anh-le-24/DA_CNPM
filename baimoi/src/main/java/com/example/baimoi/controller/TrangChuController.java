@@ -38,6 +38,7 @@ public class TrangChuController {
     
     @Autowired
     private DoiTacService doiTacService;
+    @Autowired
     private NguoiDungService nguoiDungService;
     @Autowired
     private LoaiNhaHangService loaiNhaHangService;
@@ -66,10 +67,18 @@ public class TrangChuController {
     }
 
     @GetMapping("/info")
-    private String getViewInfo(){
+    public String getViewInfo(Model model, HttpSession session) {
+        Long mand = (Long) session.getAttribute("mand");
+        if (mand == null) {
+            return "redirect:/login";
+        }
+        Optional <NguoiDung> nguoiDungOtp = nguoiDungService.getNguoiDungById(mand);
+        NguoiDung nguoiDung = nguoiDungOtp.get();
+
+
+        model.addAttribute("nguoiDung", nguoiDung);
         return "trangchu/info";
     }
-
     // -------- Đăng Nhập Tài khoản --------// 
     @GetMapping("/login")
     public String getViewLogin() {
@@ -199,4 +208,5 @@ public class TrangChuController {
     private String getViewThanhCong(){
         return "trangchu/datthanhcong";
     }
+
 }
