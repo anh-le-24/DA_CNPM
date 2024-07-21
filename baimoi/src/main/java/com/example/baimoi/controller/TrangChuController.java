@@ -24,6 +24,10 @@ import com.example.baimoi.model.ComBoMonAn;
 import com.example.baimoi.model.DoiTac;
 import com.example.baimoi.model.DonDatBan;
 import com.example.baimoi.model.NguoiDung;
+<<<<<<< HEAD
+=======
+import com.example.baimoi.service.ComBoMonAnService;
+>>>>>>> 0e7539ead2915ea78c766e997495ae227db5cafa
 import com.example.baimoi.service.DoiTacService;
 import com.example.baimoi.service.DonDatBanService;
 import com.example.baimoi.service.LoaiNhaHangService;
@@ -44,6 +48,11 @@ public class TrangChuController {
     private LoaiNhaHangService loaiNhaHangService;
     @Autowired
     private DonDatBanService donDatBanService;
+<<<<<<< HEAD
+=======
+    @Autowired
+    private ComBoMonAnService comBoMonAnService;
+>>>>>>> 0e7539ead2915ea78c766e997495ae227db5cafa
 
     @GetMapping("/trangchu")
     private String getViewTrangChu(Model model){
@@ -228,6 +237,7 @@ public class TrangChuController {
     private String getViewThanhCong(){
         return "trangchu/datthanhcong";
     }
+<<<<<<< HEAD
     
     // -------- Lịch SỬ đặt bàn --------//
     
@@ -243,5 +253,21 @@ public class TrangChuController {
         model.addAttribute("nguoiDung", nguoiDung);
         return "trangchu/lsdondatban";
     }
+=======
+
+
+    // Combo
+    @GetMapping("/combo/{id}")
+    private String getViewCombo(@PathVariable("id") Long id, Model model)
+                                        throws IOException, ParseException{
+        Optional<ComBoMonAn> monan = comBoMonAnService.getComboMonAnById(id);
+        ComBoMonAn combomonan = monan.get();
+        model.addAttribute("combo", combomonan);
+
+        
+        return "trangchu/combo";
+    }
+    
+>>>>>>> 0e7539ead2915ea78c766e997495ae227db5cafa
 
 }

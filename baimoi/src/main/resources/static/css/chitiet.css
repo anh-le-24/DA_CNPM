@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     /* chinh lai margin */
     font-family: Arial, sans-serif;
@@ -361,3 +362,368 @@ body {
     color: white;
     border: 5px solid red;
 }
+=======
+body {
+    /* chinh lai margin */
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light background color for better contrast */
+    margin:0px;
+}
+/* xoa margin */
+.fixcontent {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    max-width: 1500px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.container {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 10vh;
+}
+
+.content-wrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+}
+
+.slider-wrapper {
+    position: relative;
+    max-width: 48rem;
+    margin-right: 2rem; /* Space between slider and nav images */
+    flex: 1 1 100%; /* Make the slider responsive */
+}
+
+.slider {
+    display: flex;
+    aspect-ratio: 16/9;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.25);
+    border-radius: 0.5rem;
+}
+
+.slider img {
+    flex: 1 0 100%;
+    object-fit: cover;
+}
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 2;
+    font-size: 1.5rem;
+    border-radius: 0.3rem;
+}
+
+.slider-button.prev {
+    left: 0.5rem;
+}
+
+.slider-button.next {
+    right: 0.5rem;
+}
+
+.slider-button:hover {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.slider-nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 0.5rem; /* Gap between columns */
+    row-gap: 0.5rem; /* Gap between rows */
+}
+
+.slider-nav a {
+    display: block;
+    width: 12rem; /* Adjust the width for larger images */
+    height: 8rem; /* Adjust the height for larger images */
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.25);
+}
+
+.slider-nav img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.item-left, .item-right {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    flex: 1;
+}
+
+.item-left {
+    margin-right: 1rem; /* Space between item-left and item-right */
+}
+
+.item-right {
+    margin-left: 1rem; /* Space between item-left and item-right */
+}
+
+.detail-box {
+    margin-bottom: 10px;
+    padding-left: 5%;
+    padding-right: 5%; 
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.1);
+    
+}
+
+.detail-box h2 {
+    margin: 0 0 0.5rem;
+    font-size: 2.5rem;
+    color: #333;
+    padding-bottom: 5px;
+}
+
+.detail-box p {
+    margin: 0.25rem 0;
+    font-size: 1.5rem; 
+}
+.menu-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    position: sticky;
+    top: 60px;
+    background-color: white;
+    z-index: 999;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.1);
+    padding-top: 0.5rem;
+}
+
+ .menu-detail a {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 1rem;
+    flex: 1;
+    text-align: center;
+    font-size: 2rem;
+}
+/* #tom-tat, #de-xuat{
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.1);
+    padding-top: 0.5rem;
+    border:black;
+    margin-bottom: 20px;
+} */
+
+
+
+.menu-content {
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.1);
+    display: block;
+    justify-content: center;
+}
+
+.menu-content h2 {
+    font-size: 2rem;
+    color: #333;
+    margin: 1rem;
+}
+
+.menu-content p {
+    font-size: 1.5rem;
+    color: #666;
+    margin:  1.5rem;
+}
+
+@media (max-width: 768px) {
+    .item-wrapper {
+        flex-direction: column;
+    }
+    
+    .item-left, .item-right {
+        margin: 0 0 1rem;
+    }
+
+    .slider-wrapper {
+        max-width: 100%;
+        margin-right: 0;
+    }
+
+    .slider-nav {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .slider-nav a {
+        width: 100%;
+        height: auto;
+    }
+}
+.menu-detail a:focus {
+    outline: 2px solid red; 
+    outline-offset: 2px;
+    background-color: red; 
+    color: white;
+    border-radius: 0.3rem;
+} 
+
+/* Hiệu ứng cho button khi được nhấn */
+.menu-detail a:active {
+    background-color: red; 
+    color: white;
+    border-radius: 0.3rem;
+}
+
+/* Hiệu ứng hover (nếu chưa có) */
+ .menu-detail a:hover {
+    background-color: red; 
+    color: white;
+    border-radius: 0.3rem;
+} 
+
+
+.card-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    
+}
+.card-scroll a {
+    text-decoration: none;
+}
+
+.card-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.card-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.card-scroll::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 3px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+}
+
+.card-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.card {
+    flex: 0 0 auto; /* Đảm bảo các thẻ không co giãn và nằm kế bên nhau */
+    width: 400px; /* Đặt chiều rộng cố định cho mỗi thẻ */
+    height: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: .5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform .3s ease, box-shadow .3s ease;
+    padding: 10px;
+    margin: 10px 0;
+  
+}
+
+.card-img img {
+    height: auto;
+    width: 100%;
+    border-radius: .5rem .5rem 0 0;
+    transition: .3s ease;
+}
+
+.card-info {
+    padding: 20px; /* Để tăng khoảng cách giữa nội dung và các phần tử khác */
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Để tăng khoảng cách xung quanh phần footer */
+    border-top: 1px solid #ddd;
+}
+
+.text-title {
+    font-weight: 900;
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+.text-body {
+    font-size: .9em;
+    padding-bottom: 10px;
+}
+
+.card-button {
+    border: 1px solid #252525;
+    padding: .5em 1em;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: .3s ease-in-out;
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Hiệu ứng khi hover */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Đổ bóng khi hover */
+}
+
+.card-button:hover {
+    border: 1px solid red;
+    background-color: red;
+    color: white;
+}
+.fm-btndatban{
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+    position: fixed;
+    margin-top: 50px;
+    right: 5vh;
+    padding: 20px;
+    text-decoration: none;
+    font-size: 20px;
+    width: 150px;
+    font-weight: bold;
+    background-color: white;
+    color: red;
+    border: 5px solid red;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 30px 40px 2px rgba(236, 82, 74, 0.5);
+}
+.fm-btndatban:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 30px 20px -6px rgba(236, 82, 74, 0.5);
+    background-color: red;
+    color: white;
+    border: 5px solid red;
+}
+>>>>>>> 0e7539ead2915ea78c766e997495ae227db5cafa

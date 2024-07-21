@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -113,3 +114,120 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale= 1.0" />
+    <title>Chi Tiết</title>
+    <link rel="stylesheet" th:href="@{/css/chitiet.css}">
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    
+</head>
+<body>
+    <header th:replace="/fragments/top :: top">
+    </header>
+    <div class="fixcontent">
+        <div class="content">
+            <section class="container">
+                <div class="content-wrapper">
+                    <div class="slider-wrapper">
+                        <div class="slider">
+                            <th:block th:each="image, iterStat : ${images}">
+                                <img th:src="@{/uploads/{img}(img=${image.img})}" th:alt="'Slide ' + ${iterStat.index + 1}" th:id="'slider-' + ${iterStat.index + 1}" />
+                            </th:block>
+                        </div>
+                        <button class="slider-button prev" onclick="prevSlide()">&#10094;</button>
+                        <button class="slider-button next" onclick="nextSlide()">&#10095;</button>
+                    </div>
+                    <div class="slider-nav">
+                        <th:block th:each="image, iterStat : ${images}">
+                            <a th:href="'#slider-' + ${iterStat.index + 1}">
+                                <img th:src="@{/uploads/{img}(img=${image.img})}" th:alt="'Thumbnail ' + ${iterStat.index + 1}" />
+                            </a>
+                        </th:block>
+                    </div>
+                </div>
+            </section>
+            <div class="item-left">
+                <div class="detail-box" >
+                    <h2 th:text="${doiTac.tennhahang}"></h2>
+                    <div style="margin-left: 10px; color: #888">
+                        <p th:text="${doiTac.getFullAddress()}"></p>
+                        <p><span>Loại nhà Hàng:</span>
+                            <ul>
+                                <li style="font-size: 20px;" class="category" th:each="loainhahang : ${doiTac.loaiNhaHangs}"  th:text="${loainhahang.tenlnh}"></li>
+                            </ul>
+                        </p>
+                        <p  th:text="'Khoảng giá: ' + ${doiTac.hoadontb} + ' / người'"><span>200.000 - 500.000 đ/người</span></p>
+                        <p style="color: red;" th:text="'Mở cửa: ' + ${doiTac.giomo}"></p>
+                        <p  th:text="'Đóng cửa: ' + ${doiTac.giodong}"></p>
+                    </div>
+                </div>
+                <div class="menu-detail">
+                    <a href="#de-xuat" class="active">Đề xuất</a>
+                    <a href="#tom-tat">Tóm tắt</a>
+                    <a href="#bang-gia">Bảng giá</a>
+                    <a href="#quy-dinh">Quy định</a>
+                    <a href="#de-xe">Để xe</a>
+                    <a href="#tien-ich">Tiện ích</a>
+                    <a href="#chi-tiet">Chi Tiết</a>
+                </div>
+                <div class="menu-content">
+                    <section id="de-xuat">
+                        <h2>Đề xuất</h2>
+                        <div class="card-scroll"> 
+                            <div class="card" th:each="combo : ${doiTac.comBoMonAns}">
+                                <a th:href="@{/combo/{id}(id=${combo.macb})}">
+                                    <div class="card-img">
+                                        <img th:src="@{/uploads/{imgmota}(imgmota=${combo.img})}" />
+                                    </div>
+                                    <div class="card-info">
+                                    <p class="text-title" th:text="${combo.tencb}"></p>
+                                    <p class="text-body" th:text="${combo.mota}"></p>
+                                    </div>
+                                    <div class="card-footer">
+                                    <span class="text-title" th:text="${combo.giatien}"></span>
+                                    <a class="card-button" th:href="@{/doitac/combo/{id}(id=${combo.macb})}">
+                                    Chọn ngay
+                                    </a> 
+                                    </div>
+                                </a>
+                            </div>
+                        </div> 
+                    </section>
+                    <section id="tom-tat">
+                        <h2>Tóm tắt</h2>
+                        <div th:utext="${doiTac.baiVietDT.ndtomtat}"></div>
+                    </section>
+                    <section id="bang-gia">
+                        <h2>Bảng giá</h2>
+                        <div th:utext="${doiTac.baiVietDT.ndbanggia}"></div>
+                    </section>
+                    <section id="quy-dinh">
+                        <h2>Quy định</h2>
+                        <div th:utext="${doiTac.baiVietDT.ndquydinh}"></div>
+                    </section>
+                    <section id="de-xe">
+                        <h2>Để xe</h2>
+                        <div th:utext="${doiTac.baiVietDT.nddexe}"></div>
+                    </section>
+                    <section id="tien-ich">
+                        <h2>Tiện ích</h2>
+                        <div th:utext="${doiTac.baiVietDT.ndtienich}"></div>
+                    </section>
+                    <section id="chi-tiet">
+                        <h2>Chi tiết</h2>
+                        <div th:utext="${doiTac.baiVietDT.ndchitiet}"></div>
+                    </section>
+                </div>
+            </div>
+            <a class="fm-btndatban" th:if="${session.loggedInUser != null}" th:href="@{/datban/{id}(id=${doiTac.madt})}">Đặt Bàn</a>
+            <a class="fm-btndatban" th:if="${session.loggedInUser == null}" th:href="@{/doitac/login-required}">Đặt Bàn</a>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
+>>>>>>> 0e7539ead2915ea78c766e997495ae227db5cafa

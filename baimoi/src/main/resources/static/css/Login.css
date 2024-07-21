@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body { 
     font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f4; 
 }
@@ -25,4 +26,33 @@ input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; 
 .switch a { text-decoration: none; color: #333; padding: 10px 20px; }
 .btn-active { width: 50%; height: 3px; background-color: #007bff; transition: 0.3s; }
 button { width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+=======
+body { 
+    font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #f4f4f4; 
+}
+.container-login { 
+    max-width: 400px; margin: auto; 
+    background: #fff; padding: 20px; 
+    border-radius: 5px; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+    margin-top: 200px;
+}
+.box-login { 
+    text-align: center; 
+}
+.top-header {
+     margin-bottom: 20px; 
+    }
+h2 { color: #333; }
+.small { color: #666; }
+.input-group { margin-bottom: 20px; }
+.input-field { margin-bottom: 10px; }
+input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+.forgot { text-align: right; }
+.forgot a { color: #666; text-decoration: none; }
+.switch { display: flex; justify-content: space-between; margin-top: 20px; }
+.switch a { text-decoration: none; color: #333; padding: 10px 20px; }
+.btn-active { width: 50%; height: 3px; background-color: #007bff; transition: 0.3s; }
+button { width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+>>>>>>> 0e7539ead2915ea78c766e997495ae227db5cafa
 button:hover { background-color: #0056b3; }
