@@ -41,5 +41,7 @@ public class NguoiDungService {
             throw new RuntimeException("Không tìm thấy người dùng với mã: " + mand);
         }
     }
-    
+    public Optional<NguoiDung> findBySdtAndPassword(String sdt, String password) {
+        return nguoidungRepository.findBySdtAndPassword(sdt, password);
+    }
 }
