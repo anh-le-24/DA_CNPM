@@ -62,7 +62,7 @@
                         <h2>Đề xuất</h2>
                         <div class="card-scroll"> 
                             <div class="card" th:each="combo : ${doiTac.comBoMonAns}">
-                                <a th:href="@{/doitac/ctcombo/{id}(id=${combo.macb})}">
+                                <a th:href="@{/combo/{id}(id=${combo.macb})}">
                                     <div class="card-img">
                                         <img th:src="@{/uploads/{imgmota}(imgmota=${combo.img})}" />
                                     </div>
@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="card-footer">
                                     <span class="text-title" th:text="${combo.giatien}"></span>
-                                    <a class="card-button" th:href="@{/doitac/ctcombo/{id}(id=${combo.macb})}">
+                                    <a class="card-button" th:href="@{/doitac/combo/{id}(id=${combo.macb})}">
                                     Chọn ngay
                                     </a> 
                                     </div>

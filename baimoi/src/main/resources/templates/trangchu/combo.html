@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale= 1.0" />
+    <link th:href="@{/css/combo.css}" rel="stylesheet" />
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <title>Chi Tiết Combo</title>
+    
+</head>
+<body>
+    <header th:replace="~{/fragments/top :: top}"></header>
+    <div class="container-combo">
+        <div class="img">
+            <img src="https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwdusm6thmu176@resize_ss576x330" alt="">
+        </div>
+        <div class="detail">
+            <div class="tieude">
+                <h1 th:text="${combo.tencb}">
+                </h1>
+            </div>
+            <div class="chitiet">
+                <p th:text="${combo.mota}"></p>
+            </div>
+            <div class="gia" th:text="${combo.giatien}">
+            </div>
+            <div class="slnguoidung" th:text="'Combo này dành cho' + ${combo.solgngdung}">
+            </div>
+            
+            <button>Chọn ngay</button>
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -24,6 +24,7 @@ import com.example.baimoi.model.ComBoMonAn;
 import com.example.baimoi.model.DoiTac;
 import com.example.baimoi.model.DonDatBan;
 import com.example.baimoi.model.NguoiDung;
+import com.example.baimoi.service.ComBoMonAnService;
 import com.example.baimoi.service.DoiTacService;
 import com.example.baimoi.service.DonDatBanService;
 import com.example.baimoi.service.LoaiNhaHangService;
@@ -44,6 +45,8 @@ public class TrangChuController {
     private LoaiNhaHangService loaiNhaHangService;
     @Autowired
     private DonDatBanService donDatBanService;
+    @Autowired
+    private ComBoMonAnService comBoMonAnService;
 
     @GetMapping("/trangchu")
     private String getViewTrangChu(Model model){
@@ -228,5 +231,19 @@ public class TrangChuController {
     private String getViewThanhCong(){
         return "trangchu/datthanhcong";
     }
+
+
+    // Combo
+    @GetMapping("/combo/{id}")
+    private String getViewCombo(@PathVariable("id") Long id, Model model)
+                                        throws IOException, ParseException{
+        Optional<ComBoMonAn> monan = comBoMonAnService.getComboMonAnById(id);
+        ComBoMonAn combomonan = monan.get();
+        model.addAttribute("combo", combomonan);
+
+        
+        return "trangchu/combo";
+    }
+    
 
 }
