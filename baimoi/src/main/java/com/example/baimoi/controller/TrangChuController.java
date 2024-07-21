@@ -228,5 +228,20 @@ public class TrangChuController {
     private String getViewThanhCong(){
         return "trangchu/datthanhcong";
     }
+    
+    // -------- Lịch SỬ đặt bàn --------//
+    
+    @GetMapping("/lsdatban")
+    private String getViewLSDatBan(Model model, HttpSession session){
+        Long mand = (Long) session.getAttribute("mand");
+        if (mand == null) {
+            return "redirect:/login";
+        }
+        Optional<NguoiDung> nguOptional = nguoiDungService.getNguoiDungById(mand);
+        NguoiDung nguoiDung = nguOptional.get();
+
+        model.addAttribute("nguoiDung", nguoiDung);
+        return "trangchu/lsdondatban";
+    }
 
 }

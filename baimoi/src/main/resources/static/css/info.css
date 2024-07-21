@@ -16,6 +16,7 @@ body {
 .container-info {
     display: flex;
     width: 90%;
+    margin-top: 100px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

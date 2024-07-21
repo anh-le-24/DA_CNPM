@@ -35,7 +35,7 @@ public class NguoiDung {
     private DoiTac doiTac;
 
     // kết nối với bảng đơn đặt bàn
-    @OneToMany(mappedBy = "nguoiDung")
+    @OneToMany(mappedBy = "nguoiDung", fetch = FetchType.EAGER)
     private Set<DonDatBan> donDatBans;
 
     public NguoiDung() {
