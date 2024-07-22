@@ -3,6 +3,8 @@ package com.example.baimoi.model;
 import java.sql.Date;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -31,11 +33,14 @@ public class NguoiDung {
     private int solandatban;
     private int mapq;
 
-    @OneToOne(mappedBy = "nguoiDung", fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToOne(mappedBy = "nguoiDung", fetch = FetchType.LAZY)
     private DoiTac doiTac;
 
+    
     // kết nối với bảng đơn đặt bàn
-    @OneToMany(mappedBy = "nguoiDung", fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(mappedBy = "nguoiDung", fetch = FetchType.LAZY)
     private Set<DonDatBan> donDatBans;
 
     public NguoiDung() {

@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -48,7 +50,8 @@ public class DoiTac {
     private DichVuCC dichVuCC;
     
     // kết nối với bảng đơn đặt bàn
-    @OneToMany(mappedBy = "doiTac", fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(mappedBy = "doiTac", fetch = FetchType.LAZY)
     private Set<DonDatBan> donDatBans;
 
     // kết nối với bảng Com bo mon an

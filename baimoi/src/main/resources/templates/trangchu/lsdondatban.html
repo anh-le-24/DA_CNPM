@@ -9,40 +9,56 @@
 </head>
 <body>
     <header th:replace="~{/fragments/top :: top}"></header>
-    <div class="container"> 
-        <h1>LỊCH SỬ ĐẶT BÀN</h1>
-        <div class="fm-table-QLDH">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tên nhà hàng</th>
-                        <th>Ngày đặt</th>
-                        <th>Giờ đến</th>
-                        <th>Số lượng</th>
-                        <th>Tên Combo</th>
-                        <th>Tên Chi Nhánh</th>
-                        <th>Yêu cầu đặc biệt</th>
-                        <th>Ghi chú</th>
-                        <th>Trạng thái</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="donDatBan : ${nguoiDung.donDatBans}">
-                        <td th:text="${donDatBan.doiTac.tennhahang}"></td>
-                        <td th:text="${#dates.format(donDatBan.ngaydat, 'dd/MM/yyyy')}"></td>
-                        <td th:text="${#dates.format(donDatBan.thoigiandat, 'HH:mm')}"></td>
-                        <td th:text="${donDatBan.solgnguoi}"></td>
-                        <td th:text="${donDatBan.comBoMonAn != null ? donDatBan.comBoMonAn.tencb : 'Null'}"></td>
-                        <td th:text="${donDatBan.chiNhanh != null ? donDatBan.chiNhanh.tencn : 'Null'}"></td>
-                        <td th:text="${donDatBan.yeucaudacbiet}"></td>
-                        <td th:text="${donDatBan.ghichu}"></td>
-                        <td>
-                            <button class="btnXN" th:text="${donDatBan.trangThaiDon.noidung}" disabled></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="container-lsdatban"> 
+        <div class="fm-divlsdatban">
+            <h1 style="text-align: center;">LỊCH SỬ ĐẶT BÀN</h1>
+            <div class="fm-table-QLDH">
+                <table id="donDatBanTable">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên nhà hàng</th>
+                            <th>Ngày đặt</th>
+                            <th>Giờ đến</th>
+                            <th>Số lượng</th>
+                            <th>Tên Combo</th>
+                            <th>Tên Chi Nhánh</th>
+                            <th>Yêu cầu đặc biệt</th>
+                            <th>Ghi chú</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="donDatBan : ${donDatBans}">
+                            <td></td>
+                            <td th:text="${donDatBan.doiTac.tennhahang}"></td>
+                            <td th:text="${#dates.format(donDatBan.ngaydat, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${#dates.format(donDatBan.thoigiandat, 'HH:mm')}"></td>
+                            <td th:text="${donDatBan.solgnguoi}"></td>
+                            <td th:text="${donDatBan.comBoMonAn != null ? donDatBan.comBoMonAn.tencb : 'Null'}"></td>
+                            <td th:text="${donDatBan.chiNhanh != null ? donDatBan.chiNhanh.tencn : 'Null'}"></td>
+                            <td th:text="${donDatBan.yeucaudacbiet}"></td>
+                            <td th:text="${donDatBan.ghichu}"></td>
+                            <td>
+                                <button class="btnXN" th:text="${donDatBan.trangThaiDon.noidung}" disabled></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var table = document.getElementById("donDatBanTable");
+            var tbody = table.querySelector("tbody");
+            var rows = tbody.querySelectorAll("tr");
+            
+            rows.forEach(function(row, index) {
+                var sttCell = row.querySelector("td");
+                sttCell.textContent = index + 1;
+            });
+        });
+    </script>
 </body>
 </html>

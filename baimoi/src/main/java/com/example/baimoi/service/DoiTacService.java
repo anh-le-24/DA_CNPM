@@ -21,9 +21,11 @@ public class DoiTacService {
     @Autowired
     private LoaiNhaHangService loaiNhaHangService;
 
+    @Transactional
     public Optional<DoiTac> getDoiTacById(Long id){
         return doiTacRepository.findById(id);
     }
+
     public List<DoiTac> getAllDoitac(){
         return doiTacRepository.findAll();
     }

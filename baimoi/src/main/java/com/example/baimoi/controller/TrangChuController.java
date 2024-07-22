@@ -6,6 +6,7 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.baimoi.model.ComBoMonAn;
 import com.example.baimoi.model.DoiTac;
 import com.example.baimoi.model.DonDatBan;
 import com.example.baimoi.model.NguoiDung;
-<<<<<<< HEAD
-=======
 import com.example.baimoi.service.ComBoMonAnService;
->>>>>>> 0e7539ead2915ea78c766e997495ae227db5cafa
 import com.example.baimoi.service.DoiTacService;
 import com.example.baimoi.service.DonDatBanService;
 import com.example.baimoi.service.LoaiNhaHangService;
@@ -48,11 +47,8 @@ public class TrangChuController {
     private LoaiNhaHangService loaiNhaHangService;
     @Autowired
     private DonDatBanService donDatBanService;
-<<<<<<< HEAD
-=======
     @Autowired
     private ComBoMonAnService comBoMonAnService;
->>>>>>> 0e7539ead2915ea78c766e997495ae227db5cafa
 
     @GetMapping("/trangchu")
     private String getViewTrangChu(Model model){
@@ -74,19 +70,22 @@ public class TrangChuController {
         
         return "trangchu/chitiet";
     }
-
+    
     @GetMapping("/info")
-    public String getViewInfo(Model model, HttpSession session) {
+    public ModelAndView getViewInfo(HttpSession session) {
         Long mand = (Long) session.getAttribute("mand");
         if (mand == null) {
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
-        Optional <NguoiDung> nguoiDungOtp = nguoiDungService.getNguoiDungById(mand);
+        Optional<NguoiDung> nguoiDungOtp = nguoiDungService.getNguoiDungById(mand);
+       
         NguoiDung nguoiDung = nguoiDungOtp.get();
 
-        model.addAttribute("nguoiDung", nguoiDung);
-        return "trangchu/info";
+        ModelAndView mav = new ModelAndView("trangchu/info");
+        mav.addObject("nguoiDung", nguoiDung);
+        return mav;
     }
+    
     @PostMapping("/update-info")
     public String updateInfo(@ModelAttribute NguoiDung updatedUser, HttpSession session) {
         Long mand = (Long) session.getAttribute("mand");
@@ -237,23 +236,21 @@ public class TrangChuController {
     private String getViewThanhCong(){
         return "trangchu/datthanhcong";
     }
-<<<<<<< HEAD
     
     // -------- Lịch SỬ đặt bàn --------//
     
     @GetMapping("/lsdatban")
-    private String getViewLSDatBan(Model model, HttpSession session){
+    public String getLichSuDatBan(HttpSession session, Model model) {
         Long mand = (Long) session.getAttribute("mand");
         if (mand == null) {
             return "redirect:/login";
         }
-        Optional<NguoiDung> nguOptional = nguoiDungService.getNguoiDungById(mand);
-        NguoiDung nguoiDung = nguOptional.get();
 
-        model.addAttribute("nguoiDung", nguoiDung);
+        List<DonDatBan> donDatBans = donDatBanService.getDonDatBansForUser(mand);
+        model.addAttribute("donDatBans", donDatBans);
+
         return "trangchu/lsdondatban";
     }
-=======
 
 
     // Combo
@@ -268,6 +265,5 @@ public class TrangChuController {
         return "trangchu/combo";
     }
     
->>>>>>> 0e7539ead2915ea78c766e997495ae227db5cafa
 
 }
