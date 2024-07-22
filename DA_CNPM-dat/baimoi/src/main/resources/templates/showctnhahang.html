@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết Quả Bài Viết</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Kết Quả Bài Viết</h1>
+
+        <div class="content-item">
+            <h2>Nội dung Tóm tắt</h2>
+            <div th:utext="${doiTac.baiVietDT.ndtomtat}"></div>
+        </div>
+
+        <div class="content-item">
+            <h2>Nội dung Bảng giá</h2>
+            <div th:utext="${doiTac.baiVietDT.ndbanggia}"></div>
+        </div>
+
+        <div class="content-item">
+            <h2>Nội dung Quy định</h2>
+            <div th:utext="${doiTac.baiVietDT.ndquydinh}"></div>
+        </div>
+
+        <div class="content-item">
+            <h2>Nội dung Để xe</h2>
+            <div th:utext="${doiTac.baiVietDT.nddexe}"></div>
+        </div>
+
+        <div class="content-item">
+            <h2>Nội dung Tiện ích</h2>
+            <div th:utext="${doiTac.baiVietDT.ndtienich}"></div>
+        </div>
+
+        <div class="content-item">
+            <h2>Nội dung Chi tiết</h2>
+            <div th:utext="${doiTac.baiVietDT.ndchitiet}"></div>
+        </div>
+
+        <a href="/doitac/baiviet/edit" class="fm-btn-CSTT">Quay lại chỉnh sửa</a>
+    </div>
+</body>
+</html>

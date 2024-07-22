@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Chi tiết Phân quyền</h1>
+    <div th:if="${phanquyen != null}">
+        
+        <p>Tên: <span th:text="${phanquyen.tenpq}"></span></p>
+        <!-- Thêm các trường khác nếu có -->
+    </div>
+  
+</body>
+</html>

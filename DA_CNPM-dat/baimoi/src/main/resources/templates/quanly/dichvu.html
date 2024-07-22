@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Dịch Vụ</title>
+    <link rel="stylesheet" href="/css/dichvu.css">
+    <link rel="stylesheet" href="/css/nav.css"> 
+    <script src="/js/nav.js"></script>
+</head>
+<body>
+    <!--NAV BAR-->
+    <div th:replace="~{/fragments/navbar :: navbar}"></div>
+
+    <h1>Danh Sách Dịch Vụ</h1>
+
+    <!-- Form thêm dịch vụ -->
+        <h2>Thêm Dịch Vụ</h2>
+        <form th:action="@{/dichvu/them}" method="post">
+            <label for="noidung">Nội Dung:</label>
+            <input type="text" id="noidung" name="noidung" required>
+            <label for="soluong">Số Lượng:</label>
+            <input type="number" id="soluong" name="soluong" required>
+            <label for="giadv">Giá Dịch Vụ:</label>
+            <input type="number" id="giadv" name="giadv" step="0.01" required>
+            <button type="submit">Thêm</button>
+        </form>
+
+
+    <!-- Danh sách dịch vụ -->
+    <h2>Danh Sách Dịch Vụ</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nội Dung</th>
+                <th>Số Lượng</th>
+                <th>Giá Dịch Vụ</th>
+                <th>Thao Tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="dichVuCC : ${dichVuCCList}">
+                <td th:text="${dichVuCC.madv}"></td>
+                <td th:text="${dichVuCC.noidung}"></td>
+                <td th:text="${dichVuCC.soluong}"></td>
+                <td th:text="${dichVuCC.giadv}"></td>
+                <td>
+                    <a class="button edit" th:href="@{/dichvu/sua/{madv}(madv=${dichVuCC.madv})}">Sửa</a>
+                    <a class="button delete" th:href="@{/dichvu/xoa/{madv}(madv=${dichVuCC.madv})}" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Form sửa dịch vụ -->
+    <div th:if="${isedit}">
+        <h2>Sửa Dịch Vụ</h2>
+        <form th:action="@{/dichvu/sua}" method="post">
+            <input type="hidden" name="madv" th:value="${dichVuCC.madv}">
+            <label for="noidung">Nội Dung:</label>
+            <input type="text" id="noidung" name="noidung" th:value="${dichVuCC.noidung}" required>
+            <label for="soluong">Số Lượng:</label>
+            <input type="number" id="soluong" name="soluong" th:value="${dichVuCC.soluong}" required>
+            <label for="giadv">Giá Dịch Vụ:</label>
+            <input type="number" id="giadv" name="giadv" th:value="${dichVuCC.giadv}" step="0.01" required>
+            <button type="submit">Cập Nhật</button>
+        </form>
+        <a class="button add" href="/dichvu/tatca">Trở về danh sách</a>
+    </div>
+</body>
+</html>

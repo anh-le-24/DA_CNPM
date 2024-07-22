@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký Đối tác</title>
+    <link rel="stylesheet" th:href="@{/css/DoiTacCss.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body style="background-color: #303a45;">
+    <div class="container-DKDT">
+        <h1 style="text-align: center;">Đăng ký Đối tác</h1>
+        <form class="fm-formDKDT" th:action="@{/doitac/save}" method="post" th:object="${doitac}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="tennhahang">Tên Nhà Hàng</label>
+                <input placeholder="(vd: Nhà Hàng A)" type="text" class="form-control" id="tennhahang" th:field="*{tennhahang}" required />
+            </div>
+            <div class="form-group">
+                <label for="mota">Mô Tả</label>
+                <textarea placeholder="(vd: Nhà hàng chuyên về ĐẶC SẢN BÒ TƠ mềm, ngọt, non, sạch... mang tới những trải nghiệm ẩm thực trọn vẹn trong không gian phố xưa náo nhiệt.)" class="form-control" id="mota" th:field="*{mota}" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="sonhanh">Địa Chỉ Nhà Nhà Hàng</label>
+                <input placeholder="(vd: 19/4)" type="text" class="form-control" id="sonhanh" th:field="*{sonhanh}" required />
+            </div>
+            <div class="form-group">
+                <label for="duongnh">Đường</label>
+                <input placeholder="(vd: đường Phạm Văn Đồng)" type="text" class="form-control" id="duongnh" th:field="*{duongnh}" required />
+            </div>
+            <div class="form-group">
+                <label for="quannh">Quận</label>
+                <input placeholder="(vd: quận 2)" type="text" class="form-control" id="quannh" th:field="*{quannh}" required />
+            </div>
+            <div class="form-group">
+                <label for="thanhphonh">Thành Phố</label>
+                <input placeholder="(vd: TP.Hồ Chí Minh)" type="text" class="form-control" id="thanhphonh" th:field="*{thanhphonh}" required />
+            </div>
+            <div class="form-group">
+                <label for="linklienket">Link Facebook Của Nhà Hàng</label>
+                <input placeholder="(vd: facebook.com/...)" type="url" class="form-control" id="linklienket" th:field="*{linklienket}" required />
+            </div>
+            <div class="form-group">
+                <label for="linkggmap">Link Google Map Của Nhà Hàng</label>
+                <input placeholder="(vd: google.com/maps/...)" type="url" class="form-control" id="linkggmap" th:field="*{linkggmap}" required />
+            </div>
+            <div class="form-group">
+                <label for="hoadontb">Hóa Đơn Trung Bình</label>
+                <input placeholder="(vd: 300k - 1tr)" type="text" class="form-control" id="hoadontb" th:field="*{hoadontb}" required />
+            </div>
+            <div class="form-group">
+                <label for="giomo">Giờ Mở</label>
+                <input type="time" class="form-control" step="1" id="giomo" th:field="*{giomo}" required />
+            </div>
+            <div class="form-group">
+                <label for="giodong">Giờ Đóng</label>
+                <input type="time" class="form-control" step="1" id="giodong" th:field="*{giodong}" required />
+            </div>
+            <div class="form-group">
+                <label for="sochongoi">Tổng Số Chỗ Ngồi</label>
+                <input type="number" min="10" class="form-control" id="sochongoi" th:field="*{sochongoi}" required />
+            </div>
+            <div class="form-group">
+                <label>Đăng Ký Dịch Vụ</label>
+                <select class="form-control" name="madv" required>
+                    <option value="" disabled selected>Chọn dịch vụ</option>
+                    <option th:each="dichvu : ${dichvuccs}" th:value="${dichvu.madv}" th:text="${dichvu.noidung}"></option>
+                </select>
+            </div> 
+            <div class="form-group">
+                <label for="file">Ảnh Mô Tả Nhà Hàng</label>
+                <input type="file" class="form-control-file" id="file" name="file" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Đăng ký</button>
+        </form>
+    </div>
+</body>
+</html>

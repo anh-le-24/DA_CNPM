@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link th:href="@{/css/Login.css}" rel="stylesheet" />
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+    <header th:replace="~{/fragments/top :: top}"></header>
+    <div class="container-login">
+        <div class="box">
+            <div id="login" class="box-login">
+                <div class="top-header">
+                    <h2>Xin chào, mời đăng nhập!</h2>
+                    <p class="small">Chúng tôi rất vui khi bạn quay lại.</p>
+                </div>
+                <form th:action="@{/login/check}" method="post">
+                    <div class="input-field">
+                        <input type="text" name="sdt" placeholder="Số điện thoại" required>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="password" placeholder="Mật khẩu" required>
+                    </div>
+                    <div style="color: red;" th:if="${error}" class="error-message" th:text="${error}"></div>
+                    <div class="input-field">
+                        <button type="submit">Đăng nhập</button>
+                    </div>
+                </form>
+                <div class="input-field">
+                    <a  class="register" th:href="@{/register}">Đăng ký</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

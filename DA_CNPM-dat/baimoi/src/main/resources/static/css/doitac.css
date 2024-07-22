@@ -1,0 +1,206 @@
+/* Reset các kiểu mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+    background: #333;
+    color: #fff;
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background: #444;
+}
+
+table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background: #f1f1f1;
+}
+
+/* CSS cho phần chi tiết đối tác */
+.doitac-detail {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff; /* Đổi màu nền cho sạch sẽ hơn */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Thêm bóng cho phần chi tiết */
+}
+
+.doitac-detail h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.doitac-detail p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.doitac-detail p span {
+    font-weight: bold;
+}
+
+.doitac-detail a {
+    color: #3487e0;
+    text-decoration: none;
+    font-weight: bold;
+}
+.doitac-detail .btn-quaylai{
+    color: #fff;
+}
+.doitac-detail a:hover {
+    text-decoration: underline;
+}
+
+.doitac-detail img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.btn-chitiet, .btn-xacnhan, .btn-xoa, .btn-quaylai {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-chitiet {
+    background-color: #007bff;
+}
+
+.btn-chitiet:hover {
+    background-color: #0056b3;
+}
+
+.btn-xacnhan {
+    background-color: #146426;
+}
+
+.btn-xacnhan:hover {
+    background-color: #218838;
+}
+
+.btn-xoa {
+    background-color: #dc3545;
+}
+
+.btn-xoa:hover {
+    background-color: #c82333;
+}
+
+.btn-quaylai {
+    background-color: #1bd8f1;
+}
+
+.btn-quaylai:hover {
+    background-color: #17899b;
+}
+/*FORM*/
+form {
+    width: 60%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input[type="text"], form input[type="url"], form input[type="number"], form input[type="time"], form textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+form input[disabled], form textarea[disabled], form img[disabled] {
+    cursor: not-allowed;
+}
+
+form textarea {
+    resize: vertical;
+}
+
+form img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+}
+
+form .btn-xacnhan, form .btn-xoa, form .btn-quaylai {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+form .btn-xacnhan {
+    background-color: #28a745;
+    color: white;
+}
+
+form .btn-xoa {
+    background-color: #dc3545;
+    color: white;
+}
+
+form .btn-quaylai {
+    background-color: #39b2de;
+    color: white;
+}

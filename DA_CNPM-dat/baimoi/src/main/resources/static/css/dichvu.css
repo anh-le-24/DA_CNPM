@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Đặt nền và kiểu chữ cho toàn bộ trang */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+}
+
+/* Đặt kiểu cho tiêu đề */
+h1, h2 {
+    color: #0056b3;
+}
+
+/* Định dạng cho các form */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"], 
+form input[type="number"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #004494;
+}
+
+/* Định dạng cho các liên kết */
+a {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Định dạng cho bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+thead {
+    background-color: #f4f4f4;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.hidden {
+    display: none;
+}
+
+button, a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #f9f9f9;
+}
+
+/* Nút thêm */
+button[type="submit"], a.button.add {
+    background-color: #4CAF50; 
+}
+
+button[type="submit"]:hover, a.button.add:hover {
+    background-color: #45a049; 
+}
+
+/* Nút sửa */
+a.button.edit {
+    background-color: #2196F3; 
+    color: white;
+}
+
+a.button.edit:hover {
+    background-color: #0b7dda; 
+}
+
+/* Nút xóa */
+a.button.delete {
+    background-color: #f44336;
+    color: white;
+}
+
+a.button.delete:hover {
+    background-color: #d32f2f; 
+}

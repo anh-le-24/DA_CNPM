@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhà Hàng Đối tác</title>
+    <link rel="stylesheet" th:href="@{/css/DoiTacCss.css}">
+    <script th:src="@{/js/DoiTacJs.js}" defer></script>
+    <link rel="stylesheet" th:href="@{/ckeditor5-42/ckeditor5/ckeditor5.css}">
+    <style>
+        .main-container {
+            width: 795px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body onload="toggleSidebar()">
+    <div class="container">
+        <div th:replace="~{/fragments/left :: left}"></div>
+        <div class="content" id="content">
+            <div id="DoiTacContent" class="content-item">
+                <div class="box-bg1">
+                    <h1>Chỉnh sửa bài viết</h1>
+                    <div class="box-bg2 scroll-list">
+                        <div class="fm-layoutbaiviet">
+                            <form th:action="@{/doitac/baiviet/save}" method="post" th:object="${baiVietDT}" enctype="multipart/form-data" onsubmit="updateTextareaValues()">
+                                <input type="hidden" name="madt" th:value="${doiTac.madt != null ? doiTac.madt : ''}" />
+                                
+                                <div class="fm-baivietdt">
+                                    <label for="ndtomtat">Nội dung Tóm tắt:</label>
+                                    <textarea id="ndtomtat" name="ndtomtat" th:text="${baiVietDT.ndtomtat}"></textarea>
+                                </div>
+
+                                <div class="fm-baivietdt">
+                                    <label for="ndbanggia">Nội dung Bảng giá:</label>
+                                    <textarea id="ndbanggia" name="ndbanggia" th:text="${baiVietDT.ndbanggia}"></textarea>
+                                </div>
+
+                                <div class="fm-baivietdt">
+                                    <label for="ndquydinh">Nội dung Quy định:</label>
+                                    <textarea id="ndquydinh" name="ndquydinh" th:text="${baiVietDT.ndquydinh}"></textarea>
+                                </div>
+
+                                <div class="fm-baivietdt">
+                                    <label for="nddexe">Nội dung Để xe:</label>
+                                    <textarea id="nddexe" name="nddexe" th:text="${baiVietDT.nddexe}"></textarea>
+                                </div>
+
+                                <div class="fm-baivietdt">
+                                    <label for="ndtienich">Nội dung Tiện ích:</label>
+                                    <textarea id="ndtienich" name="ndtienich" th:text="${baiVietDT.ndtienich}"></textarea>
+                                </div>
+
+                                <div class="fm-baivietdt">
+                                    <label for="ndchitiet">Nội dung Chi tiết:</label>
+                                    <textarea id="ndchitiet" name="ndchitiet" th:text="${baiVietDT.ndchitiet}"></textarea>
+                                </div>
+                                <a class="fm-addimg"  th:href = "@{/doitac/{id}/images (id = ${doiTac.madt})}">Thêm hình ảnh</a>
+                                <button class="fm-btn-CSTT" type="submit">Lưu bài viết</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "ckeditor5": "/ckeditor5-42/ckeditor5/ckeditor5.js",
+                "ckeditor5/": "/ckeditor5-42/ckeditor5/"
+            }
+        }
+    </script>
+    <script type="module">
+        import {
+            ClassicEditor,
+            Essentials,
+            Paragraph,
+            Bold,
+            Italic,
+            Font
+        } from 'ckeditor5';
+
+        const editorConfig = {
+            plugins: [ Essentials, Paragraph, Bold, Italic, Font ],
+            toolbar: {
+                items: [
+                    'undo', 'redo', '|', 
+                    'bold', 'italic', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                ],
+                shouldNotGroupWhenFull: true
+            },
+            language: 'vi'
+        };
+
+        const editors = {};
+        const textareaIds = ['ndtomtat', 'ndbanggia', 'ndquydinh', 'nddexe', 'ndtienich', 'ndchitiet'];
+
+        textareaIds.forEach(id => {
+            ClassicEditor
+                .create(document.querySelector(`#${id}`), editorConfig)
+                .then(editor => {
+                    editors[id] = editor;
+                })
+                .catch(error => {
+                    console.error(`Error initializing editor for ${id}:`, error);
+                });
+        });
+
+        function updateTextareaValues() {
+            textareaIds.forEach(id => {
+                const editor = editors[id];
+                const textarea = document.querySelector(`#${id}`);
+                if (editor && textarea) {
+                    textarea.value = editor.getData();
+                }
+            });
+        }
+    </script>
+</body>
+</html>

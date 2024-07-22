@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar Fragment</title>
+</head>
+<body>
+    <div class="navbar" th:fragment="navbar">
+        <div class="contenttop">
+            <a th:href="@{/admin/tatcadoitac}" class="nav-link">Trang chủ Admin</a>
+            <a th:href="@{/nguoidung/tatca}" class="nav-link">Người dùng</a>
+            <a th:href="@{/dichvu/tatca}" class="nav-link">Dịch vụ</a>
+            <a th:href="@{/admin/tatcadonxindk}" class="nav-link">Đơn Xin Đăng Ký</a>
+        </div>
+    </div>
+</body>
+</html>

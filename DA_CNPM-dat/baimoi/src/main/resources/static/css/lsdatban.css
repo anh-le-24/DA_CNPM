@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container-lsdatban{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 100px;
+}
+.fm-table-QLDH{
+    display: flex;
+    justify-content: center;
+    /* overflow-x:auto */
+}
+.fm-table-QLDH table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    
+  }
+.fm-table-QLDH th{
+    font-size: 18px;
+    padding: 20px 5px;
+    background-color:#ee7a45 ;
+    margin-bottom: 10px;
+    text-align: center;
+    max-width: 200px;
+    border: 1px solid black;
+    
+}
+.fm-table-QLDH td {
+    max-width: 250px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid black;
+  }
+
+  
+.fm-table-QLDH tr:nth-child(even){
+    background-color: #e1e1e4c2
+}
+.btnXN{
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #25cc0f ;
+    transition: all 0.3s ease-in-out;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    margin: 5px;
+    font-weight: 500;
+}
+.fm-divlsdatban{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+}

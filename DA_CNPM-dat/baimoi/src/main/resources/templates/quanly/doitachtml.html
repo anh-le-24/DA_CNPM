@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Đối Tác</title>
+    <link rel="stylesheet" href="/css/doitac.css">
+    <link rel="stylesheet" href="/css/nav.css"> 
+    <script src="/js/nav.js"></script>
+</head>
+<body> 
+
+    <!--NAV BAR-->
+    <div th:replace="~{/fragments/navbar :: navbar}"></div>
+
+    <!-- Hiển thị thông báo nếu có -->
+    <div th:if="${message}" class="alert alert-success">
+        <p th:text="${message}"></p>
+    </div>
+        <div th:unless="${doiTac != null}">
+            <h1>Danh sách Xin Gia Nhập Đối Tác</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên Nhà Hàng</th>
+                        <th>Địa Chỉ</th>
+                        <th>Giờ mở</th>
+                        <th>Giờ đóng</th>
+                        <th>Ngày Đăng Ký</th>
+                        <th>Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="doiTac : ${doiTacList}" th:if="${doiTac.nguoiDung.mapq == 2}">
+                        <td th:text="${doiTac.madt}"></td>
+                        <td th:text="${doiTac.tennhahang}"></td>
+                        <td th:text="${doiTac.getFullAddress()}"></td>
+                        <td th:text="${doiTac.giomo}"></td>
+                        <td th:text="${doiTac.giodong}"></td>
+                        <td th:text="${doiTac.ngaydk}"></td>
+                        <td>
+                            <a class="btn-chitiet" th:href="@{/admin/details/{id}(id=${doiTac.madt})}">Xem Chi Tiết</a>
+                            <a class="btn-xacnhan" th:href="@{/admin/xacnhan/{id}(id=${doiTac.nguoiDung.mand})}">Xác nhận</a>
+                            <a class="btn-xoa" th:href="@{/admin/xoa/{id}(id=${doiTac.madt})}">Xóa</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+      <!-- Phần hiển thị chi tiết -->
+      <div class="doitac-detail" th:if="${doiTac != null}">
+          <h2>Chi Tiết Đối Tác</h2>
+          <p>ID: <span th:text="${doiTac.madt}"></span></p>
+          <p>Tên Nhà Hàng: <span th:text="${doiTac.tennhahang}"></span></p>
+          <p>Số Nhà: <span th:text="${doiTac.sonhanh}"></span></p>
+          <p>Đường: <span th:text="${doiTac.duongnh}"></span></p>
+          <p>Quận: <span th:text="${doiTac.quannh}"></span></p>
+          <p>Thành Phố: <span th:text="${doiTac.thanhphonh}"></span></p>
+          <p>Mô Tả: <span th:text="${doiTac.mota}"></span></p>
+          <p>Liên Kết: <a th:href="${doiTac.linklienket}" th:text="${doiTac.linklienket}">Xem Liên Kết</a></p>
+          <p>Link Google Map: <a th:href="${doiTac.linkggmap}" th:text="${doiTac.linkggmap}">Xem trên Bản Đồ</a></p>
+          <p>Hóa Đơn: <span th:text="${doiTac.hoadontb}"></span></p>
+          <p>Giờ Mở: <span th:text="${#dates.format(doiTac.giomo, 'HH:mm')}"></span></p>
+          <p>Giờ Đóng: <span th:text="${#dates.format(doiTac.giodong, 'HH:mm')}"></span></p>
+          <p>Số Chỗ Ngồi: <span th:text="${doiTac.sochongoi}"></span></p>
+          <p>Ảnh Mô Tả: <img th:src="@{/images/{imgmota}(imgmota=${doiTac.imgmota})}" alt="Ảnh Mô Tả" style="max-width: 400px; height: auto;"></p>
+          <p>Ngày Đăng Ký: <span th:text="${#dates.format(doiTac.ngaydk, 'dd/MM/yyyy')}"></span></p>
+          <h3>Thông Tin Người Dùng</h3>
+          <p>ID Người Dùng: <span th:text="${doiTac.nguoiDung.mand}"></span></p>
+          <p>Tên Người Dùng: <span th:text="${doiTac.nguoiDung.hoten}"></span></p>
+          <p>Email: <span th:text="${doiTac.nguoiDung.email}"></span></p>
+          <p>Số Điện Thoại: <span th:text="${doiTac.nguoiDung.sdt}"></span></p>
+          <a class="btn-quaylai" href="/admin/tatcadonxindk">Quay lại danh sách</a>
+          <a class="btn-xacnhan" th:href="@{/admin/xacnhan/{id}(id=${doiTac.madt})}">Xác nhận</a>
+          <a class="btn-xoa" th:href="@{/admin/xoa/{id}(id=${doiTac.madt})}">Xóa</a>
+      </div>
+</body>
+</html>
