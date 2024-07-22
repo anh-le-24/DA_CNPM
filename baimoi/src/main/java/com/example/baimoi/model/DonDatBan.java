@@ -34,7 +34,7 @@ public class DonDatBan {
     private Long macb;
     private Long madg;
     // Kết nối với bảng đối tác
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "madt", referencedColumnName = "madt",insertable=false, updatable=false)
     private DoiTac doiTac;
 
@@ -44,7 +44,7 @@ public class DonDatBan {
     private ComBoMonAn comBoMonAn;
 
     // Kết nối với bảng nguoi dung
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mand", referencedColumnName = "mand",insertable=false, updatable=false)
     private NguoiDung nguoiDung;
 

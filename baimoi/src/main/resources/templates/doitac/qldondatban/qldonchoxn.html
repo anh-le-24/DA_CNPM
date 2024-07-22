@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="/fragments/head :: head">
-    </head>
+<head th:replace="/fragments/head :: head"></head>
 <body onload="toggleSidebar()">
     <!-- phần thân -->
     <div class="container">
@@ -9,21 +8,21 @@
 
         <div class="div-ThongBao" id="myForm">
             <div style="display: flex;justify-content: center;align-items: center;width: 100%;height: 100%;">
-                <div class="form-XN" >
+                <div class="form-XN">
                     <div class="header-foXN">
-                    <div class="content-foXN">
-                        <span class="title-foXN">Xác nhận nhận đặt bàn</span>
-                        <p class="message-foXN">Đối tác đã liên hệ với khách hàng và yêu cầu tiền cọc</p>
-                    </div>
-                    <div class="actions">
-                        <form th:action="@{/doitac/quanlydon/capnhat}" method="post">
-                            <input type="hidden" name="maddb" id="xacNhanMaddb" />
-                            <input type="hidden" name="madt" th:value="${doiTac.madt}" />
-                            <input type="hidden" name="trangThai" value="2" />
-                            <button class="desactivate-foXN" type="submit">Xác nhận</button>
-                            <button class="cancel-foXN" type="button" onclick="closeForm()">Hủy</button>
-                        </form>
-                    </div>
+                        <div class="content-foXN">
+                            <span class="title-foXN">Xác nhận nhận đặt bàn</span>
+                            <p class="message-foXN">Đối tác đã liên hệ với khách hàng và yêu cầu tiền cọc</p>
+                        </div>
+                        <div class="actions">
+                            <form th:action="@{/doitac/quanlydon/capnhat}" method="post">
+                                <input type="hidden" name="maddb" id="xacNhanMaddb" />
+                                <input type="hidden" name="madt" th:value="${doiTac.madt}" />
+                                <input type="hidden" name="trangThai" value="2" />
+                                <button class="desactivate-foXN" type="submit">Xác nhận</button>
+                                <button class="cancel-foXN" type="button" onclick="closeForm()">Hủy</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -31,23 +30,23 @@
 
         <div class="div-ThongBao" id="myFormHuy">
             <div style="display: flex;justify-content: center;align-items: center;width: 100%;height: 100%;">
-                <div class="form-XN" >
+                <div class="form-XN">
                     <div class="header-foXN">
-                    <div class="content-foXN">
-                        <span class="title-foXN">Xác nhận hủy đặt bàn</span>
-                        <p class="message-foXN">Đối tác đã liên hệ với khách hàng và giải thích lý do hủy</p>
-                        <input type="text" id="lyDoHuyInput"  placeholder="Lý do hủy" class="input-lyDoHuy" name="lyDoHuy">
-                    </div>
-                    <div class="actions">
-                        <form th:action="@{/doitac/quanlydon/capnhat}" method="post" onsubmit="return setLyDoHuy()">
-                            <input type="hidden" name="maddb" id="huyMaddb" />
-                            <input type="hidden" name="madt" th:value="${doiTac.madt}" />
-                            <input type="hidden" name="trangThai" value="4" />
-                            <input type="hidden" name="lyDo" id="lyDoHuyHidden" />
-                            <button class="desactivate-foXN" type="submit">Xác nhận hủy</button>
-                            <button class="cancel-foXN" type="button" onclick="closeFormHuy()">Hủy</button>
-                        </form>
-                    </div>
+                        <div class="content-foXN">
+                            <span class="title-foXN">Xác nhận hủy đặt bàn</span>
+                            <p class="message-foXN">Đối tác đã liên hệ với khách hàng và giải thích lý do hủy</p>
+                            <input type="text" id="lyDoHuyInput" placeholder="Lý do hủy" class="input-lyDoHuy" name="lyDoHuy">
+                        </div>
+                        <div class="actions">
+                            <form th:action="@{/doitac/quanlydon/capnhat}" method="post" onsubmit="return setLyDoHuy()">
+                                <input type="hidden" name="maddb" id="huyMaddb" />
+                                <input type="hidden" name="madt" th:value="${doiTac.madt}" />
+                                <input type="hidden" name="trangThai" value="4" />
+                                <input type="hidden" name="lyDo" id="lyDoHuyHidden" />
+                                <button class="desactivate-foXN" type="submit">Xác nhận hủy</button>
+                                <button class="cancel-foXN" type="button" onclick="closeFormHuy()">Hủy</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,7 +54,7 @@
 
         <div class="content" id="content">
             <div id="QLDonChoXNContent" class="content-item">
-                <div class="box-bg1">  
+                <div class="box-bg1">
                     <h1>Chờ Xác Nhận</h1>
                     <div class="box-bg2">
                         <div class="box-search">
@@ -64,33 +63,33 @@
                         </div>
                         <div class="fm-table-QLDH">
                             <table>
-                            <tr>
-                                <th>Mã DDB</th>
-                                <th>Mã Người Dùng</th>
-                                <th>Ngày đặt</th>
-                                <th>Giờ đến</th>
-                                <th>Số lượng</th>
-                                <th>Tên Combo</th>
-                                <th>Tên Chi Nhánh</th>
-                                <th>Yêu cầu đặc biệt</th>
-                                <th>Ghi chú</th>
-                                <th>Trạng thái</th>
-                            </tr>
-                            <tr th:if="${donDatBan.trangThaiDon.mattd == 1}" th:each="donDatBan : ${doiTac.donDatBans}">
-                                <td th:text="${donDatBan.maddb}"></td>
-                                <td th:text="${donDatBan.nguoiDung.hoten}"></td>
-                                <td th:text="${#dates.format(donDatBan.ngaydat, 'dd/MM/yyyy')}"></td>
-                                <td th:text="${#dates.format(donDatBan.thoigiandat, 'HH:mm')}"></td>
-                                <td th:text="${donDatBan.solgnguoi}"></td>
-                                <td th:text="${donDatBan.comBoMonAn?.tencb ?: 'Null'}"></td>
-                                <td th:text="${donDatBan.chiNhanh?.tencn ?: 'Null'}"></td>
-                                <td th:text="${donDatBan.yeucaudacbiet}"></td>
-                                <td th:text="${donDatBan.ghichu}"></td>
-                                <td>
-                                    <button class="btnXN" type="button" th:onclick="'openForm(' + ${donDatBan.maddb} + ')'">Xác nhận</button>
-                                    <button class="btnHuy" type="button" th:onclick="'openFormHuy(' + ${donDatBan.maddb} + ')'">Hủy</button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th>Mã DDB</th>
+                                    <th>Tên Người Dùng</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Giờ đến</th>
+                                    <th>Số lượng</th>
+                                    <th>Tên Combo</th>
+                                    <th>Tên Chi Nhánh</th>
+                                    <th>Yêu cầu đặc biệt</th>
+                                    <th>Ghi chú</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                                <tr th:if="${donDatBan.trangThaiDon.mattd == 1}" th:each="donDatBan : ${donDatBans}">
+                                    <td th:text="${donDatBan.maddb}"></td>
+                                    <td th:text="${donDatBan.nguoiDung.hoten}"></td>
+                                    <td th:text="${#dates.format(donDatBan.ngaydat, 'dd/MM/yyyy')}"></td>
+                                    <td th:text="${#dates.format(donDatBan.thoigiandat, 'HH:mm')}"></td>
+                                    <td th:text="${donDatBan.solgnguoi}"></td>
+                                    <td th:text="${donDatBan.comBoMonAn?.tencb ?: 'Null'}"></td>
+                                    <td th:text="${donDatBan.chiNhanh?.tencn ?: 'Null'}"></td>
+                                    <td th:text="${donDatBan.yeucaudacbiet}"></td>
+                                    <td th:text="${donDatBan.ghichu}"></td>
+                                    <td>
+                                        <button class="btnXN" type="button" th:onclick="'openForm(' + ${donDatBan.maddb} + ')'">Xác nhận</button>
+                                        <button class="btnHuy" type="button" th:onclick="'openFormHuy(' + ${donDatBan.maddb} + ')'">Hủy</button>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>

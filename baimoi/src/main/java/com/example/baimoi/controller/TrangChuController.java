@@ -6,6 +6,7 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.baimoi.model.ComBoMonAn;
@@ -68,19 +70,22 @@ public class TrangChuController {
         
         return "trangchu/chitiet";
     }
-
+    
     @GetMapping("/info")
-    public String getViewInfo(Model model, HttpSession session) {
+    public ModelAndView getViewInfo(HttpSession session) {
         Long mand = (Long) session.getAttribute("mand");
         if (mand == null) {
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
-        Optional <NguoiDung> nguoiDungOtp = nguoiDungService.getNguoiDungById(mand);
+        Optional<NguoiDung> nguoiDungOtp = nguoiDungService.getNguoiDungById(mand);
+       
         NguoiDung nguoiDung = nguoiDungOtp.get();
 
-        model.addAttribute("nguoiDung", nguoiDung);
-        return "trangchu/info";
+        ModelAndView mav = new ModelAndView("trangchu/info");
+        mav.addObject("nguoiDung", nguoiDung);
+        return mav;
     }
+    
     @PostMapping("/update-info")
     public String updateInfo(@ModelAttribute NguoiDung updatedUser, HttpSession session) {
         Long mand = (Long) session.getAttribute("mand");
@@ -230,6 +235,21 @@ public class TrangChuController {
     @GetMapping("/datthanhcong")
     private String getViewThanhCong(){
         return "trangchu/datthanhcong";
+    }
+    
+    // -------- Lịch SỬ đặt bàn --------//
+    
+    @GetMapping("/lsdatban")
+    public String getLichSuDatBan(HttpSession session, Model model) {
+        Long mand = (Long) session.getAttribute("mand");
+        if (mand == null) {
+            return "redirect:/login";
+        }
+
+        List<DonDatBan> donDatBans = donDatBanService.getDonDatBansForUser(mand);
+        model.addAttribute("donDatBans", donDatBans);
+
+        return "trangchu/lsdondatban";
     }
 
 

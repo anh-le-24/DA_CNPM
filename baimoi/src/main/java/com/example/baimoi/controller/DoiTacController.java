@@ -230,13 +230,17 @@ public class DoiTacController {
     @Autowired
     private DanhGiaService danhGiaService;
 
-    @Transactional
     @GetMapping("/quanlydon/qldonchoxn/{id}")
     public String getViewQlDonChoXN(@PathVariable("id") Long id,Model model){
+        
+        List<DonDatBan> donDatBans = donDatBanService.getDonDatBansForDoiTac(id);
+        model.addAttribute("donDatBans", donDatBans);
+
         Optional<DoiTac> doiTac = doiTacService.getDoiTacById(id);
         model.addAttribute("doiTac", doiTac.get());
 
-        return "/doitac/qldondatban/qldonchoxn";
+        
+        return "doitac/qldondatban/qldonchoxn";
     }
 
     @Transactional

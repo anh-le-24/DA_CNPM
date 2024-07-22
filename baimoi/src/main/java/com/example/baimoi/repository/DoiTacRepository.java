@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.baimoi.model.DoiTac;
+import com.example.baimoi.model.DonDatBan;
+import com.example.baimoi.model.NguoiDung;
 
 @Repository
 public interface DoiTacRepository extends JpaRepository<DoiTac, Long> {
@@ -15,4 +17,7 @@ public interface DoiTacRepository extends JpaRepository<DoiTac, Long> {
     DoiTac findDoiTacWithImages(@Param("id") Long id);
 
     List<DoiTac> findByMadt(Long madt);
+    
+    @Query("SELECT dt FROM DoiTac dt JOIN FETCH dt.donDatBans ddb WHERE dt.madt = :id")
+    DonDatBan findDonDatBansByDoiTacId(@Param("id") Long id);
 }

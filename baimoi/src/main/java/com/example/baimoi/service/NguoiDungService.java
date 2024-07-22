@@ -12,6 +12,7 @@ import com.example.baimoi.repository.NguoidungRepository;
 import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class NguoiDungService {
     @Autowired
     private NguoidungRepository nguoidungRepository;
