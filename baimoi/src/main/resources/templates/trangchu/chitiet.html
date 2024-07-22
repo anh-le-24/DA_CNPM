@@ -6,6 +6,70 @@
     <title>Chi Tiết</title>
     <link rel="stylesheet" th:href="@{/css/chitiet.css}">
     <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sliderImages = document.querySelectorAll('.slider img');
+            const navLinks = document.querySelectorAll('.slider-nav a');
+            const prevButton = document.querySelector('.slider-button.prev');
+            const nextButton = document.querySelector('.slider-button.next');
+            let currentIndex = 0;
+        
+            function showImage(index) {
+                sliderImages.forEach(img => img.classList.remove('active'));
+                sliderImages[index].classList.add('active');
+                currentIndex = index;
+            }
+        
+            navLinks.forEach((link, index) => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showImage(index);
+                });
+            });
+        
+            prevButton.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + sliderImages.length) % sliderImages.length;
+                showImage(currentIndex);
+            });
+        
+            nextButton.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % sliderImages.length;
+                showImage(currentIndex);
+            });
+        
+            // Show the first image initially
+            showImage(0);
+        });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const button = document.querySelector('.fm-btndatban');
+                const menuDetail = document.querySelector('.menu-detail');
+                let menuDetailBottom = menuDetail.offsetTop + menuDetail.offsetHeight;
+                const initialButtonTop = window.innerHeight - button.offsetHeight - 30; // 20px from bottom
+            
+                function positionButton() {
+                    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    if (scrollPosition > menuDetailBottom - window.innerHeight) {
+                        button.style.position = 'fixed';
+                        button.style.top = (menuDetail.offsetHeight + 60) + 'px';
+                    } else {
+                        button.style.position = 'fixed';
+                        button.style.top = initialButtonTop + 'px';
+                    }
+                }
+            
+                window.addEventListener('scroll', positionButton);
+                window.addEventListener('resize', function() {
+                    menuDetailBottom = menuDetail.offsetTop + menuDetail.offsetHeight;
+                    positionButton();
+                });
+            
+                // Initial positioning
+                positionButton();
+            });
+            </script>
     
 </head>
 <body>
@@ -47,6 +111,8 @@
                         <p style="color: red;" th:text="'Mở cửa: ' + ${doiTac.giomo}"></p>
                         <p  th:text="'Đóng cửa: ' + ${doiTac.giodong}"></p>
                     </div>
+                    <a class="fm-btndatban" th:if="${session.loggedInUser != null}" th:href="@{/datban/{id}(id=${doiTac.madt})}">Đặt Bàn</a>
+                    <a class="fm-btndatban" th:if="${session.loggedInUser == null}" th:href="@{/doitac/login-required}">Đặt Bàn</a>
                 </div>
                 <div class="menu-detail">
                     <a href="#de-xuat" class="active">Đề xuất</a>
@@ -106,8 +172,7 @@
                     </section>
                 </div>
             </div>
-            <a class="fm-btndatban" th:if="${session.loggedInUser != null}" th:href="@{/datban/{id}(id=${doiTac.madt})}">Đặt Bàn</a>
-            <a class="fm-btndatban" th:if="${session.loggedInUser == null}" th:href="@{/doitac/login-required}">Đặt Bàn</a>
+            
         </div>
     </div>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
