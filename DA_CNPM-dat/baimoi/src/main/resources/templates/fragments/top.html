@@ -4,21 +4,13 @@
             <a th:href="@{/trangchu}" class="active">Trang chủ</a>
             <a href="#news">News</a>
             <a href="#contact">Contact</a>
-            <a th:href="@{/admin/tatcadoitac}">Admin</a>
-            <img src="/images/bell.png" ></img>
         </div>
         <div class="nav_button">
             <div th:if="${session.loggedInUser}">
                 <div class="account-menu">
-                    <a href="#">
-                        <button class="btnac" th:text="${'Xin chào, ' + session.loggedInUser.hoten}"><i class="bx bx-user"></i></button>
+                    <a th:href="@{/info}">
+                        <button  class="btnac" th:text="${'Xin chào, ' + session.loggedInUser.hoten}"></button>
                     </a>
-                    <div class="dropdown-content">
-                        <a th:href="@{/info}">Thông tin cá nhân</a>
-                        <a th:href="@{/resetpw}">Quản lý mật khẩu</a>
-                        <a th:href="@{/logout}">Đăng xuất</a>
-                        
-                    </div> 
                 </div>
             </div>
             <div class="fm-topright" th:unless="${session.loggedInUser}">

@@ -16,7 +16,26 @@
     <body>
         <!--NAV BAR-->
         <header th:replace="~{/fragments/top :: top}"></header>
-
+        <!-- Thông báo -->
+        <div class="container thongbao-container" th:if="${thongBaos != null}">
+            <h2>Danh sách thông báo</h2>
+            <table class="table table-striped thongbao">
+                <thead>
+                    <tr>
+                        <th>Tiêu đề</th>
+                        <th>Nội dung</th>
+                        <th>Ngày gửi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="thongBao : ${thongBaos}">
+                        <td th:text="${thongBao.tieude}">Tiêu đề</td>
+                        <td th:text="${thongBao.noidung}">Nội dung</td>
+                        <td th:text="${#dates.format(thongBao.ngaygui, 'dd/MM/yyyy')}">Ngày gửi</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <!-- BODY Content  -->
         <div class="fixcontent">
             <div class="content">
