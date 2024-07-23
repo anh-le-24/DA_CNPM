@@ -51,4 +51,25 @@ public class DoiTacService {
     public DoiTac findByIdDT(Long madt) {
         return doiTacRepository.findById(madt).orElse(null);
     }
+
+    // service tìm kiếm
+    public List<DoiTac> searchByName(String tennhahang) {
+        return doiTacRepository.findByTennhahangContainingIgnoreCase(tennhahang);
+    }
+
+    public List<DoiTac> searchByFullAddress(String address) {
+        return doiTacRepository.findBySonhanhContainingIgnoreCaseOrDuongnhContainingIgnoreCaseOrQuannhContainingIgnoreCaseOrThanhphonhContainingIgnoreCase(address, address, address, address);
+    }
+    
+    public List<DoiTac> searchByCity(String city) {
+        return doiTacRepository.findByThanhphonhContainingIgnoreCase(city);
+    }
+
+    public List<DoiTac> searchByDistrict(String district) {
+        return doiTacRepository.findByQuannhContainingIgnoreCase(district);
+    }
+
+    public List<DoiTac> searchByInvoiceAverage(String invoiceAverage) {
+        return doiTacRepository.findByHoadontbContainingIgnoreCase(invoiceAverage);
+    }
 }

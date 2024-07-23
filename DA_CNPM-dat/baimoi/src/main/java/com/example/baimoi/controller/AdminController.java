@@ -90,15 +90,20 @@ public class AdminController {
     }
 
     @DeleteMapping("/xoa/{id}")
-public ResponseEntity<String> xoaDoiTac(@PathVariable("id") Long id) {
-    try {
-        chiNhanhService.deleteChiNhanh(id); 
-        doitacService.deleteByIdDT(id);
-        return ResponseEntity.ok("Xóa thành công");
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Xóa thất bại: " + e.getMessage());
+    public ResponseEntity<String> xoaDoiTac(@PathVariable("id") Long id) {
+        NguoiDung nguoiDung = nguoiDungService.findByIdND(id);
+        try {
+            chiNhanhService.deleteChiNhanh(id); 
+            doitacService.deleteByIdDT(id);
+                nguoiDung.setMapq(2); 
+                nguoiDungService.saveOrUpdate(nguoiDung);
+                // Tạo thông báo cho người dùng
+                thongBaoService.createThongBao(id, "bạn mới bị trục xuất", "Tài khoản của bạn đã mất quyền đối tác");
+            return ResponseEntity.ok("Xóa thành công");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Xóa thất bại: " + e.getMessage());
+        }
     }
-}
 
     @RequestMapping("/error")
     public String handleError() {

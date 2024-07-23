@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.baimoi.model.DoiTac;
 import com.example.baimoi.model.DonDatBan;
-import com.example.baimoi.model.NguoiDung;
 
 @Repository
 public interface DoiTacRepository extends JpaRepository<DoiTac, Long> {
@@ -20,4 +19,12 @@ public interface DoiTacRepository extends JpaRepository<DoiTac, Long> {
     
     @Query("SELECT dt FROM DoiTac dt JOIN FETCH dt.donDatBans ddb WHERE dt.madt = :id")
     DonDatBan findDonDatBansByDoiTacId(@Param("id") Long id);
+
+    //list để tìm kiếm
+    List<DoiTac> findByTennhahangContainingIgnoreCase(String tennhahang);
+    List<DoiTac> findBySonhanhContainingIgnoreCaseOrDuongnhContainingIgnoreCaseOrQuannhContainingIgnoreCaseOrThanhphonhContainingIgnoreCase(String sonhanh, String duongnh, String quannh, String thanhphonh);
+
+    List<DoiTac> findByThanhphonhContainingIgnoreCase(String thanhphonh);
+    List<DoiTac> findByQuannhContainingIgnoreCase(String quannh);
+    List<DoiTac> findByHoadontbContainingIgnoreCase(String hoadontb);
 }

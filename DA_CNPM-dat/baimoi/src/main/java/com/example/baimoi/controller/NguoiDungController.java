@@ -3,6 +3,7 @@ package com.example.baimoi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.baimoi.model.NguoiDung;
 import com.example.baimoi.service.NguoiDungService;
+import com.example.baimoi.service.ThongBaoService;
 
 @Controller
 @RequestMapping("/nguoidung")
@@ -24,6 +26,8 @@ public class NguoiDungController {
     
     @Autowired
     private NguoiDungService nguoiDungService;
+    @Autowired
+    private ThongBaoService thongBaoService;
     
     @GetMapping("/tatca")
     public String allNguoiDung(Model model){
@@ -70,9 +74,17 @@ public class NguoiDungController {
  
     @DeleteMapping("/xoa/{mand}")
     public ResponseEntity<Void> xoaNguoidung(@PathVariable Long mand) {
-        nguoiDungService.deleteNguoiDung(mand); 
-        return ResponseEntity.ok().build();
+        try {
+            // Xóa các thông báo liên quan đến người dùng
+            thongBaoService.deleteByNguoiDungMand(mand);
+            // Xóa người dùng
+            nguoiDungService.deleteNguoiDung(mand);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @GetMapping("/search")
     public String search(@RequestParam(value = "hoten", required = false, defaultValue = "") String hoten, Model model) {

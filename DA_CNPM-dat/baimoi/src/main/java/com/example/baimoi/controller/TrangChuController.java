@@ -278,5 +278,38 @@ public class TrangChuController {
         return "trangchu/combo";
     }
     
+    // tìm kiếm
+    @GetMapping("/search")
+    public String search(@RequestParam(name = "query", required = false) String query, Model model) {
+        List<DoiTac> results;
+        if (query != null && !query.isEmpty()) {
+            results = doiTacService.searchByName(query);
+            results.addAll(doiTacService.searchByFullAddress(query));
+        } else {
+            results = doiTacService.getAllDoitac();
+        }
+        model.addAttribute("doiTacs", results);
+        return "trangchu/index";
+    }
 
+    //lọcs
+    @GetMapping("/loc")
+    public String search(
+            @RequestParam(name = "city", required = false) String city,
+            @RequestParam(name = "district", required = false) String district,
+            @RequestParam(name = "invoiceAverage", required = false) String invoiceAverage,
+            Model model) {
+        List<DoiTac> results;
+        if (city != null && !city.isEmpty()) {
+            results = doiTacService.searchByCity(city);
+        } else if (district != null && !district.isEmpty()) {
+            results = doiTacService.searchByDistrict(district);
+        } else if (invoiceAverage != null && !invoiceAverage.isEmpty()) {
+            results = doiTacService.searchByInvoiceAverage(invoiceAverage);
+        } else {
+            results = doiTacService.getAllDoitac();
+        }
+        model.addAttribute("doiTacs", results);
+        return "trangchu/index";
+    }
 }

@@ -68,9 +68,9 @@
                 <button type="submit">Cập nhật</button>
             </form>
             <div class="fm-phanquyen" style="margin-top: 20px;">
-                <!-- <div class="item-phanquyen" th:if="${nguoiDung.mapq == 1}">
-                    <a th:href="@{/admin/tatcadoitac}" class="button">Quản lý Admin</a>
-                </div> -->
+                <div class="item-phanquyen" th:if="${nguoiDung.mapq == 1}">
+                    <a target="_blank" th:href="@{/admin/tatcadoitac}" class="button">Quản lý Admin</a>
+                </div>
                 <div class="item-phanquyen" th:if="${nguoiDung.mapq == 3}">
                     <a target="_blank" th:href = "@{/doitac/{id} (id = ${nguoiDung.doiTac.madt})}" class="button">Quản lý Đối tác</a>
                 </div>

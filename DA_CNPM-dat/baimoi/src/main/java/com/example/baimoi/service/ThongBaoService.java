@@ -26,4 +26,8 @@ public class ThongBaoService {
         thongBao.setNgaygui(new Date(System.currentTimeMillis()));
         return thongBaoReponsitory.save(thongBao);
     }
+
+    public void deleteByNguoiDungMand(Long mand) {
+        thongBaoReponsitory.deleteByNguoiDungMand(mand);
+    }
 }

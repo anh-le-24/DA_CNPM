@@ -20,13 +20,12 @@
         <!-- BODY Content  -->
         <div class="fixcontent">
             <div class="content">
-                <div class="search-box">
-                    <input type="search" name="Tìm kiếm" placeholder="Tìm kiếm của bạn...">
-                    <a th:href="@{#}" class="search-btn">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </a>
-                </div>
-                <div class="menu-filter">
+                <form class="search-box" action="/search" method="get">
+                    <input type="text" name="query" placeholder="Nhập tên nhà hàng hoặc địa chỉ">
+                    <button type="submit">Tìm kiếm</button> 
+                </form>
+                <!--Lọc-->
+                <form class="menu-filter" action="/loc" method="get">
                     <div class="dropdown">
                         <div class="select">
                             <span class="selected">Thành phố</span>
@@ -65,8 +64,9 @@
                             <li>Quận 4</li>
                         </ul>
                     </div>
-                    <button class="filter-btn">Lọc</button>
-                </div>
+                    <button type="submit" class="filter-btn">Lọc</button>
+                </form>
+
                 <!---------  Loại Nhà Hàng  --------->
                 <div class="menu-container">
                     <div class="menu" th:each="loainhahang : ${loainhahangs}" th:if="${loainhahang != null}">
@@ -87,7 +87,7 @@
                 </div>
                 
                 <div class="pagebox">
-                    <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac != null}">
+                    <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac.nguoiDung.mapq == 3}" >
                         <a th:href="@{/ctnhahang/{id} (id = ${doiTac.madt})}">
                             <div class="box2">
                                 <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
@@ -103,6 +103,7 @@
                         </a>
                     </div>
                 </div>
+
             </div>
         </div>
         
