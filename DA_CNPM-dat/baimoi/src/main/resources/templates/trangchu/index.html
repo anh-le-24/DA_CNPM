@@ -5,12 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale= 1.0" />
         <title>Đặt bàn Boss </title>
         <link th:href="@{/css/main.css}" rel="stylesheet" />
+        <link th:href="@{/css/thongbao.css}" rel="stylesheet" />
+        <script th:src="@{/js/nav.js}"></script>
         <script th:src="@{https://example.com/fontawesome/vVERSION/js/all.js}"></script>
  
         <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}"/>
         <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
         <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
         <script th:src="@{/js/script.js}" defer></script>
+        
     </head>
 
     <body>
@@ -124,7 +127,7 @@
                     </div>
                 </div>   
                 <div class="div-main-ele"> 
-                    <div class="fmLogoDT">
+                    <div class="fmLogoDT"  >
                         <a th:href="${session.loggedInUser != null ? '/doitac/dangkydoitac' : '/doitac/login-required'}" target="_blank">ĐĂNG KÝ ĐỐI TÁC</a>
                     </div>
                 </div>

@@ -1,26 +1,61 @@
-<div class="navfixtop" th:fragment="top">
-    <div class="contenttop">
-        <div class="topnav" id="myTopnav">
-            <a th:href="@{/trangchu}" class="active">Trang chủ</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <div class="nav_button">
-            <div th:if="${session.loggedInUser}">
-                <div class="account-menu">
-                    <a th:href="@{/info}">
-                        <button  class="btnac" th:text="${'Xin chào, ' + session.loggedInUser.hoten}"></button>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="navfixtop" th:fragment="top">
+        <div class="contenttop">
+            <div class="topnav" id="myTopnav">
+                <a th:href="@{/trangchu}" class="active">Trang chủ</a>
+                <a href="#news">News</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+
+            <!--Thông báo-->
+            <img th:if="${session.loggedInUser}" id="canhanImage" th:src="@{/images/canhan.png}">
+
+            <div id="overlay" style="display: none;">
+                <form id="thongbaoForm" class="thongbao-container">
+                    <div th:each="thongBao : ${thongBaos}" class="thongbao-item">
+                        <div>
+                            <label>Tiêu đề:</label>
+                            <input type="text" th:value="${thongBao.tieude}" readonly>
+                        </div>
+                        <div>
+                            <label>Nội dung:</label>
+                            <textarea readonly th:text="${thongBao.noidung}"></textarea>
+                        </div>
+                        <div>
+                            <label>Ngày gửi:</label>
+                            <input type="text" th:value="${#dates.format(thongBao.ngaygui, 'dd/MM/yyyy')}" readonly>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="nav_button">
+                <div th:if="${session.loggedInUser}">
+                    <div class="account-menu">
+                        <a th:href="@{/info}">
+                            <button  class="btnac" th:text="${'Xin chào, ' + session.loggedInUser.hoten}"></button>
+                        </a>
+                    </div>
+                </div>
+                <div class="fm-topright" th:unless="${session.loggedInUser}">
+                    <a class="btn-dn" th:href="@{/login}">
+                        Đăng nhập
+                    </a>
+                    <a class="btn-dk" th:href="@{/register}">
+                        Đăng ký
                     </a>
                 </div>
             </div>
-            <div class="fm-topright" th:unless="${session.loggedInUser}">
-                <a class="btn-dn" th:href="@{/login}">
-                    Đăng nhập
-                </a>
-                <a class="btn-dk" th:href="@{/register}">
-                    Đăng ký
-                </a>
-            </div>
-        </div>
-    </div> 
-</div>
+        </div> 
+    </div>
+</body>
+</html>

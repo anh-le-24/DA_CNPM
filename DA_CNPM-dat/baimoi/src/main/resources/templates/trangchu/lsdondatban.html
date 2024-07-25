@@ -6,6 +6,8 @@
     <title>Lịch sử đặt bàn</title>
     <link th:href="@{/css/lsdatban.css}" rel="stylesheet" />
     <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link th:href="@{/css/thongbao.css}" rel="stylesheet" />
+    <script th:src="@{/js/nav.js}"></script>
 </head>
 <body>
     <header th:replace="~{/fragments/top :: top}"></header>
@@ -40,7 +42,13 @@
                             <td th:text="${donDatBan.yeucaudacbiet}"></td>
                             <td th:text="${donDatBan.ghichu}"></td>
                             <td>
-                                <button class="btnXN" th:text="${donDatBan.trangThaiDon.noidung}" disabled></button>
+                                <a th:if="${donDatBan.trangThaiDon.mattd == 1}">
+                                    <button style="background-color: red;"  class="btnXN" type="submit">Hủy</button>
+                                </a>
+                                <button th:if="${donDatBan.trangThaiDon.mattd != 1 && donDatBan.trangThaiDon.mattd != 3 || donDatBan.madg != null}"  class="btnXN" th:text="${donDatBan.trangThaiDon.noidung}" style="cursor: not-allowed;" disabled></button>
+                                <a th:if="${donDatBan.trangThaiDon.mattd == 3 && donDatBan.madg == null}" th:href = "@{/danhgia/{id}(id = ${donDatBan.maddb})}">
+                                    <button type="submit" class="btnXN" style="background-color: #f0e51b;">Đánh giá</button>
+                                </a>
                             </td>
                         </tr>
                     </tbody>

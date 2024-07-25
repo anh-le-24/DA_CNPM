@@ -29,7 +29,7 @@
                                 <th style="background-color: #9f9810;">Số tiền</th>
                                 <th>Trạng thái</th>
                             </tr>
-                            <tr th:if="${donDatBan.trangThaiDon.mattd == 3}" th:each="donDatBan : ${doiTac.donDatBans}">
+                            <tr th:if="${donDatBan.trangThaiDon.mattd == 3}" th:each="donDatBan : ${donDatBans}">
                                 <td th:text="${donDatBan.maddb}"></td>
                                 <td th:text="${donDatBan.nguoiDung.hoten}"></td>
                                 <td th:text="${#dates.format(donDatBan.ngaydat, 'dd/MM/yyyy')}"></td>

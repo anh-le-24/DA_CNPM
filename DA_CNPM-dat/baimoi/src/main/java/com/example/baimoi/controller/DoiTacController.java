@@ -44,6 +44,7 @@ import com.example.baimoi.service.DonDatBanService;
 import com.example.baimoi.service.ImgDoiTacService;
 import com.example.baimoi.service.LoaiNhaHangService;
 import com.example.baimoi.service.StorageService;
+import com.example.baimoi.service.ThongBaoService;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpSession;
@@ -62,6 +63,8 @@ public class DoiTacController {
     private LoaiNhaHangService loaiNhaHangService;
     @Autowired
     private StorageService storageService;
+    @Autowired
+    private ThongBaoService thongBaoService;
 
     @GetMapping("/{id}")
     public String getViewDoiTac(@PathVariable("id") Long id, Model model) {
@@ -207,7 +210,9 @@ public class DoiTacController {
 
         doiTacService.saveDoiTac(doitac);
 
-        return "redirect:/doitac/" + doitac.getMadt();
+        thongBaoService.createThongBao(mand, "Đang chờ xác nhận",
+         "Chúng tôi đã nhận được đơn đăng ký của bạn, chúng tôi sẽ liên hệ lại với bạn sớm nhất có thể.");
+        return "redirect:/trangchu" ;
     }
 
     @Transactional
@@ -294,16 +299,24 @@ public class DoiTacController {
     @Transactional
     @GetMapping("/quanlydon/qldondaxn/{id}")
     public String getViewQlDonDaXN(@PathVariable("id") Long id,Model model){
+        List<DonDatBan> donDatBans = donDatBanService.getDonDatBansForDoiTac(id);
+        model.addAttribute("donDatBans", donDatBans);
+
         Optional<DoiTac> doiTac = doiTacService.getDoiTacById(id);
         model.addAttribute("doiTac", doiTac.get());
+
         return "/doitac/qldondatban/qldondaxn";
     }
 
     @Transactional
     @GetMapping("/quanlydon/qldondaht/{id}")
     public String getViewQlDonDaHT(@PathVariable("id") Long id,Model model){
+        List<DonDatBan> donDatBans = donDatBanService.getDonDatBansForDoiTac(id);
+        model.addAttribute("donDatBans", donDatBans);
+
         Optional<DoiTac> doiTac = doiTacService.getDoiTacById(id);
         model.addAttribute("doiTac", doiTac.get());
+
 
         return "/doitac/qldondatban/qldondaht";
     }
@@ -311,8 +324,12 @@ public class DoiTacController {
     @Transactional
     @GetMapping("/quanlydon/qldonhuy/{id}")
     public String getViewQlDonHuy(@PathVariable("id") Long id,Model model){
+        List<DonDatBan> donDatBans = donDatBanService.getDonDatBansForDoiTac(id);
+        model.addAttribute("donDatBans", donDatBans);
+
         Optional<DoiTac> doiTac = doiTacService.getDoiTacById(id);
         model.addAttribute("doiTac", doiTac.get());
+
         return "/doitac/qldondatban/qldonhuy";
     }
 

@@ -15,7 +15,7 @@ public class FileSystemStorageService implements StorageService {
 	private final Path rootLocation;
 
     public FileSystemStorageService(){
-        this.rootLocation = Paths.get("baimoi/src/main/resources/static/uploads");
+        this.rootLocation = Paths.get("DA_CNPM-dat/baimoi/src/main/resources/static/uploads");
     }
     
 	@Override

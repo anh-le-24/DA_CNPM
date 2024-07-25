@@ -21,13 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.baimoi.model.ComBoMonAn;
+import com.example.baimoi.model.DanhGia;
 import com.example.baimoi.model.DoiTac;
 import com.example.baimoi.model.DonDatBan;
 import com.example.baimoi.model.NguoiDung;
 import com.example.baimoi.model.ThongBao;
 import com.example.baimoi.service.ComBoMonAnService;
+import com.example.baimoi.service.DanhGiaService;
 import com.example.baimoi.service.DoiTacService;
 import com.example.baimoi.service.DonDatBanService;
 import com.example.baimoi.service.LoaiNhaHangService;
@@ -53,6 +56,13 @@ public class TrangChuController {
     private ComBoMonAnService comBoMonAnService;
     @Autowired 
     private ThongBaoService thongBaoService;
+    @Autowired
+    private DanhGiaService danhGiaService;
+    @GetMapping("/")
+    public RedirectView redirectToTrangChu() {
+        return new RedirectView("/trangchu");
+    }
+    
 
     @GetMapping("/trangchu")
     private String getViewTrangChu(Model model, HttpSession session){
@@ -80,7 +90,6 @@ public class TrangChuController {
         model.addAttribute("loainhahangs", loaiNhaHangService.getAllLoaiNhaHang());
         model.addAttribute("comBoMonAn", new ComBoMonAn());
 
-        
         return "trangchu/chitiet";
     }
     
@@ -263,6 +272,50 @@ public class TrangChuController {
         model.addAttribute("donDatBans", donDatBans);
 
         return "trangchu/lsdondatban";
+    }
+
+    @GetMapping("/danhgia/{id}")
+    public String getDanhGia(@PathVariable("id") Long id, HttpSession session, Model model) {
+        Long mand = (Long) session.getAttribute("mand");
+        if (mand == null) {
+            return "redirect:/login";
+        }
+        Optional<DonDatBan> donDatBanOtp = donDatBanService.getDonDatBanById(id);
+        DonDatBan donDatBan = donDatBanOtp.get();
+        model.addAttribute("donDatBan", donDatBan);
+        
+        return "trangchu/feedback";
+    }
+
+    @PostMapping("/danhgia/save/{id}")
+    public String postDanhGia(@PathVariable("id") Long id, 
+                              @RequestParam("sosao") int sosao,
+                              @RequestParam("binhluan") String binhluan,
+                              HttpSession session) {
+        Long mand = (Long) session.getAttribute("mand");
+        if (mand == null) {
+            return "redirect:/login";
+        }
+
+        Optional<DonDatBan> donDatBanOpt = donDatBanService.getDonDatBanById(id);
+        if (donDatBanOpt.isPresent()) {
+            DonDatBan donDatBan = donDatBanOpt.get();
+            
+            DanhGia danhGia = new DanhGia();
+            danhGia.setSosao(sosao);
+            danhGia.setBinhluan(binhluan);
+            danhGia.setNgaydg(new Date(Calendar.getInstance().getTimeInMillis()));
+            danhGia.setDonDatBan(donDatBan);
+            danhGiaService.saveDanhGia(danhGia);
+
+            donDatBan.setDanhGia(danhGia);
+            donDatBan.setMadg(danhGia.getMadg());
+            donDatBanService.saveDonDatBan(donDatBan);
+
+            return "redirect:/lsdatban";
+        } else {
+            return "error";
+        }
     }
 
 

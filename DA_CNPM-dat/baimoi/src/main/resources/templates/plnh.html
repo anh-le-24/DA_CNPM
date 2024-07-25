@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phân Loại Nhà Hàng</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/nav.css"> 
+    <script src="/js/nav.js"></script>
 </head>
 <body>
+    <!--NAV BAR-->
+    <div th:replace="~{/fragments/navbar :: navbar}"></div>
+
     <div class="container">
         <h2>Thêm loại nhà hàng</h2>
         <form th:action="@{/loainhahang/save}" method="post" th:object="${loainhahang}" enctype="multipart/form-data">

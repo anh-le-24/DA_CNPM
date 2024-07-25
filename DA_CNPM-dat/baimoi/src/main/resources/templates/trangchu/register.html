@@ -6,9 +6,15 @@
     <title>Đăng ký người dùng</title>
     <link th:href="@{/css/register.css}" rel="stylesheet" />
     <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
-    <header th:replace="~{/fragments/top :: top}"></header>
+    <header th:replace="/fragments/top :: top"></header>
     <div class="container-regis">
         <h1>Đăng ký người dùng</h1>
         <form th:action="@{/register}" method="post" th:object="${nguoiDung}" onsubmit="return validateForm()">
@@ -26,6 +32,10 @@
             <input type="password" id="password" th:field="*{password}" required>
             <div id="password-error" class="error"></div>
 
+            <label for="confirm-password">Nhập lại mật khẩu:</label>
+            <input type="password" id="confirm-password" required>
+            <div id="confirm-password-error" class="error"></div>
+            
             <label for="sonha">Số nhà:</label>
             <input type="text" id="sonha" th:field="*{sonha}" required>
 
@@ -61,7 +71,9 @@
 
         function validateForm() {
             const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
             const passwordError = document.getElementById('password-error');
+            const confirmPasswordError = document.getElementById('confirm-password-error');
             const phoneNumber = document.getElementById('sdt').value;
             const phoneError = document.getElementById('sdt-error');
             let isValid = true;
@@ -71,6 +83,13 @@
                 isValid = false;
             } else {
                 passwordError.textContent = '';
+            }
+
+            if (password !== confirmPassword) {
+                confirmPasswordError.textContent = 'Mật khẩu nhập lại không khớp.';
+                isValid = false;
+            } else {
+                confirmPasswordError.textContent = '';
             }
 
             if (!validatePhoneNumber(phoneNumber)) {
@@ -85,6 +104,11 @@
 
         // Kiểm tra mật khẩu khi người dùng nhập
         document.getElementById('password').addEventListener('input', function() {
+            validateForm();
+        });
+
+        // Kiểm tra mật khẩu nhập lại khi người dùng nhập
+        document.getElementById('confirm-password').addEventListener('input', function() {
             validateForm();
         });
 
