@@ -3,11 +3,8 @@ package com.example.baimoi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -92,29 +89,54 @@ public class AdminController {
         return "redirect:/admin/tatcadonxindk"; 
     }
 
-    @DeleteMapping("/xoa/{id}")
-    public ResponseEntity<String> xoaDoiTac(@PathVariable("id") Long id) {
-        NguoiDung nguoiDung = nguoiDungService.findByIdND(id);
+    @PostMapping("/xoa/{madt}")
+    public String xoaDoiTac(@PathVariable("madt") String madtstr, RedirectAttributes redirectAttributes) {
         try {
+            Long madt = Long.valueOf(madtstr);
+            DoiTac doiTac = doitacService.findByIdDT(madt);
+            if (doiTac == null) {
+                redirectAttributes.addFlashAttribute("message", "Đối tác không tồn tại");
+                return "redirect:/admin/tatcadoitac";
+            }
+
+            // Lấy mã người dùng từ đối tác
+            NguoiDung nguoiDung = doiTac.getNguoiDung();
+            if (nguoiDung == null) {
+                redirectAttributes.addFlashAttribute("message", "Người dùng không tồn tại");
+                return "redirect:/admin/tatcadoitac";
+            }
+
             // Xóa các thông tin liên quan đến đối tác
-            chiNhanhService.deleteChiNhanh(id);
-            comBoMonAnService.deleteComboMonAn(id);
-            donDatBanService.deleteDonDatBanByDoiTacId(id);
-            imgDoiTacService.deleteById(id);
-            doitacService.deleteByIdDT(id);
-            
+            chiNhanhService.deleteChiNhanh(madt);
+            comBoMonAnService.deleteComboMonAn(madt);
+            donDatBanService.deleteDonDatBanByDoiTacId(madt);
+            imgDoiTacService.deleteById(madt);
+            doitacService.deleteByIdDT(madt);
+
             // Cập nhật quyền của người dùng
-            nguoiDung.setMapq(2);
+            nguoiDung.setMapq(2); // Ví dụ: quyền mặc định hoặc quyền thấp hơn
             nguoiDungService.saveOrUpdate(nguoiDung);
-    
+
             // Tạo thông báo cho người dùng
-            thongBaoService.createThongBao(id, "Bạn mới bị trục xuất", "Tài khoản của bạn đã mất quyền đối tác");
-    
-            return ResponseEntity.ok("Xóa thành công");
+            thongBaoService.createThongBao(nguoiDung.getMand(), "Bạn mới bị trục xuất", "Tài khoản của bạn đã mất quyền đối tác");
+
+            // Ghi log thông báo xóa thành công
+            System.out.println("Đối tác với ID " + madt + " đã được xóa thành công.");
+
+            // Thêm thông báo thành công
+            redirectAttributes.addFlashAttribute("message", "Xóa đối tác thành công");
+
+            return "redirect:/admin/tatcadoitac";
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Xóa thất bại: " + e.getMessage());
+            // Ghi log lỗi
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("message", "Xóa thất bại: " + e.getMessage());
+            return "redirect:/admin/tatcadoitac";
         }
-    }    
+    }
+
+
+   
 
 
     @PostMapping("/delete/{madt}")
