@@ -33,5 +33,9 @@ public interface DoiTacRepository extends JpaRepository<DoiTac, Long> {
             @Param("hoadon") String hoadon);
 
     @Query("SELECT d FROM DoiTac d JOIN d.loaiNhaHangs lnh WHERE lnh.id = :loaiNhaHangId")
-    List<DoiTac> findByLoaiNhaHang(@Param("loaiNhaHangId") Long loaiNhaHangId);        
+    List<DoiTac> findByLoaiNhaHang(@Param("loaiNhaHangId") Long loaiNhaHangId);    
+    
+    @Query("SELECT d.nguoiDung.mand FROM DoiTac d WHERE d.madt = :madt")
+    Long findMaNguoiDungByMaDoiTac(@Param("madt") Long madt);
+
 }

@@ -1,7 +1,6 @@
 package com.example.baimoi.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -70,15 +70,8 @@ public class AdminController {
 
     @GetMapping("/details/{madt}")
     public String showDoiTacDetails(@PathVariable("madt") Long madt, Model model) {
-        Optional<DoiTac> doiTac = doitacService.getDoiTacById(madt);
-        if (doiTac.isPresent()) {
-            model.addAttribute("doiTac", doiTac.get());
-        } else {
-
-            return "error";
-        }
-        List<DoiTac> doiTacList = doitacService.getAllDoitac();
-        model.addAttribute("doiTacList", doiTacList);
+        DoiTac doiTac = doitacService.findByIdDT(madt);
+        model.addAttribute("doiTac", doiTac);
         return "quanly/doitachtml";
     }
 
@@ -103,28 +96,36 @@ public class AdminController {
     public ResponseEntity<String> xoaDoiTac(@PathVariable("id") Long id) {
         NguoiDung nguoiDung = nguoiDungService.findByIdND(id);
         try {
+            // Xóa các thông tin liên quan đến đối tác
             chiNhanhService.deleteChiNhanh(id);
             comBoMonAnService.deleteComboMonAn(id);
             donDatBanService.deleteDonDatBanByDoiTacId(id);
             imgDoiTacService.deleteById(id);
             doitacService.deleteByIdDT(id);
             
+            // Cập nhật quyền của người dùng
             nguoiDung.setMapq(2);
             nguoiDungService.saveOrUpdate(nguoiDung);
-
+    
             // Tạo thông báo cho người dùng
             thongBaoService.createThongBao(id, "Bạn mới bị trục xuất", "Tài khoản của bạn đã mất quyền đối tác");
-
+    
             return ResponseEntity.ok("Xóa thành công");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Xóa thất bại: " + e.getMessage());
         }
-    }
+    }    
 
 
-    @GetMapping("/delete/{madt}")
-    public String deleteDoiTac(@PathVariable("madt") Long madt) {
+    @PostMapping("/delete/{madt}")
+    public String deleteDoiTac(@PathVariable("madt") String madtStr) {
+        Long madt = Long.valueOf(madtStr);
+        Long manguoidung = doitacService.findMaNguoiDungByMaDoiTac(madt);
         doitacService.deleteByIdDT(madt);
+
+        thongBaoService.createThongBao(manguoidung, "Xin đăng ký đối tác không thành công",
+        "Nhà hàng của bạn chưa đạt đủ điều kiện để thành đối tác của chúng tôi! Cảm ơn.");
+
         return "redirect:/admin/tatcadonxindk";
     }
 

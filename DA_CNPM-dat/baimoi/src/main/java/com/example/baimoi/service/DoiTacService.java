@@ -68,4 +68,7 @@ public class DoiTacService {
     public List<DoiTac> findByLoaiNhaHang(Long loaiNhaHangId) {
         return doiTacRepository.findByLoaiNhaHang(loaiNhaHangId);
     }
+    public Long findMaNguoiDungByMaDoiTac(Long madt) {
+        return doiTacRepository.findMaNguoiDungByMaDoiTac(madt);
+    }
 }

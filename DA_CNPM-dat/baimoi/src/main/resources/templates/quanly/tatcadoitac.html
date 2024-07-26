@@ -6,14 +6,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>List Đối tác</title>
     <link rel="stylesheet" href="/css/doitac.css">
-    <script th:src="@{/js/doitac.js}"></script>
+    <script th:src="@{/js/nav.js}"></script>
     <link rel="stylesheet" href="/css/nav.css"> 
-    <script src="/js/nav.js"></script>
 </head>
 <body>
 
      <!--NAV BAR-->
      <div th:replace="~{/fragments/navbar :: navbar}"></div>
+
+     <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+     <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
 
     <div th:unless="${doiTac != null}">
         <h1>Danh sách Đối Tác</h1>
@@ -128,11 +130,12 @@
                 <input type="number" id="sdt" th:value="${doiTac.nguoiDung.sdt}" disabled>
             </div>
             <div>
-                <a class="btn-xoa" href="/admin/tatcadoitac" th:onclick="'xoaDoiTac(' + ${doiTac.madt} + '); return false;'">Xóa</a>
+                <a class="btn-xoa" th:href="@{/doitac/xoa/{madt}(madt=${doiTac.madt})}" onclick="return confirm('Bạn có chắc chắn muốn xóa đối tác này?');">Xóa đối tác</a>
                 <a class="btn-quaylai" href="/admin/tatcadoitac">Quay lại danh sách</a>
             </div>
         </div>
     </form>
     </div>
+   
 </body>
 </html>

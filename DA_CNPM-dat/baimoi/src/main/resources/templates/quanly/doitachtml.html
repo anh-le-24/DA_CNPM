@@ -72,7 +72,10 @@
           <p>Số Điện Thoại: <span th:text="${doiTac.nguoiDung.sdt}"></span></p>
           <a class="btn-quaylai" href="/admin/tatcadonxindk">Quay lại danh sách</a>
           <a class="btn-xacnhan" th:href="@{/admin/xacnhan/{id}(id=${doiTac.nguoiDung.mand})}">Xác nhận</a>
-          <a class="btn-xoa" th:href="@{/admin/delete/{id}(id=${doiTac.madt})}">Xóa</a>
+          <form action="#" th:action="@{/admin/delete/{madt}(madt=${doiTac.madt})}" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đối tác này?');">
+            <button type="submit" class="btn btn-danger">Xóa Đối Tác</button>
+        </form>
+        
       </div>
 </body>
 </html>
