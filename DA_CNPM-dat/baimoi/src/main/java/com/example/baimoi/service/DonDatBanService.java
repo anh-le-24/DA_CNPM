@@ -62,4 +62,14 @@ public class DonDatBanService {
         // Fetch DonDatBan entries for the user
         return donDatBanRepository.findByDoiTac(doiTac);
     }
+
+    public void deleteDonDatBan(Long id) {
+        donDatBanRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteDonDatBanByDoiTacId(Long doiTacId) {
+        List<DonDatBan> donDatBans = getDonDatBansForDoiTac(doiTacId);
+        donDatBanRepository.deleteAll(donDatBans);
+    }
 }

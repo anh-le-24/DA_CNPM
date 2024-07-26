@@ -40,8 +40,7 @@
                         <td th:text="${doiTac.ngaydk}"></td>
                         <td>
                             <a class="btn-chitiet" th:href="@{/admin/details/{id}(id=${doiTac.madt})}">Xem Chi Tiết</a>
-                            <a class="btn-xacnhan" th:href="@{/admin/xacnhan/{id}(id=${doiTac.nguoiDung.mand})}">Xác nhận</a>
-                            <a class="btn-xoa" th:href="@{/admin/delete/{id}(id=${doiTac.madt})}">Xóa</a>
+                          
                         </td>
                     </tr>
                 </tbody>
@@ -72,8 +71,8 @@
           <p>Email: <span th:text="${doiTac.nguoiDung.email}"></span></p>
           <p>Số Điện Thoại: <span th:text="${doiTac.nguoiDung.sdt}"></span></p>
           <a class="btn-quaylai" href="/admin/tatcadonxindk">Quay lại danh sách</a>
-          <a class="btn-xacnhan" th:href="@{/admin/xacnhan/{id}(id=${doiTac.madt})}">Xác nhận</a>
-          <a class="btn-xoa" th:href="@{/admin/xoa/{id}(id=${doiTac.madt})}">Xóa</a>
+          <a class="btn-xacnhan" th:href="@{/admin/xacnhan/{id}(id=${doiTac.nguoiDung.mand})}">Xác nhận</a>
+          <a class="btn-xoa" th:href="@{/admin/delete/{id}(id=${doiTac.madt})}">Xóa</a>
       </div>
 </body>
 </html>

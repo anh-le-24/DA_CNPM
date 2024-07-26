@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.baimoi.model.DoiTac;
 import com.example.baimoi.model.NguoiDung;
 import com.example.baimoi.service.ChiNhanhService;
+import com.example.baimoi.service.ComBoMonAnService;
 import com.example.baimoi.service.DoiTacService;
+import com.example.baimoi.service.DonDatBanService;
+import com.example.baimoi.service.ImgDoiTacService;
 import com.example.baimoi.service.NguoiDungService;
 import com.example.baimoi.service.ThongBaoService;
 
@@ -34,6 +36,13 @@ public class AdminController {
     private ChiNhanhService chiNhanhService;
     @Autowired
     private ThongBaoService thongBaoService;
+    @Autowired
+    private ComBoMonAnService comBoMonAnService;
+    @Autowired
+    private DonDatBanService donDatBanService;
+    @Autowired
+    private ImgDoiTacService imgDoiTacService;
+
 
     @GetMapping("/tatcadoitac")
     public String listDoiTacAll(Model model) {
@@ -94,22 +103,29 @@ public class AdminController {
     public ResponseEntity<String> xoaDoiTac(@PathVariable("id") Long id) {
         NguoiDung nguoiDung = nguoiDungService.findByIdND(id);
         try {
-            chiNhanhService.deleteChiNhanh(id); 
+            chiNhanhService.deleteChiNhanh(id);
+            comBoMonAnService.deleteComboMonAn(id);
+            donDatBanService.deleteDonDatBanByDoiTacId(id);
+            imgDoiTacService.deleteById(id);
             doitacService.deleteByIdDT(id);
-                nguoiDung.setMapq(2); 
-                nguoiDungService.saveOrUpdate(nguoiDung);
-                // Tạo thông báo cho người dùng
-                thongBaoService.createThongBao(id, "bạn mới bị trục xuất", "Tài khoản của bạn đã mất quyền đối tác");
+            
+            nguoiDung.setMapq(2);
+            nguoiDungService.saveOrUpdate(nguoiDung);
+
+            // Tạo thông báo cho người dùng
+            thongBaoService.createThongBao(id, "Bạn mới bị trục xuất", "Tài khoản của bạn đã mất quyền đối tác");
+
             return ResponseEntity.ok("Xóa thành công");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Xóa thất bại: " + e.getMessage());
         }
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteDoiTac(@PathVariable("id") Long id) {
-        doitacService.deleteByIdDT(id);
-        return "redirect:/admin/tatcadondk";
+
+    @GetMapping("/delete/{madt}")
+    public String deleteDoiTac(@PathVariable("madt") Long madt) {
+        doitacService.deleteByIdDT(madt);
+        return "redirect:/admin/tatcadonxindk";
     }
 
     @RequestMapping("/error")

@@ -15,17 +15,4 @@ function xoaDoiTac(id) {
         });
     }
 }
-//xóa đối tác chưa đang xin gia nhập
-    document.addEventListener('DOMContentLoaded', function() {
-        const deleteButtons = document.querySelectorAll('.btn-xoa');
-
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
-                const confirmed = confirm('Bạn có chắc chắn muốn xóa đối tác này không?');
-                if (!confirmed) {
-                    event.preventDefault();
-                }
-            });
-        });
-    });
 
