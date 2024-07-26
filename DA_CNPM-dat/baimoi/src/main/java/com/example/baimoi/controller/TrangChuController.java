@@ -271,7 +271,6 @@ public class TrangChuController {
 
         List<DonDatBan> donDatBans = donDatBanService.getDonDatBansForUser(mand);
         model.addAttribute("donDatBans", donDatBans);
-
         return "trangchu/lsdondatban";
     }
 
@@ -318,6 +317,33 @@ public class TrangChuController {
             return "error";
         }
     }
+
+    @PostMapping("/huy")
+    public String postHuy(@RequestParam("maddb") Long maddb,
+                        @RequestParam("lyDo") String lyDo) {
+
+        Optional<DonDatBan> donDatBanOpt = donDatBanService.getDonDatBanById(maddb);
+        
+            DonDatBan donDatBan = donDatBanOpt.get();
+            System.out.println(maddb);
+            System.out.println(lyDo);
+
+            DanhGia danhGia = new DanhGia();
+            danhGia.setLydohuy(lyDo);
+            danhGia.setSosao(0);
+            danhGia.setNgaydg(new Date(Calendar.getInstance().getTimeInMillis()));
+            danhGia.setDonDatBan(donDatBan);
+            danhGiaService.saveDanhGia(danhGia);
+
+            donDatBan.setDanhGia(danhGia);
+            donDatBan.setMadg(danhGia.getMadg());
+            donDatBan.setMattd(4L); 
+            donDatBanService.saveDonDatBan(donDatBan);
+
+            return "redirect:/lsdatban";
+        
+    }
+
 
 
     // Combo
