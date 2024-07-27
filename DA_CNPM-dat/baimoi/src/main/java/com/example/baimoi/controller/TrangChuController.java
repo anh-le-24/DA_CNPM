@@ -27,6 +27,7 @@ import com.example.baimoi.model.ComBoMonAn;
 import com.example.baimoi.model.DanhGia;
 import com.example.baimoi.model.DoiTac;
 import com.example.baimoi.model.DonDatBan;
+import com.example.baimoi.model.LoaiNhaHang;
 import com.example.baimoi.model.NguoiDung;
 import com.example.baimoi.model.ThongBao;
 import com.example.baimoi.service.ComBoMonAnService;
@@ -270,7 +271,6 @@ public class TrangChuController {
 
         List<DonDatBan> donDatBans = donDatBanService.getDonDatBansForUser(mand);
         model.addAttribute("donDatBans", donDatBans);
-
         return "trangchu/lsdondatban";
     }
 
@@ -318,6 +318,33 @@ public class TrangChuController {
         }
     }
 
+    @PostMapping("/huy")
+    public String postHuy(@RequestParam("maddb") Long maddb,
+                        @RequestParam("lyDo") String lyDo) {
+
+        Optional<DonDatBan> donDatBanOpt = donDatBanService.getDonDatBanById(maddb);
+        
+            DonDatBan donDatBan = donDatBanOpt.get();
+            System.out.println(maddb);
+            System.out.println(lyDo);
+
+            DanhGia danhGia = new DanhGia();
+            danhGia.setLydohuy(lyDo);
+            danhGia.setSosao(0);
+            danhGia.setNgaydg(new Date(Calendar.getInstance().getTimeInMillis()));
+            danhGia.setDonDatBan(donDatBan);
+            danhGiaService.saveDanhGia(danhGia);
+
+            donDatBan.setDanhGia(danhGia);
+            donDatBan.setMadg(danhGia.getMadg());
+            donDatBan.setMattd(4L); 
+            donDatBanService.saveDonDatBan(donDatBan);
+
+            return "redirect:/lsdatban";
+        
+    }
+
+
 
     // Combo
     @GetMapping("/combo/{id}")
@@ -347,22 +374,37 @@ public class TrangChuController {
 
     //lọcs
     @GetMapping("/loc")
-    public String search(
-            @RequestParam(name = "city", required = false) String city,
-            @RequestParam(name = "district", required = false) String district,
-            @RequestParam(name = "invoiceAverage", required = false) String invoiceAverage,
+    public String filterDoiTac(
+            @RequestParam(required = false) String thanhpho,
+            @RequestParam(required = false) String hoadon,
             Model model) {
-        List<DoiTac> results;
-        if (city != null && !city.isEmpty()) {
-            results = doiTacService.searchByCity(city);
-        } else if (district != null && !district.isEmpty()) {
-            results = doiTacService.searchByDistrict(district);
-        } else if (invoiceAverage != null && !invoiceAverage.isEmpty()) {
-            results = doiTacService.searchByInvoiceAverage(invoiceAverage);
-        } else {
-            results = doiTacService.getAllDoitac();
+
+        List<DoiTac> filteredDoiTacs = doiTacService.filterDoiTac(thanhpho,hoadon);
+        model.addAttribute("doiTacs", filteredDoiTacs);
+        return "trangchu/index";    
+    }   
+    
+    @GetMapping("/loc-theo-loai/{malnh}")
+    public String locTheoLoai(@PathVariable("malnh") Long loaiNhaHangId, Model model, HttpSession session) {
+        Long mand = (Long) session.getAttribute("mand");
+        
+        // Nếu người dùng đã đăng nhập (có mã người dùng)
+        if (mand != null) {
+            List<ThongBao> thongBaos = thongBaoService.getThongBaosByUserId(mand);
+            model.addAttribute("thongBaos", thongBaos);
         }
-        model.addAttribute("doiTacs", results);
-        return "trangchu/index";
+
+        // Lấy danh sách đối tác theo mã loại nhà hàng
+        List<DoiTac> doiTacs = doiTacService.findByLoaiNhaHang(loaiNhaHangId);
+        model.addAttribute("doiTacs", doiTacs);
+
+        // Lấy tất cả các loại nhà hàng
+        List<LoaiNhaHang> loaiNhaHangs = loaiNhaHangService.getAllLoaiNhaHang();
+        model.addAttribute("loainhahangs", loaiNhaHangs);
+
+        return "trangchu/index"; 
     }
+
+    
+
 }

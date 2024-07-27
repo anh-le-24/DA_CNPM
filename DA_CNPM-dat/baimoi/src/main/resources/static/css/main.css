@@ -242,115 +242,46 @@ body {
 
 
 /* Menu Filter (Bộ lọc)*/
-.menu-filter{
-  margin-top: 30px;
-  min-height: 100px;  
+
+#filterForm {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  background: white;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
 }
 
-.dropdown,.filter-btn{
-  min-width: 15em;
-  position: relative;
-  margin: 2em;
+#filterForm label {
+  font-size: 16px;
+  color: #555;
 }
 
-.dropdown * {
+#filterForm select, #filterForm input[type="number"] {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
   box-sizing: border-box;
 }
 
-.select,.filter-btn {
-  background: #f8f9fa; /* Màu nền nhạt */
-  color: #343a40; /* Màu chữ đậm */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 10px;
-  padding: 1em;
+#filterForm select:focus, #filterForm input[type="number"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+#filterForm button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  transition: 0.3s;
-  border: 1px solid #ced4da; /* Đường viền nhạt */
+  transition: background-color 0.3s ease;
 }
 
-.select-clicked{
-  border: 2px #007bff solid; /* Đường viền màu xanh */
-  box-shadow: 0 0 0.8em #007bff; /* Bóng đổ màu xanh */
-}
-
-.select:hover{
-  background: #e9ecef; /* Màu nền khi hover */
-}
-
-.caret{
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid #343a40; /* Màu caret */
-}
-
-.caret-rotate{
-  transform: rotate(180deg);
-}
-
-.option{
-  list-style: none;
-  padding: 0.2em 0.5em;
-  background: white;
-  border: 1px #ced4da solid;
-  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  color: #495057;
-  position: absolute;
-  top: 3em;
-  left: 50%;
-  width: 100%;
-  transform: translateX(-50%);
-  opacity: 0;
-  display: none;
-  transition: 0.2s;
-  z-index: 1;
-}
-
-.option li{
-  padding: 0.7em 0.5em;
-  margin: 0.3em 0;
-  border-radius: 0.5em;
-  cursor: pointer;
-}
-
-.option li:hover{
-  background: #dee2e6; /* Màu nền khi hover */
-}
-
-.active{
-   /* Màu nền khi active */
-  color: white; /* Màu chữ khi active */
-}
-
-.option-open{
-  display: block;
-  opacity: 1;
-}
-
-.filter-btn{
-  margin-left: 10px; /* Khoảng cách giữa các dropdown */
-}
-
-@media (max-width: 768px) {
-  .menu-filter {
-    justify-content: center;
-  }
-
-  .dropdown, .filter-btn {
-    margin: 0.5em; /* Giảm khoảng cách giữa các phần tử */
-  }
-
-  .filter-btn {
-    order: 1; /* Đảm bảo nút button "Lọc" luôn ở cuối */
-  }
+#filterForm button:hover {
+  background-color: #218838;
 }
 
 

@@ -176,57 +176,53 @@ public class DoiTacController {
     
     // -----Đăng ký đối tác --------//
     @Transactional
-    @PostMapping("/save")
-    public String saveDoiTac(@Valid @ModelAttribute("doitac") DoiTac doitac,
-                             BindingResult bindingResult,
-                             @RequestParam("giomo") String giomo,
-                             @RequestParam("giodong") String giodong,
-                             @RequestParam("file") MultipartFile file,
-                             @RequestParam("madv") Long madv,
-                             HttpSession session
-                             ) throws IOException, ParseException {
+@PostMapping("/save")
+public String saveDoiTac(@Valid @ModelAttribute("doitac") DoiTac doitac,
+                         BindingResult bindingResult,
+                         @RequestParam("giomo") String giomo,
+                         @RequestParam("giodong") String giodong,
+                         @RequestParam("file") MultipartFile file,
+                         @RequestParam("madv") Long madv,
+                         HttpSession session
+                         ) throws IOException, ParseException {
 
-        if (bindingResult.hasErrors()) {
-            return "dangkydoitac";
-        }
-
-        this.storageService.store(file);
-        doitac.setImgmota(file.getOriginalFilename());
-
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-        Time giomoTime = new Time(format.parse(giomo).getTime());
-        doitac.setGiomo(giomoTime);
-        Time giodongTime = new Time(format.parse(giodong).getTime());
-        doitac.setGiodong(giodongTime);
-
-        Date ngayHienTai = new Date(Calendar.getInstance().getTimeInMillis());
-        doitac.setNgaydk(ngayHienTai);
-
-        DichVuCC dichVuCC = dichVuCCService.getDichVuCCById(madv).orElse(null);
-        doitac.setDichVuCC(dichVuCC);
-
-        Long mand = (long) session.getAttribute("mand");
-        doitac.setMand(mand);
-
-        doiTacService.saveDoiTac(doitac);
-
-        thongBaoService.createThongBao(mand, "Đang chờ xác nhận",
-         "Chúng tôi đã nhận được đơn đăng ký của bạn, chúng tôi sẽ liên hệ lại với bạn sớm nhất có thể.");
-        return "redirect:/trangchu" ;
-    }
-
-    @Transactional
-    @GetMapping("/dangkydoitac")
-    public String getViewDangKyDoiTac(Model model) {
-        model.addAttribute("doitac", new DoiTac());
-        model.addAttribute("dichvuccs", dichVuCCService.getAllDichVuCC());
-        model.addAttribute("loainhahangs", loaiNhaHangService.getAllLoaiNhaHang());
+    if (bindingResult.hasErrors()) {
         return "dangkydoitac";
     }
-    @GetMapping("/login-required")
-    public String getViewDangKyDoiTac(){
-        return "required";
+
+    this.storageService.store(file);
+    doitac.setImgmota(file.getOriginalFilename());
+
+    SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+    Time giomoTime = new Time(format.parse(giomo).getTime());
+    doitac.setGiomo(giomoTime);
+    Time giodongTime = new Time(format.parse(giodong).getTime());
+    doitac.setGiodong(giodongTime);
+
+    Date ngayHienTai = new Date(Calendar.getInstance().getTimeInMillis());
+    doitac.setNgaydk(ngayHienTai);
+
+    DichVuCC dichVuCC = dichVuCCService.getDichVuCCById(madv).orElse(null);
+    doitac.setDichVuCC(dichVuCC);
+
+    Long mand = null;
+    Object mandObj = session.getAttribute("mand");
+    if (mandObj != null) {
+        mand = ((Long) mandObj);
+    } else {
+        // Xử lý khi không có giá trị trong session
+        // Ví dụ: trả về lỗi hoặc redirect đến trang khác
+        return "redirect:/error"; // Hoặc trả về một thông báo lỗi tùy chỉnh
     }
+    doitac.setMand(mand);
+
+    doiTacService.saveDoiTac(doitac);
+
+    thongBaoService.createThongBao(mand, "Đang chờ xác nhận",
+     "Chúng tôi đã nhận được đơn đăng ký của bạn, chúng tôi sẽ liên hệ lại với bạn sớm nhất có thể.");
+    return "redirect:/trangchu";
+}
+
 
     //------------ Quản lý đơn đặt bàn---------//
 

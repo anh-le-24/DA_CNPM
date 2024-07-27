@@ -33,6 +33,12 @@
                             <label>Ngày gửi:</label>
                             <input type="text" th:value="${#dates.format(thongBao.ngaygui, 'dd/MM/yyyy')}" readonly>
                         </div>
+                        <div>
+                            <span th:text="${#dates.format(thongBao.thoigian, 'HH:mm:ss')}">Thời gian</span>
+                        </div>
+                        <div>
+                            <a>xóa</a>
+                        </div>
                     </div>
                 </form>
             </div>

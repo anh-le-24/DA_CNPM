@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.example.baimoi.model.DoiTac;
 import com.example.baimoi.model.DonDatBan;
 
+
 @Repository
 public interface DoiTacRepository extends JpaRepository<DoiTac, Long> {
     @Query("SELECT d FROM DoiTac d LEFT JOIN FETCH d.imgDoiTacs WHERE d.madt = :id")
@@ -24,7 +25,17 @@ public interface DoiTacRepository extends JpaRepository<DoiTac, Long> {
     List<DoiTac> findByTennhahangContainingIgnoreCase(String tennhahang);
     List<DoiTac> findBySonhanhContainingIgnoreCaseOrDuongnhContainingIgnoreCaseOrQuannhContainingIgnoreCaseOrThanhphonhContainingIgnoreCase(String sonhanh, String duongnh, String quannh, String thanhphonh);
 
-    List<DoiTac> findByThanhphonhContainingIgnoreCase(String thanhphonh);
-    List<DoiTac> findByQuannhContainingIgnoreCase(String quannh);
-    List<DoiTac> findByHoadontbContainingIgnoreCase(String hoadontb);
+    @Query("SELECT d FROM DoiTac d WHERE "
+            + "(:thanhpho IS NULL OR d.thanhphonh = :thanhpho) AND "
+            + "(:hoadon IS NULL OR d.hoadontb = :hoadon)")
+    List<DoiTac> findByCriteria(
+            @Param("thanhpho") String thanhpho,
+            @Param("hoadon") String hoadon);
+
+    @Query("SELECT d FROM DoiTac d JOIN d.loaiNhaHangs lnh WHERE lnh.id = :loaiNhaHangId")
+    List<DoiTac> findByLoaiNhaHang(@Param("loaiNhaHangId") Long loaiNhaHangId);    
+    
+    @Query("SELECT d.nguoiDung.mand FROM DoiTac d WHERE d.madt = :madt")
+    Long findMaNguoiDungByMaDoiTac(@Param("madt") Long madt);
+
 }

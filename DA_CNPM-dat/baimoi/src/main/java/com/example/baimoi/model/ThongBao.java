@@ -1,6 +1,7 @@
 package com.example.baimoi.model;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
@@ -15,23 +16,24 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="THONGBAO")
+@Table(name = "THONGBAO")
 public class ThongBao {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long matb;
     private Long mand;
     private String tieude;
     private String noidung;
     private Date ngaygui;
+    private Time thoigian;
     
     // Kết nối với bảng người dùng
     @ManyToOne
     @JoinColumn(name = "mand", insertable = false, updatable = false)
     private NguoiDung nguoiDung;
 
-    // Kết nối với bảng loại nhà hàng
+    // Kết nối với bảng người nhận thông báo
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "THONGBAO_NGUOINHAN",
@@ -43,13 +45,14 @@ public class ThongBao {
     public ThongBao() {
     }
 
-    public ThongBao(Long matb, Long mand, String tieude, String noidung, Date ngaygui, NguoiDung nguoiDung,
-            Set<NguoiDung> thongbaNguoiDungs) {
+    public ThongBao(Long matb, Long mand, String tieude, String noidung, Date ngaygui, Time thoigian, NguoiDung nguoiDung,
+                    Set<NguoiDung> thongbaNguoiDungs) {
         this.matb = matb;
         this.mand = mand;
         this.tieude = tieude;
         this.noidung = noidung;
         this.ngaygui = ngaygui;
+        this.thoigian = thoigian;
         this.nguoiDung = nguoiDung;
         this.thongbaNguoiDungs = thongbaNguoiDungs;
     }
@@ -94,6 +97,14 @@ public class ThongBao {
         this.ngaygui = ngaygui;
     }
 
+    public Time getThoigian() {
+        return thoigian;
+    }
+
+    public void setThoigian(Time thoigian) {
+        this.thoigian = thoigian;
+    }
+
     public NguoiDung getNguoiDung() {
         return nguoiDung;
     }
@@ -109,5 +120,4 @@ public class ThongBao {
     public void setThongbaNguoiDungs(Set<NguoiDung> thongbaNguoiDungs) {
         this.thongbaNguoiDungs = thongbaNguoiDungs;
     }
-
 }

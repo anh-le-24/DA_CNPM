@@ -204,3 +204,21 @@ form .btn-quaylai {
     background-color: #39b2de;
     color: white;
 }
+
+.btn-danger {
+    background-color: red; 
+    color: white; 
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border-radius: 4px; 
+}
+
+.btn-danger:hover {
+    background-color: darkred; 
+}

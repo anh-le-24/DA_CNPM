@@ -56,16 +56,6 @@ function openFormDaXN(maddb) {
   document.getElementById("myFormDaXN").style.display = "block";
 }
 
-function setSoTienDaXN() {
-var soTien = document.getElementById("soTienInputDaXN").value;
-if (soTien) {
-    document.getElementById("soTienHiddenDaXN").value = lyDo;
-    return true;
-} else {
-    alert("Vui lòng nhập số tiền");
-    return false;
-}
-}
 
 function closeFormDaXN() {
   document.getElementById("myFormDaXN").style.display = "none";
@@ -79,14 +69,13 @@ function closeFormHuyDaXN() {
   document.getElementById("myFormHuyDaXN").style.display = "none";
 }
 
-
 function setSoTienDaXN() {
 var lyDo = document.getElementById("soTienInputDaXN").value;
 if (lyDo) {
     document.getElementById("soTienHiddenDaXN").value = lyDo;
     return true;
 } else {
-    alert("Vui lòng nhập lý do hủy");
+    alert("Vui lòng nhập số tiền của hóa đơn");
     return false;
 }
 }

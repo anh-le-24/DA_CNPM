@@ -22,62 +22,38 @@
 
         <!-- BODY Content  -->
         <div class="fixcontent">
-            <div class="content">
+            <div class="content" >
                 <form class="search-box" action="/search" method="get">
                     <input type="text" name="query" placeholder="Nhập tên nhà hàng hoặc địa chỉ">
                     <button type="submit">Tìm kiếm</button> 
                 </form>
                 <!--Lọc-->
-                <form class="menu-filter" action="/loc" method="get">
-                    <div class="dropdown">
-                        <div class="select">
-                            <span class="selected">Thành phố</span>
-                            <div class="caret"></div>
-                        </div>
-                        <ul class="option"> <!--menu -->
-                            <li class="active">Thành phố</li>
-                            <li>Hồ Chí Minh</li>
-                            <li>Hà Nội</li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <div class="select">
-                            <span class="selected">Khu vực</span>
-                            <div class="caret"></div>
-                        </div>
-                        <ul class="option"> <!--menu -->
-                            <li class="active">Khu vực</li>
-                            <li>Quận 1</li>
-                            <li>Quận 2</li>
-                            <li>Quận 3</li>
-                            <li>Thủ Đức</li>
-                            <li>Quận 10</li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <div class="select">
-                            <span class="selected">Giá trung bình</span>
-                            <div class="caret"></div>
-                        </div>
-                        <ul class="option"> <!--menu -->
-                            <li class="active">Giá trung bình</li>
-                            <li>Hồ Chí Minh</li>
-                            <li>Hà Nội</li>
-                            <li>Quận 1</li>
-                            <li>Quận 4</li>
-                        </ul>
-                    </div>
-                    <button type="submit" class="filter-btn">Lọc</button>
+                <form id="filterForm" method="get" action="/loc">
+                    <label for="thanhpho">Thành phố:</label>
+                    <select id="thanhpho" name="thanhpho">
+                        <option value="">Chọn thành phố</option>
+                        <option value="Hà Nội">Hà Nội</option>
+                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                        <option value="Hồ Chí Minh">Đà Nẵng</option>
+                        
+                    </select>
+                
+                    <label for="hoadon">Hóa đơn trung bình:</label>
+                    <input type="text" id="hoadon" name="hoadon" placeholder="Nhập hóa đơn trung bình">
+                
+                    <button type="submit">Lọc</button>
                 </form>
+                
 
                 <!---------  Loại Nhà Hàng  --------->
                 <div class="menu-container">
                     <div class="menu" th:each="loainhahang : ${loainhahangs}" th:if="${loainhahang != null}">
                         <div class="menu-item">
                             <img th:src="@{/uploads/{imgmota}(imgmota=${loainhahang.imgmota})}" alt="Mô tả ảnh">
-                            <p th:text="${loainhahang.tenlnh}"></p>
+                            <p>
+                                <a th:href="@{/loc-theo-loai/{malnh}(malnh=${loainhahang.malnh})}" th:text="${loainhahang.tenlnh}"></a>
+                            </p>
                         </div>
-                      
                     </div>
                 </div>
 
@@ -90,8 +66,103 @@
                 </div>
                 
                 <div class="pagebox">
-                    <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac.nguoiDung.mapq == 3}" >
-                        <a style="text-decoration: none;" th:href="@{/ctnhahang/{id} (id = ${doiTac.madt})}">
+                    <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac.nguoiDung.mapq == 3 && doiTac.madv == 1 && doiTac.mabv != null } "  >
+                        <a th:href="@{/ctnhahang/{id} (id = ${doiTac.madt})}">
+                            <div class="box2">
+                                <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
+                            </div>
+                            
+                                <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
+                            
+                            
+                            <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
+                            <div>
+                                <button type="button" class="fm-btn">Đặt bàn</button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                 <!--Box2-->
+                 <div>
+                    <h2>Nhà Hàng da đạng giá. Ưu đãi bất ngờ!</h2>
+                    <p>Buffet chay, Buffet trưa, Buffet hải sản, buffet nướng, buffet lẩu,... cho ăn gia đình, liên hoan văn phòng, tiếp khách,....</p>
+                </div>
+                
+                <div class="pagebox">
+                    <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac.nguoiDung.mapq == 3 && doiTac.madv == 2 && doiTac.mabv != null }" >
+                        <a th:href="@{/ctnhahang/{id} (id = ${doiTac.madt})}">
+                            <div class="box2">
+                                <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
+                            </div>
+                            
+                                <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
+                            
+                            
+                            <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
+                            <div>
+                                <button type="button" class="fm-btn">Đặt bàn</button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!--Box3-->
+                <div>
+                    <h2>Nhà Hàng cho tụ họp, liên hoan, tiếp khách</h2>
+                    <p>Gồm cả các nhà hàng hải sản, quán chay, món Nhật, món Thái, món Trung... Phục vụ buffet hoặc gọi món. Nhiều mức giá.</p>
+                </div>
+                
+                <div class="pagebox">
+                    <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac.nguoiDung.mapq == 3 && doiTac.madv == 3 && doiTac.mabv != null }" >
+                        <a th:href="@{/ctnhahang/{id} (id = ${doiTac.madt})}">
+                            <div class="box2">
+                                <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
+                            </div>
+                            
+                                <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
+                            
+                            
+                            <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
+                            <div>
+                                <button type="button" class="fm-btn">Đặt bàn</button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!--Box4-->
+                <div>
+                    <h2>Top QUÁN NHẬU vừa ngon vừa chill. CỰC ĐÃ!</h2>
+                    <p>
+                        Món nhậu ngon, đồ uống chất, bình dân tới cao cấp, cực chill. Nhiều góc view đẹp. Có cả rooftop. Mở cửa từ sáng đến khuya!</p>
+                </div>
+                
+                <div class="pagebox">
+                    <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac.nguoiDung.mapq == 3 && doiTac.madv == 4 && doiTac.mabv != null }" >
+                        <a th:href="@{/ctnhahang/{id} (id = ${doiTac.madt})}">
+                            <div class="box2">
+                                <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
+                            </div>
+                            
+                                <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
+                            
+                            
+                            <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
+                            <div>
+                                <button type="button" class="fm-btn">Đặt bàn</button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!--Box4-->
+                <div>
+                    <h2>TOP Quán ăn GIA ĐÌNH siêu ngon, các bé thích mê!</h2>
+                    <p>Đồ ăn ngon, không gian ấm cúng. Có phòng riêng hoặc khu vực riêng, ít người qua lại, phù hợp cho cả trẻ nhỏ, người già.</p>
+                </div>
+                
+                <div class="pagebox">
+                    <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac.nguoiDung.mapq == 3 && doiTac.madv == 5 && doiTac.mabv != null }" >
+                        <a th:href="@{/ctnhahang/{id} (id = ${doiTac.madt})}">
                             <div class="box2">
                                 <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
                             </div>
@@ -106,10 +177,6 @@
 
             </div>
         </div>
-        
-        0
-
-
         <!-- -----Tool Box ------- -->
         <div class="pagebox manhinh3">
             <div class="footer">

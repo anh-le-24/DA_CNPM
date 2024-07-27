@@ -6,14 +6,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>List Đối tác</title>
     <link rel="stylesheet" href="/css/doitac.css">
-    <script th:src="@{/js/doitac.js}"></script>
+    <script th:src="@{/js/nav.js}"></script>
     <link rel="stylesheet" href="/css/nav.css"> 
-    <script src="/js/nav.js"></script>
 </head>
 <body>
 
      <!--NAV BAR-->
      <div th:replace="~{/fragments/navbar :: navbar}"></div>
+
+     <div th:if="${message != null}" class="alert">
+        <p th:text="${message}"></p>
+    </div>
 
     <div th:unless="${doiTac != null}">
         <h1>Danh sách Đối Tác</h1>
@@ -45,94 +48,94 @@
         </table>
     </div>
 
-    <!--chi tiết đối tác-->
     <div th:if="${isview}">
-    <form>
-        <div class="doitac" th:if="${doiTac != null}">
-            <h2>Chi Tiết Đối Tác</h2>
-            <div>
-                <label for="madt">ID:</label>
-                <input type="text" id="madt" th:value="${doiTac.madt}" disabled>
+        <form th:action="@{/admin/xoa/{madt}(madt=${doiTac.madt})}" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đối tác này?');">
+            <div class="doitac" th:if="${doiTac != null}">
+                <h2>Chi Tiết Đối Tác</h2>
+                <div>
+                    <label for="madt">ID:</label>
+                    <input type="text" id="madt" th:value="${doiTac.madt}" disabled>
+                </div>
+                <div>
+                    <label for="tennhahang">Tên Nhà Hàng:</label>
+                    <input type="text" id="tennhahang" th:value="${doiTac.tennhahang}" disabled>
+                </div>
+                <div>
+                    <label for="sonhanh">Số Nhà:</label>
+                    <input type="text" id="sonhanh" th:value="${doiTac.sonhanh}" disabled>
+                </div>
+                <div>
+                    <label for="duongnh">Đường:</label>
+                    <input type="text" id="duongnh" th:value="${doiTac.duongnh}" disabled>
+                </div>
+                <div>
+                    <label for="quannh">Quận:</label>
+                    <input type="text" id="quannh" th:value="${doiTac.quannh}" disabled>
+                </div>
+                <div>
+                    <label for="thanhphonh">Thành Phố:</label>
+                    <input type="text" id="thanhphonh" th:value="${doiTac.thanhphonh}" disabled>
+                </div>
+                <div>
+                    <label for="mota">Mô Tả:</label>
+                    <textarea id="mota" th:text="${doiTac.mota}" disabled></textarea>
+                </div>
+                <div>
+                    <label for="linklienket">Liên Kết:</label>
+                    <input type="url" id="linklienket" th:value="${doiTac.linklienket}" disabled>
+                </div>
+                <div>
+                    <label for="linkggmap">Link Google Map:</label>
+                    <input type="url" id="linkggmap" th:value="${doiTac.linkggmap}" disabled>
+                </div>
+                <div>
+                    <label for="hoadontb">Hóa Đơn:</label>
+                    <input type="number" id="hoadontb" th:value="${doiTac.hoadontb}" disabled>
+                </div>
+                <div>
+                    <label for="giomo">Giờ Mở:</label>
+                    <input type="time" id="giomo" th:value="${#dates.format(doiTac.giomo, 'HH:mm')}" disabled>
+                </div>
+                <div>
+                    <label for="giodong">Giờ Đóng:</label>
+                    <input type="time" id="giodong" th:value="${#dates.format(doiTac.giodong, 'HH:mm')}" disabled>
+                </div>
+                <div>
+                    <label for="sochongoi">Số Chỗ Ngồi:</label>
+                    <input type="number" id="sochongoi" th:value="${doiTac.sochongoi}" disabled>
+                </div>
+                <div>
+                    <label for="imgmota">Ảnh Mô Tả:</label>
+                    <img th:src="@{/images/{imgmota}(imgmota=${doiTac.imgmota})}" alt="Ảnh Mô Tả" style="max-width: 400px; height: auto;">
+                </div>
+                <div>
+                    <label for="ngaydk">Ngày Đăng Ký:</label>
+                    <input type="text" id="ngaydk" th:value="${#dates.format(doiTac.ngaydk, 'dd/MM/yyyy')}" disabled>
+                </div>
+                <h3>Thông Tin Người Dùng</h3>
+                <div>
+                    <label for="mand">ID Người Dùng:</label>
+                    <input type="text" id="mand" th:value="${doiTac.nguoiDung.mand}" disabled>
+                </div>
+                <div>
+                    <label for="hoten">Tên Người Dùng:</label>
+                    <input type="text" id="hoten" th:value="${doiTac.nguoiDung.hoten}" disabled>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" th:value="${doiTac.nguoiDung.email}" disabled>
+                </div>
+                <div>
+                    <label for="sdt">Số Điện Thoại:</label>
+                    <input type="number" id="sdt" th:value="${doiTac.nguoiDung.sdt}" disabled>
+                </div>
+                <div>
+                    <button type="submit" class="btn-xoa">Xóa đối tác</button>
+                    <a class="btn-quaylai" href="/admin/tatcadoitac">Quay lại danh sách</a>
+                </div>
             </div>
-            <div>
-                <label for="tennhahang">Tên Nhà Hàng:</label>
-                <input type="text" id="tennhahang" th:value="${doiTac.tennhahang}" disabled>
-            </div>
-            <div>
-                <label for="sonhanh">Số Nhà:</label>
-                <input type="text" id="sonhanh" th:value="${doiTac.sonhanh}" disabled>
-            </div>
-            <div>
-                <label for="duongnh">Đường:</label>
-                <input type="text" id="duongnh" th:value="${doiTac.duongnh}" disabled>
-            </div>
-            <div>
-                <label for="quannh">Quận:</label>
-                <input type="text" id="quannh" th:value="${doiTac.quannh}" disabled>
-            </div>
-            <div>
-                <label for="thanhphonh">Thành Phố:</label>
-                <input type="text" id="thanhphonh" th:value="${doiTac.thanhphonh}" disabled>
-            </div>
-            <div>
-                <label for="mota">Mô Tả:</label>
-                <textarea id="mota" th:text="${doiTac.mota}" disabled ></textarea>
-            </div>
-            <div>
-                <label for="linklienket">Liên Kết:</label>
-                <input type="url" id="linklienket" th:value="${doiTac.linklienket}" disabled>
-            </div>
-            <div>
-                <label for="linkggmap">Link Google Map:</label>
-                <input type="url" id="linkggmap" th:value="${doiTac.linkggmap}" disabled>
-            </div>
-            <div>
-                <label for="hoadontb">Hóa Đơn:</label>
-                <input type="number" id="hoadontb" th:value="${doiTac.hoadontb}" disabled>
-            </div>
-            <div>
-                <label for="giomo">Giờ Mở:</label>
-                <input type="time" id="giomo" th:value="${#dates.format(doiTac.giomo, 'HH:mm')}" disabled>
-            </div>
-            <div>
-                <label for="giodong">Giờ Đóng:</label>
-                <input type="time" id="giodong" th:value="${#dates.format(doiTac.giodong, 'HH:mm')}" disabled>
-            </div>
-            <div>
-                <label for="sochongoi">Số Chỗ Ngồi:</label>
-                <input type="number" id="sochongoi" th:value="${doiTac.sochongoi}" disabled>
-            </div>
-            <div>
-                <label for="imgmota">Ảnh Mô Tả:</label>
-                <img th:src="@{/images/{imgmota}(imgmota=${doiTac.imgmota})}" alt="Ảnh Mô Tả" style="max-width: 400px; height: auto;" disabled>
-            </div>
-            <div>
-                <label for="ngaydk">Ngày Đăng Ký:</label>
-                <input type="text" id="ngaydk" th:value="${#dates.format(doiTac.ngaydk, 'dd/MM/yyyy')}" disabled>
-            </div>
-            <h3>Thông Tin Người Dùng</h3>
-            <div>
-                <label for="mand">ID Người Dùng:</label>
-                <input type="text" id="mand" th:value="${doiTac.nguoiDung.mand}" disabled>
-            </div>
-            <div>
-                <label for="hoten">Tên Người Dùng:</label>
-                <input type="text" id="hoten" th:value="${doiTac.nguoiDung.hoten}" disabled>
-            </div>
-            <div>
-                <label for="email">Email:</label>
-                <input type="text" id="email" th:value="${doiTac.nguoiDung.email}" disabled>
-            </div>
-            <div>
-                <label for="sdt">Số Điện Thoại:</label>
-                <input type="number" id="sdt" th:value="${doiTac.nguoiDung.sdt}" disabled>
-            </div>
-            <div>
-                <a class="btn-xoa" href="/admin/tatcadoitac" th:onclick="'xoaDoiTac(' + ${doiTac.madt} + '); return false;'">Xóa</a>
-                <a class="btn-quaylai" href="/admin/tatcadoitac">Quay lại danh sách</a>
-            </div>
-        </div>
-    </form>
+        </form>
     </div>
+   
 </body>
 </html>

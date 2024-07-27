@@ -7,22 +7,30 @@ document.addEventListener("DOMContentLoaded", function() {
             link.classList.add('active');
         }
     });
-});
 
-document.addEventListener('DOMContentLoaded', function() {
     const canhanImage = document.getElementById('canhanImage');
     const thongbaoForm = document.getElementById('thongbaoForm');
     const overlay = document.getElementById('overlay');
 
-    canhanImage.addEventListener('click', function() {
-        overlay.style.display = 'flex';
-    });
+    if (canhanImage) {
+        canhanImage.addEventListener('click', function() {
+            if (overlay) {
+                overlay.style.display = 'flex';
+            }
+        });
+    }
 
-    overlay.addEventListener('click', function(event) {
-        if (event.target === overlay) {
-            overlay.style.display = 'none';
-        }
-    });
+    if (overlay) {
+        overlay.addEventListener('click', function(event) {
+            if (event.target === overlay) {
+                overlay.style.display = 'none';
+            }
+        });
+    }
 });
 
-
+function confirmDelete(url) {
+    if (confirm("Bạn có chắc chắn muốn hủy lời đăng ký đối tác không?")) {
+        window.location.href = url;
+    }
+}

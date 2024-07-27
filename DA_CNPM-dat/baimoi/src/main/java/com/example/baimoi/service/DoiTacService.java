@@ -61,15 +61,14 @@ public class DoiTacService {
         return doiTacRepository.findBySonhanhContainingIgnoreCaseOrDuongnhContainingIgnoreCaseOrQuannhContainingIgnoreCaseOrThanhphonhContainingIgnoreCase(address, address, address, address);
     }
     
-    public List<DoiTac> searchByCity(String city) {
-        return doiTacRepository.findByThanhphonhContainingIgnoreCase(city);
+    public List<DoiTac> filterDoiTac(String thanhpho,String hoadon) {
+        return doiTacRepository.findByCriteria(thanhpho,hoadon);
     }
 
-    public List<DoiTac> searchByDistrict(String district) {
-        return doiTacRepository.findByQuannhContainingIgnoreCase(district);
+    public List<DoiTac> findByLoaiNhaHang(Long loaiNhaHangId) {
+        return doiTacRepository.findByLoaiNhaHang(loaiNhaHangId);
     }
-
-    public List<DoiTac> searchByInvoiceAverage(String invoiceAverage) {
-        return doiTacRepository.findByHoadontbContainingIgnoreCase(invoiceAverage);
+    public Long findMaNguoiDungByMaDoiTac(Long madt) {
+        return doiTacRepository.findMaNguoiDungByMaDoiTac(madt);
     }
 }
