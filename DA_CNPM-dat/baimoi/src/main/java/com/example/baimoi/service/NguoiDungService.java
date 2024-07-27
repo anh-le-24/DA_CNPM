@@ -1,6 +1,8 @@
 package com.example.baimoi.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +74,25 @@ public class NguoiDungService {
             return true;
         }
         return false;
+    }
+
+    //thống kê
+    public Map<Integer, Integer> getUserStatisticsByMonth() {
+        List<Object[]> results = nguoidungRepository.countUsersByMonth();
+        Map<Integer, Integer> statistics = new HashMap<>();
+
+        // Initialize statistics map with all months
+        for (int i = 1; i <= 12; i++) {
+            statistics.put(i, 0);
+        }
+
+        // Populate statistics map with query results
+        for (Object[] result : results) {
+            Integer month = (Integer) result[0];
+            Long count = (Long) result[1];
+            statistics.put(month, count.intValue());
+        }
+
+        return statistics;
     }
 }

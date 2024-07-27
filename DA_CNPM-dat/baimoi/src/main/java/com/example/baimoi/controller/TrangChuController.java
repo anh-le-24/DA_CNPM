@@ -290,8 +290,8 @@ private String getViewTrangChu(Model model, HttpSession session) {
     public String datBan(@Valid @ModelAttribute("donDatBan") DonDatBan donDatBan,
                          BindingResult bindingResult,
                          @RequestParam("thoigiandat") String thoigiandat,
-                         @RequestParam("ngaydat") String ngaydat,
                          @RequestParam("macn") Long macn,
+                         @RequestParam("ngaydat") String ngaydat,
                          HttpSession session,
                          RedirectAttributes redirectAttributes) {
         try {

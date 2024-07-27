@@ -9,18 +9,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.baimoi.service.DoiTacService;
+import com.example.baimoi.service.NguoiDungService;
 
-@Controller
+@Controller 
 @RequestMapping("/thongke")
 public class ThongKeController {
 
     @Autowired
     private DoiTacService doiTacService;
+    @Autowired
+    private NguoiDungService nguoiDungService;
 
     @GetMapping("/thang")
     public String thongKeSoLuongDoiTacTheoThang(Model model) {
-        Map<Integer, Long> thongKeThang = doiTacService.countDoiTacByMonth();
-        model.addAttribute("thongKeThang", thongKeThang);
+        Map<Integer, Long> thongKeDoiTacThang = doiTacService.countDoiTacByMonth();
+        Map<Integer, Integer> thongKeNguoiDungThang = nguoiDungService.getUserStatisticsByMonth();
+        model.addAttribute("thongKeDoiTacThang", thongKeDoiTacThang);
+        model.addAttribute("thongKeNguoiDungThang", thongKeNguoiDungThang);
         return "quanly/thongke"; 
     }
     

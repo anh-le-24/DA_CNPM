@@ -1,7 +1,9 @@
 package com.example.baimoi.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,5 +73,15 @@ public class DonDatBanService {
     public void deleteDonDatBanByDoiTacId(Long doiTacId) {
         List<DonDatBan> donDatBans = getDonDatBansForDoiTac(doiTacId);
         donDatBanRepository.deleteAll(donDatBans);
+    }
+     public List<Map<String, Object>> getMonthlyStatsForDoiTac(Long doiTacId) {
+        List<Object[]> rawStats = donDatBanRepository.getMonthlyStatsForDoiTac(doiTacId);
+        
+        return rawStats.stream().map(row -> Map.of(
+            "year", row[0],
+            "month", row[1],
+            "orderCount", row[2],
+            "totalRevenue", row[3]
+        )).collect(Collectors.toList());
     }
 }

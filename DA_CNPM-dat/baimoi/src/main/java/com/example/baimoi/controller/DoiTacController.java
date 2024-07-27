@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -582,8 +583,13 @@ public String getViewDangKyDoiTac(){
     @GetMapping("/thongke/{id}")
     public String getViewThongKe(@PathVariable("id") Long id, Model model){
         Optional<DoiTac> doiTac = doiTacService.getDoiTacById(id);
-        model.addAttribute("doiTac", doiTac.get());
-
+        if (doiTac.isPresent()) {
+            model.addAttribute("doiTac", doiTac.get());
+            
+            // Fetch statistics data
+            List<Map<String, Object>> monthlyStats = donDatBanService.getMonthlyStatsForDoiTac(id);
+            model.addAttribute("monthlyStats", monthlyStats);
+        }
         
         return"/doitac/thongkedoitac";
     }
