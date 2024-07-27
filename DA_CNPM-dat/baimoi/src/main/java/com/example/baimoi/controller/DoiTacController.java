@@ -575,7 +575,17 @@ public String getViewDangKyDoiTac(){
         Optional<DoiTac> doiTac = doiTacService.getDoiTacById(id);
         model.addAttribute("doiTac", doiTac.get());
         return "showctnhahang";
+    } 
+
+    //--------- Thống kê ------------//
+
+    @GetMapping("/thongke/{id}")
+    public String getViewThongKe(@PathVariable("id") Long id, Model model){
+        Optional<DoiTac> doiTac = doiTacService.getDoiTacById(id);
+        model.addAttribute("doiTac", doiTac.get());
+
+        
+        return"/doitac/thongkedoitac";
     }
 
-    
 }
