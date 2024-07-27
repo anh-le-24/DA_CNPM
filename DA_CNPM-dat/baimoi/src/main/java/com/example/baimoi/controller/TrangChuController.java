@@ -466,7 +466,29 @@ private String getViewTrangChu(Model model, HttpSession session) {
 
         return "trangchu/index"; 
     }
+    //đổi mật khẩu
+    @PostMapping("/change-password")
+    public String changePassword(@RequestParam("oldPassword") String oldPassword,
+                                  @RequestParam("newPassword") String newPassword,
+                                  @RequestParam("confirmPassword") String confirmPassword,
+                                  HttpSession session,
+                                  Model model) {
+        // Lấy mã người dùng từ session
+        Long mand = (Long) session.getAttribute("mand");
 
-    
+        if (mand == null) {
+            model.addAttribute("message", "Mã người dùng không được bỏ trống.");
+            return "trangchu/resetpw";
+        }
+
+        // Xác thực mật khẩu cũ và thay đổi mật khẩu mới
+        boolean result = nguoiDungService.changePassword(mand, oldPassword, newPassword);
+        if (result) {
+            model.addAttribute("message", "Đổi mật khẩu thành công.");
+        } else {
+            model.addAttribute("message", "Mật khẩu cũ không đúng.");
+        }
+        return "trangchu/resetpw";
+    }
 
 }

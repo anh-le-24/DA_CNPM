@@ -20,9 +20,10 @@ body {
 }
 
 .container {
-    padding:20px 50px;
+    
     min-height: 10vh;
     background-color: rgb(227, 226, 226);
+    display: flex;
 
 }
 
@@ -30,13 +31,13 @@ body {
     display: flex;
     align-items: flex-start;
     flex-wrap: nowrap; /* Allow content to wrap on smaller screens */
-    margin: 30px 100px;
+    margin: 30px 100px ;    
 
 }
 
 .slider-wrapper {
     position: relative;
-    max-width: 48rem;
+    max-width: 50rem;
     margin-right: 2rem; /* Space between slider and nav images */
     flex: 1 1 100%; /* Make the slider responsive */
 }
@@ -52,6 +53,7 @@ body {
 }
 
 .slider img {
+    
     flex: 1 0 100%;
     object-fit: cover;
     position: absolute; /* Position images absolutely */
@@ -94,8 +96,8 @@ body {
 .slider-nav {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 0.5rem; /* Gap between columns */
-    row-gap: 0.5rem; /* Gap between rows */
+    column-gap: 20px; /* Gap between columns */
+    row-gap: 20px; /* Gap between rows */
 }
 
 .slider-nav a {
@@ -107,7 +109,9 @@ body {
     box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.25);
 }
 
+
 .slider-nav img {
+    
     width: 100%;
     height: 100%;
     object-fit: cover;

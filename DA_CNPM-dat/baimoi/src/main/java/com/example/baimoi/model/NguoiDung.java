@@ -178,4 +178,11 @@ public class NguoiDung {
         this.donDatBans = donDatBans;
     }
 
+    public boolean changePassword(String oldPassword, String newPassword) {
+        if (this.password.equals(oldPassword)) {
+            this.password = newPassword;
+            return true;
+        }
+        return false;
+    }
 }
