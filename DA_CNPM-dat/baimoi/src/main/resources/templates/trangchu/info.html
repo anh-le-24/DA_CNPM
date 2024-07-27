@@ -24,7 +24,7 @@
                 <li><a th:href="@{/resetpw}">Quản lý mật khẩu</a></li>
                 <li><a th:href="@{/lsdatban}">Lịch sử đơn Đặt chỗ</a></li>
             </ul>
-            <a style="margin-left: 20px;" class="button" th:href="@{/logout}">Đăng xuất</a>
+            <a style="margin-left: 20px;" class="button" href="#" onclick="confirmLogout()">Đăng xuất</a>
         </nav>
         <div class="content">
             <h1>Thông Tin Tài Khoản</h1>
@@ -79,5 +79,12 @@
             </div>
         </div>
     </div>
+    <script>
+        function confirmLogout() {
+            if (confirm('Bạn có chắc chắn muốn đăng xuất không?')) {
+                window.location.href = '/logout';
+            }
+        }
+    </script>
 </body>
 </html>

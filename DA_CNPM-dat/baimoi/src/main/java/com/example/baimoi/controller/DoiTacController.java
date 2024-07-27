@@ -222,7 +222,18 @@ public String saveDoiTac(@Valid @ModelAttribute("doitac") DoiTac doitac,
      "Chúng tôi đã nhận được đơn đăng ký của bạn, chúng tôi sẽ liên hệ lại với bạn sớm nhất có thể.");
     return "redirect:/trangchu";
 }
-
+@Transactional
+@GetMapping("/dangkydoitac")
+public String getViewDangKyDoiTac(Model model) {
+    model.addAttribute("doitac", new DoiTac());
+    model.addAttribute("dichvuccs", dichVuCCService.getAllDichVuCC());
+    model.addAttribute("loainhahangs", loaiNhaHangService.getAllLoaiNhaHang());
+    return "dangkydoitac";
+}
+@GetMapping("/login-required")
+public String getViewDangKyDoiTac(){
+    return "required";
+}
 
     //------------ Quản lý đơn đặt bàn---------//
 

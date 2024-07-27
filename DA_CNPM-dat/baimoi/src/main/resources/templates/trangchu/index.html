@@ -196,7 +196,7 @@
                     </div>
                 </div>   
                 <div class="div-main-ele"> 
-                    <div class="fmLogoDT"  >
+                    <div class="fmLogoDT"  th:if="nguoiDung.mapq != 3">
                         <a th:href="${session.loggedInUser != null ? '/doitac/dangkydoitac' : '/doitac/login-required'}" target="_blank">ĐĂNG KÝ ĐỐI TÁC</a>
                     </div>
                 </div>

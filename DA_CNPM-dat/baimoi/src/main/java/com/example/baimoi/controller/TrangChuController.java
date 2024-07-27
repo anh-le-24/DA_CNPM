@@ -30,6 +30,7 @@ import com.example.baimoi.model.DonDatBan;
 import com.example.baimoi.model.LoaiNhaHang;
 import com.example.baimoi.model.NguoiDung;
 import com.example.baimoi.model.ThongBao;
+import com.example.baimoi.service.ChiNhanhService;
 import com.example.baimoi.service.ComBoMonAnService;
 import com.example.baimoi.service.DanhGiaService;
 import com.example.baimoi.service.DoiTacService;
@@ -59,6 +60,10 @@ public class TrangChuController {
     private ThongBaoService thongBaoService;
     @Autowired
     private DanhGiaService danhGiaService;
+    @Autowired
+    private ChiNhanhService chiNhanhService;
+
+
     @GetMapping("/")
     public RedirectView redirectToTrangChu() {
         return new RedirectView("/trangchu");
@@ -78,6 +83,7 @@ public class TrangChuController {
         
         model.addAttribute("loainhahangs", loaiNhaHangService.getAllLoaiNhaHang());
         model.addAttribute("doiTacs", doiTacService.getAllDoitac());
+        model.addAttribute("nguoiDung", nguoiDungService.getNguoiDungById(mand));
         return "trangchu/index";
     }
 
