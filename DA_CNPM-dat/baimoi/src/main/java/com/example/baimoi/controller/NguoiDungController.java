@@ -93,4 +93,7 @@ public class NguoiDungController {
         return "quanly/khachhang"; // Thay đổi tên view cho phù hợp
     }
 
+    //đổi mật khẩu
+   
+
 }

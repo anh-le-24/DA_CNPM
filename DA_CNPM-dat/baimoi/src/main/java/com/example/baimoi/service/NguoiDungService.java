@@ -53,5 +53,16 @@ public class NguoiDungService {
     public List<NguoiDung> searchByHoten(String hoten) {
         return nguoidungRepository.findByHotenContainingIgnoreCase(hoten);
     }
+
+    //đổi mật khẩu
+    public boolean changePassword(Long mand, String newPassword) {
+        NguoiDung nguoiDung = nguoidungRepository.findById(mand).orElse(null);
+        if (nguoiDung != null) {
+            nguoiDung.changePassword(newPassword);
+            nguoidungRepository.save(nguoiDung);
+            return true;
+        }
+        return false;
+    }
     
 }
