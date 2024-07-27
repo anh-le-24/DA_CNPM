@@ -110,12 +110,16 @@
                             </ul>
                         </p>
                         <p  th:text="'Khoảng giá: ' + ${doiTac.hoadontb} + ' / người'"><span>200.000 - 500.000 đ/người</span></p>
-                        <p style="color: red;" th:text="'Mở cửa: ' + ${doiTac.giomo}"></p>
-                        <p  th:text="'Đóng cửa: ' + ${doiTac.giodong}"></p>
+                        <p style="color: rgb(14, 202, 86);" th:text="'Mở cửa: ' + ${doiTac.giomo}"></p>
+                        <p  style="color: red;" th:text="'Đóng cửa: ' + ${doiTac.giodong}"></p>
+                        <a th:href="${doiTac.linklienket}" th:text="'Facebook: '+${doiTac.linklienket}" target="_blank"></a>
                     </div>
-                    <a class="fm-btndatban" th:if="${session.loggedInUser != null}" th:href="@{/datban/{id}(id=${doiTac.madt})}">Đặt Bàn</a>
-                    <a class="fm-btndatban" th:if="${session.loggedInUser == null}" th:href="@{/doitac/login-required}">Đặt Bàn</a>
+                    <div class="datban">
+                        <a class="fm-btndatban" th:if="${session.loggedInUser != null}" th:href="@{/datban/{id}(id=${doiTac.madt})}">Đặt Bàn</a>
+                        <a class="fm-btndatban" th:if="${session.loggedInUser == null}" th:href="@{/doitac/login-required}">Đặt Bàn</a>
+                    </div>
                 </div>
+                
                 <div class="menu-detail">
                     <a href="#de-xuat" class="active">Đề xuất</a>
                     <a href="#tom-tat">Tóm tắt</a>
@@ -123,6 +127,7 @@
                     <a href="#quy-dinh">Quy định</a>
                     <a href="#de-xe">Để xe</a>
                     <a href="#tien-ich">Tiện ích</a>
+                    <a href="#chi-duong">Chỉ đường</a>
                     <a href="#chi-tiet">Chi Tiết</a>
                 </div>
                 <div class="menu-content">
@@ -167,6 +172,10 @@
                     <section id="tien-ich">
                         <h2>Tiện ích</h2>
                         <div th:utext="${doiTac.baiVietDT.ndtienich}"></div>
+                    </section>
+                    <section id="chi-duong">
+                        <h2>Chỉ đường</h2>
+                        <a th:href="${doiTac.linkggmap}" target="_blank"> Địa chỉ</a>
                     </section>
                     <section id="chi-tiet">
                         <h2>Chi tiết</h2>
