@@ -177,8 +177,6 @@ public class NguoiDung {
     public void setDonDatBans(Set<DonDatBan> donDatBans) {
         this.donDatBans = donDatBans;
     }
-    public void changePassword(String newPassword) {
-        this.password = newPassword;
-    }
+   
 
 }

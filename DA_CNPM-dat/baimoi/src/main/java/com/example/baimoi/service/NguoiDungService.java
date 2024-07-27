@@ -5,9 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import com.example.baimoi.model.NguoiDung;
 import com.example.baimoi.repository.NguoidungRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class NguoiDungService {
@@ -17,6 +20,11 @@ public class NguoiDungService {
     public Optional<NguoiDung> getNguoiDungById(Long mnd) {
         return nguoidungRepository.findById(mnd);
     }
+    public NguoiDung getNguoiDungBy(Long id) {
+    Assert.notNull(id, "ID must not be null");
+    return nguoidungRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+}
+
 
     public List<NguoiDung> getAllNguoiDung(){
         return nguoidungRepository.findAll();
@@ -55,14 +63,6 @@ public class NguoiDungService {
     }
 
     //đổi mật khẩu
-    public boolean changePassword(Long mand, String newPassword) {
-        NguoiDung nguoiDung = nguoidungRepository.findById(mand).orElse(null);
-        if (nguoiDung != null) {
-            nguoiDung.changePassword(newPassword);
-            nguoidungRepository.save(nguoiDung);
-            return true;
-        }
-        return false;
-    }
+   
     
 }

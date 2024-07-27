@@ -71,21 +71,27 @@ public class TrangChuController {
     
 
     @GetMapping("/trangchu")
-    private String getViewTrangChu(Model model, HttpSession session){
-        // Lấy mã người dùng từ phiên làm việc
-        Long mand = (Long) session.getAttribute("mand");
+private String getViewTrangChu(Model model, HttpSession session) {
+    // Lấy mã người dùng từ phiên làm việc
+    Long mand = (Long) session.getAttribute("mand");
+
+    // Nếu người dùng đã đăng nhập (có mã người dùng)
+    if (mand != null) {
+        List<ThongBao> thongBaos = thongBaoService.getThongBaosByUserId(mand);
+        model.addAttribute("thongBaos", thongBaos);
         
-        // Nếu người dùng đã đăng nhập (có mã người dùng)
-        if (mand != null) {
-            List<ThongBao> thongBaos = thongBaoService.getThongBaosByUserId(mand);
-            model.addAttribute("thongBaos", thongBaos);
-        }
-        
-        model.addAttribute("loainhahangs", loaiNhaHangService.getAllLoaiNhaHang());
-        model.addAttribute("doiTacs", doiTacService.getAllDoitac());
-        model.addAttribute("nguoiDung", nguoiDungService.getNguoiDungById(mand));
-        return "trangchu/index";
+        // Lấy thông tin người dùng và thêm vào mô hình
+        NguoiDung nguoiDung = nguoiDungService.getNguoiDungBy(mand);
+        model.addAttribute("nguoiDung", nguoiDung);
     }
+
+    model.addAttribute("loainhahangs", loaiNhaHangService.getAllLoaiNhaHang());
+    model.addAttribute("doiTacs", doiTacService.getAllDoitac());
+
+    // Nếu người dùng chưa đăng nhập, không thêm thông tin người dùng vào mô hình
+    return "trangchu/index";
+}
+
 
     @GetMapping("/ctnhahang/{id}")
     private String getViewCTNhaHang(@PathVariable("id") Long id, Model model)
