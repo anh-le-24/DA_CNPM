@@ -290,14 +290,10 @@ private String getViewTrangChu(Model model, HttpSession session) {
     public String datBan(@Valid @ModelAttribute("donDatBan") DonDatBan donDatBan,
                          BindingResult bindingResult,
                          @RequestParam("thoigiandat") String thoigiandat,
+                         @RequestParam("macn") Long macn,
                          @RequestParam("ngaydat") String ngaydat,
-<<<<<<< HEAD
                          RedirectAttributes redirectAttributes,
                          HttpSession session) {
-=======
-                         @RequestParam("macn") Long macn,
-                         RedirectAttributes redirectAttributes) {
->>>>>>> 6b81c8012e45e62151829b99bc440dc4072a8386
         try {
             Long madt = donDatBan.getMadt();
 
