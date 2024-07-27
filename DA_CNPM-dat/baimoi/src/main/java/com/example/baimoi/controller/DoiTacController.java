@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -268,6 +269,13 @@ public String getViewDangKyDoiTac(){
             throw new EntityNotFoundException("Không tìm thấy Don: ");
         }
         DonDatBan donDatBan = optionalDonDatBan.get();
+
+        // Lấy mã người dùng từ Đơn Đặt Bàn
+        Long mand = donDatBan.getNguoiDung().getMand();
+        if (mand == null) {
+            throw new RuntimeException("Không tìm thấy mã người dùng trong Đơn Đặt Bàn.");
+        }
+
     
         Long matt = (long) trangThai;
         donDatBan.setMattd(matt);
@@ -294,10 +302,18 @@ public String getViewDangKyDoiTac(){
             donDatBan.setDanhGia(danhGia);
             donDatBan.setMadg(danhGia.getMadg());
             donDatBanService.saveDonDatBan(donDatBan);
+
+             // Tạo thông báo cho người dùng
+             thongBaoService.createThongBao(mand, "Đơn đặt bản bị hủy", "Đơn đặt bàn của bạn đã bị hủy!");
+
         }
         if (matt == 3) {
             double soTienDouble = Double.parseDouble(soTien);
             donDatBan.setSotien(soTienDouble);
+        }
+        if (matt == 2){
+            // Tạo thông báo cho người dùng
+            thongBaoService.createThongBao(mand, "Xác nhận đơn đặt bàn", "Đơn đặt bàn của bạn đã được nhà hàng xác nhận!");
         }
 
         return "redirect:/doitac/quanlydon/qldonchoxn/" + madt;
@@ -560,7 +576,22 @@ public String getViewDangKyDoiTac(){
         Optional<DoiTac> doiTac = doiTacService.getDoiTacById(id);
         model.addAttribute("doiTac", doiTac.get());
         return "showctnhahang";
+    } 
+
+    //--------- Thống kê ------------//
+
+    @GetMapping("/thongke/{id}")
+    public String getViewThongKe(@PathVariable("id") Long id, Model model){
+        Optional<DoiTac> doiTac = doiTacService.getDoiTacById(id);
+        if (doiTac.isPresent()) {
+            model.addAttribute("doiTac", doiTac.get());
+            
+            // Fetch statistics data
+            List<Map<String, Object>> monthlyStats = donDatBanService.getMonthlyStatsForDoiTac(id);
+            model.addAttribute("monthlyStats", monthlyStats);
+        }
+        
+        return"/doitac/thongkedoitac";
     }
 
-    
 }

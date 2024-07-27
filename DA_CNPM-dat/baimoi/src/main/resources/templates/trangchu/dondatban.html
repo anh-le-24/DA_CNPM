@@ -33,11 +33,15 @@
                 <label for="address">Địa chỉ nhà hàng:</label>
                 <input type="text" id="address" name="address" th:if="${doiTac != null}"  th:placeholder="${doiTac.getFullAddress()}" readonly>
             </div>
-            
+            <div class="form-group">
+                <label th:if="${comBoMonAn != null}" for="combo">Combo khách hàng chọn:</label>
+                <input type="text" id="combo" name="combo" th:if="${comBoMonAn != null}"  th:placeholder="${comBoMonAn.tencb}" readonly>
+            </div>
         </div>
         <form th:action="@{/save}" method="post" th:object="${donDatBan}" >
             <input type="hidden" th:field="*{madt}" />
             <input type="hidden" th:field="*{mand}" />
+            <input type="hidden" th:field="*{macb}" />
             <div class="form-group">
                 <label for="date">Ngày quý khách muốn đặt:</label>
                 <input type="date" id="date" name="date" th:field="*{ngaydat}" required>
@@ -60,7 +64,7 @@
             </div>
             <div class="form-group">
                 <label for="special-requests">Quý khách muốn thay đổi chi nhanh đến nhà hàng:</label>
-                <select class="form-control" name="madv" >
+                <select class="form-control" name="macn">
                     <option value="" disabled selected>Chọn chi nhánh</option>
                     <option th:each="chiNhanh : ${doiTac.chiNhanhs}" th:value="${chiNhanh.macn}" th:text="${chiNhanh.tencn}"></option>
                 </select>

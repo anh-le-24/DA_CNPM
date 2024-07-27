@@ -39,4 +39,7 @@ public interface DoiTacRepository extends JpaRepository<DoiTac, Long> {
     @Query("SELECT d.nguoiDung.mand FROM DoiTac d WHERE d.madt = :madt")
     Long findMaNguoiDungByMaDoiTac(@Param("madt") Long madt);
 
+    //thống kê
+    @Query("SELECT MONTH(d.ngaydk) as month, COUNT(d) as count FROM DoiTac d GROUP BY MONTH(d.ngaydk)")
+    List<Object[]> countDoiTacByMonth();
 }

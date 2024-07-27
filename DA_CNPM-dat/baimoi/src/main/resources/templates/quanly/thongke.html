@@ -2,16 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Thống Kê Đối Tác Theo Tháng</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Thống Kê</title>
     <link rel="stylesheet" href="/css/nav.css"> 
+    <link rel="stylesheet" href="/css/thongke.css"> 
 </head>
 <body>
 
     <!--NAV BAR-->
     <div th:replace="~{/fragments/navbar :: navbar}"></div>
 
-    <h1>Thống Kê Đối Tác Theo Tháng</h1>
+    <h1>Thống kê số lượng Đối tác và Người dùng theo Tháng</h1>
+    
+    <h2>Số lượng Đối tác theo Tháng</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Tháng</th>
+                <th>Số lượng Đối tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="entry : ${thongKeDoiTacThang}">
+                <td th:text="${entry.key}">Tháng</td>
+                <td th:text="${entry.value}">Số lượng</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Số lượng Người dùng theo Tháng</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Tháng</th>
+                <th>Số lượng Người dùng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="entry : ${thongKeNguoiDungThang}">
+                <td th:text="${entry.key}">Tháng</td>
+                <td th:text="${entry.value}">Số lượng</td>
+            </tr>
+        </tbody>
+    </table>
     
 </body>
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/head :: head}">
+   
+</head>
+<body onload="toggleSidebar()">
+    <!-- phần thân -->
+    <div class="container">
+        <!-- Left Side Bar -->
+        <div th:replace="~{/fragments/left :: left}"></div>
+        <!-- Conent -->
+        <div class="content" id="content">
+            <div class="box-bg1">
+                <h1>THỐNG KÊ ĐỐI TÁC</h1>
+                <div class="box-bg2">
+                    <div class="fm-table-QLDH">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Năm</th>
+                                    <th>Tháng</th>
+                                    <th>Số lượng đơn</th>
+                                    <th>Tổng doanh thu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="stat : ${monthlyStats}">
+                                    <td th:text="${stat.year}"></td>
+                                    <td th:text="${stat.month}"></td>
+                                    <td th:text="${stat.orderCount}"></td>
+                                    <td th:text="${#numbers.formatDecimal(stat.totalRevenue, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

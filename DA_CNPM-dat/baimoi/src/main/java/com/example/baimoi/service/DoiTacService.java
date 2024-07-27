@@ -1,6 +1,8 @@
 package com.example.baimoi.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,5 +82,17 @@ public class DoiTacService {
     }
     public Long findMaNguoiDungByMaDoiTac(Long madt) {
         return doiTacRepository.findMaNguoiDungByMaDoiTac(madt);
+    }
+
+    //thống kê
+    public Map<Integer, Long> countDoiTacByMonth() {
+        List<Object[]> results = doiTacRepository.countDoiTacByMonth();
+        Map<Integer, Long> countByMonth = new HashMap<>();
+        for (Object[] result : results) {
+            Integer month = (Integer) result[0];
+            Long count = (Long) result[1];
+            countByMonth.put(month, count);
+        }
+        return countByMonth;
     }
 }
