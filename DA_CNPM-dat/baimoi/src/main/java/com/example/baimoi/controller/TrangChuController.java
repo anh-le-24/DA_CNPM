@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.baimoi.model.ChiNhanh;
 import com.example.baimoi.model.ComBoMonAn;
 import com.example.baimoi.model.DanhGia;
 import com.example.baimoi.model.DoiTac;
@@ -242,12 +243,55 @@ private String getViewTrangChu(Model model, HttpSession session) {
         return "trangchu/dondatban";
     }
 
+    // Đặt bàn với ComBo
+    @GetMapping("/datban/combo/{id}")
+    public String getViewDatBanWithComBo(@PathVariable("id") Long id, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        // Kiểm tra đăng nhập
+        Long mand = (Long) session.getAttribute("mand");
+        if (mand == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Vui lòng đăng nhập để đặt bàn");
+            return "redirect:/login";
+        }
+
+        // Lấy thông tin Combo và người dùng
+        Optional<ComBoMonAn> comBoMonAnOtp = comBoMonAnService.getComboMonAnById(id);
+        Optional<NguoiDung> nguoiDungOptional = nguoiDungService.getNguoiDungById(mand);
+
+        // Kiểm tra xem có tìm thấy đối tác và người dùng không
+        if (!comBoMonAnOtp.isPresent() || !nguoiDungOptional.isPresent()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Không tìm thấy thông tin đối tác hoặc người dùng");
+            return "redirect:/error";
+        }
+
+        ComBoMonAn comBoMonAn = comBoMonAnOtp.get();
+        NguoiDung nguoiDung = nguoiDungOptional.get();
+        DoiTac doiTac = comBoMonAn.getDoiTac();
+
+        // Thêm thông tin vào model
+        model.addAttribute("comBoMonAn", comBoMonAn);
+        model.addAttribute("doiTac", doiTac);
+        model.addAttribute("nguoiDung", nguoiDung);
+
+        // Tạo đơn đặt bàn mới
+        DonDatBan donDatBan = new DonDatBan();
+        donDatBan.setMadt(doiTac.getMadt());
+        donDatBan.setMand(mand);
+        donDatBan.setMacb(id);
+        donDatBan.setSolgnguoi(1);
+        donDatBan.setThoigiandat(new Time(System.currentTimeMillis()));
+        donDatBan.setNgaydat(new Date(Calendar.getInstance().getTimeInMillis()));
+
+        model.addAttribute("donDatBan", donDatBan);
+
+        return "trangchu/dondatban";
+    }
 
     @PostMapping("/save")
     public String datBan(@Valid @ModelAttribute("donDatBan") DonDatBan donDatBan,
                          BindingResult bindingResult,
                          @RequestParam("thoigiandat") String thoigiandat,
                          @RequestParam("ngaydat") String ngaydat,
+                         @RequestParam("macn") Long macn,
                          RedirectAttributes redirectAttributes) {
         try {
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
@@ -257,6 +301,9 @@ private String getViewTrangChu(Model model, HttpSession session) {
             donDatBan.setNgaydat(dateFormat.parse(ngaydat));
             donDatBan.setMattd(1L); // Assuming 1 is the initial status
             donDatBan.setSotien(0.0); // Initial amount
+
+            ChiNhanh chiNhanh = chiNhanhService.getChiNhanhById(macn).orElse(null);
+            donDatBan.setChiNhanh(chiNhanh);
                     
             donDatBanService.saveDonDatBan(donDatBan);
             redirectAttributes.addFlashAttribute("successMessage", "Đặt bàn thành công");

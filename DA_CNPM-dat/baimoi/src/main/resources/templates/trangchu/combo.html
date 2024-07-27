@@ -26,10 +26,11 @@
             </div>
             <div class="gia" th:text="${combo.giatien}">
             </div>
-            <div class="slnguoidung" th:text="'Combo này dành cho' + ${combo.solgngdung}">
+            <div class="slnguoidung" th:text="'Combo này dành cho ' + ${combo.solgngdung} + ' người'">
             </div>
-            
-            <button>Chọn ngay đi</button>
+
+            <a  th:if="${session.loggedInUser != null}" th:href="@{/datban/combo/{id}(id=${combo.macb})}" >Đặt Bàn</a>
+            <a th:if="${session.loggedInUser == null}" th:href="@{/doitac/login-required}">Đặt Bàn</a>
         </div>
         
     </div>

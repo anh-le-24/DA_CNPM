@@ -29,7 +29,7 @@ body {
 .content-wrapper {
     display: flex;
     align-items: flex-start;
-    flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+    flex-wrap: nowrap; /* Allow content to wrap on smaller screens */
     margin: 30px 100px;
 
 }
