@@ -12,5 +12,5 @@ import com.example.baimoi.model.NguoiDung;
 public interface NguoidungRepository extends JpaRepository<NguoiDung, Long> {
     Optional<NguoiDung> findBySdtAndPassword(String sdt, String password);
     List<NguoiDung> findByHotenContainingIgnoreCase(String hoten);
-
+    NguoiDung findByEmail(String email);
 }

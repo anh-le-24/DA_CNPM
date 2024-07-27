@@ -14,6 +14,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class NguoiDungService {
+    
     @Autowired
     private NguoidungRepository nguoidungRepository;
 
@@ -26,8 +27,7 @@ public class NguoiDungService {
         return nguoidungRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
-
-    public List<NguoiDung> getAllNguoiDung(){
+    public List<NguoiDung> getAllNguoiDung() {
         return nguoidungRepository.findAll();
     }
 
@@ -63,7 +63,14 @@ public class NguoiDungService {
         return nguoidungRepository.findByHotenContainingIgnoreCase(hoten);
     }
 
-    //đổi mật khẩu
-    
-    
+    // Đổi mật khẩu
+    public boolean changePassword(long mand, String oldPassword, String newPassword) {
+        NguoiDung nguoiDung = nguoidungRepository.findById(mand).orElse(null);
+        if (nguoiDung != null && nguoiDung.getPassword().equals(oldPassword)) {
+            nguoiDung.setPassword(newPassword);
+            nguoidungRepository.save(nguoiDung);
+            return true;
+        }
+        return false;
+    }
 }
