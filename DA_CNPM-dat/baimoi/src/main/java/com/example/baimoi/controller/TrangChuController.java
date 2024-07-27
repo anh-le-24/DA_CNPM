@@ -248,8 +248,13 @@ private String getViewTrangChu(Model model, HttpSession session) {
                          BindingResult bindingResult,
                          @RequestParam("thoigiandat") String thoigiandat,
                          @RequestParam("ngaydat") String ngaydat,
-                         RedirectAttributes redirectAttributes) {
+                         RedirectAttributes redirectAttributes,
+                         HttpSession session) {
         try {
+            Long madt = donDatBan.getMadt();
+
+            Long mand = (Long) session.getAttribute("mand");
+
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     
@@ -260,6 +265,13 @@ private String getViewTrangChu(Model model, HttpSession session) {
                     
             donDatBanService.saveDonDatBan(donDatBan);
             redirectAttributes.addFlashAttribute("successMessage", "Đặt bàn thành công");
+
+            thongBaoService.createThongBao(mand, "Đang chờ xác nhận đơn đặt bàn",
+    "Chúng tôi đã nhận được đơn đặt bàn của bạn, chúng tôi sẽ liên hệ lại với bạn sớm nhất có thể.");
+
+            thongBaoService.createThongBao(madt, "Bạn có đơn đặt bàn mới",
+            "vui lòng kiểm tra đơn đặt bàn mới!");
+
             return "redirect:/datthanhcong";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Có lỗi xảy ra khi đặt bàn: " + e.getMessage());
