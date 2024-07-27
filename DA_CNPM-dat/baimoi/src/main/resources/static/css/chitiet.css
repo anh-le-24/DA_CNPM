@@ -20,12 +20,10 @@ body {
 }
 
 .container {
-padding-left: 100px;
-    /* padding: 2rem; */
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
+    padding: 10px 0 30px 100px;
     min-height: 10vh;
+    background-color: rgb(227, 226, 226);
+
 }
 
 .content-wrapper {
