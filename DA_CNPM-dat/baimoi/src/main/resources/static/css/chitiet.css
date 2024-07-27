@@ -20,7 +20,7 @@ body {
 }
 
 .container {
-    padding: 10px 0 30px 100px;
+    padding:20px 50px;
     min-height: 10vh;
     background-color: rgb(227, 226, 226);
 
@@ -30,6 +30,8 @@ body {
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+    margin: 30px 100px;
+
 }
 
 .slider-wrapper {
@@ -134,13 +136,9 @@ body {
 }
 
 .detail-box {
-    /* margin-bottom: 10px;
-    padding-left: 5%;
-    padding-right: 5%; 
-    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.1); */
     position: relative;
     margin-bottom: 10px;
-    padding: 20px 5%; /* Increased top padding to accommodate the button */
+    padding: 20px; /* Increased top padding to accommodate the button */
     box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.1);
     
 }
@@ -151,7 +149,12 @@ body {
     color: #333;
     padding-bottom: 5px;
 }
-
+.detail-box a{
+    margin: 0.25rem 0;
+    font-size: 1.5rem; 
+    font-style: italic;
+    color: rgb(36, 133, 197);    
+}
 .detail-box p {
     margin: 0.25rem 0;
     font-size: 1.5rem; 
@@ -348,12 +351,13 @@ body {
     background-color: red;
     color: white;
 }
-.fm-btndatban{
+.datban .fm-btndatban{
+    font-style: italic;
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
-    right: 40px; /* Changed from 20px to 30px */
+    right: 200px; /* Changed from 20px to 30px */
     padding: 10px 20px;
     text-decoration: none;
     font-size: 20px;
