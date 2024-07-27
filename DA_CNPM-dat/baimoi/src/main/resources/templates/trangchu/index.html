@@ -33,9 +33,9 @@
                     <label for="thanhpho">Thành phố:</label>
                     <select id="thanhpho" name="thanhpho">
                         <option value="">Chọn thành phố</option>
-                        <option value="Hà Nội">Hà Nội</option>
-                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                        <option value="Đà Nẵng">Đà Nẵng</option>
+                        <option value="TP. Hà Nội">Hà Nội</option>
+                        <option value="TP. Hồ Chí Minh">Hồ Chí Minh</option>
+                        <option value="TP. Đà Nẵng">Đà Nẵng</option>
                         <!-- Thêm các thành phố khác nếu cần -->
                     </select>
 
@@ -50,13 +50,11 @@
                 <div class="menu-container">
                     <div class="menu" th:each="loainhahang : ${loainhahangs}" th:if="${loainhahang != null}">
                         <a th:href="@{/loc-theo-loai/{malnh}(malnh=${loainhahang.malnh})}">
-                        <div  class="menu-item">
-                            <img th:src="@{/uploads/{imgmota}(imgmota=${loainhahang.imgmota})}" alt="Mô tả ảnh">
-                            <p th:text="${loainhahang.tenlnh}">
-                                
-                            </p>
-                        </div>
-                     </a>
+                            <div  class="menu-item">
+                                <img th:src="@{/uploads/{imgmota}(imgmota=${loainhahang.imgmota})}" alt="Mô tả ảnh">
+                                <p th:text="${loainhahang.tenlnh}"></p>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
@@ -64,12 +62,12 @@
 
                 <!--Box1-->
                <!-- Kiểm tra điều kiện và hiển thị tiêu đề nếu thỏa mãn -->
-            <div th:if="${doiTacs.size() > 0}">
-                <div th:if="${doiTacs.get(0).nguoiDung.mapq == 3 && doiTacs.get(0).madv == 1 && doiTacs.get(0).mabv != null }">
-                    <h2>Buffet hải sản</h2>
-                    <p>Menu cực nhiều món ngon từ tôm, cua, ốc, ghẹ,... với nhiều mức giá. Một số Nhà hàng còn có tôm hùm, cua biển. Từ bình dân đến sang chảnh.</p>
+                <div >
+                    <div >
+                        <h2>Buffet hải sản</h2>
+                        <p>Menu cực nhiều món ngon từ tôm, cua, ốc, ghẹ,... với nhiều mức giá. Một số Nhà hàng còn có tôm hùm, cua biển. Từ bình dân đến sang chảnh.</p>
+                    </div>
                 </div>
-            </div>
                 
                 <div class="pagebox">
                     <!-- Lặp qua danh sách doiTacs để hiển thị từng đối tác thỏa mãn điều kiện -->
@@ -91,11 +89,12 @@
                     </div>
                 </div>
                 
-                 <!-- Box2 -->
-                 <!-- <div th:if="${doiTacs.size() > 0}">
-                    <div th:if="${doiTacs.get(0).nguoiDung.mapq == 3 && doiTacs.get(0).madv == 2 && doiTacs.get(0).mabv != null }">
-                    <h2>Nhà Hàng da đạng giá. Ưu đãi bất ngờ!</h2>
-                    <p>Buffet chay, Buffet trưa, Buffet hải sản, buffet nướng, buffet lẩu,... cho ăn gia đình, liên hoan văn phòng, tiếp khách,....</p>
+                 <!-- Box2  -->
+                <div >
+                    <div >
+                        <h2>Nhà Hàng da đạng giá. Ưu đãi bất ngờ!</h2>
+                        <p>Buffet chay, Buffet trưa, Buffet hải sản, buffet nướng, buffet lẩu,... cho ăn gia đình, liên hoan văn phòng, tiếp khách,....</p>
+                    </div>
                 </div>
                 
                 <div class="pagebox">
@@ -105,22 +104,21 @@
                                 <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
                             </div>
                             
-                                <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
-                            
-                            
+                            <h4 style="font-size: large;" class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
                             <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
-                            <div>
+                            <div style="padding: 0px 90px;">
                                 <button type="button" class="fm-btn">Đặt bàn</button>
                             </div>
                         </a>
                     </div>
-                </div> -->
+                </div>
 
                 <!--Box3-->
-                <!-- <div th:if="${doiTacs.size() > 0}">
-                    <div th:if="${doiTacs.get(0).nguoiDung.mapq == 3 && doiTacs.get(0).madv == 3 && doiTacs.get(0).mabv != null }">
-                    <h2>Nhà Hàng cho tụ họp, liên hoan, tiếp khách</h2>
-                    <p>Gồm cả các nhà hàng hải sản, quán chay, món Nhật, món Thái, món Trung... Phục vụ buffet hoặc gọi món. Nhiều mức giá.</p>
+                <div >
+                    <div>
+                        <h2>Nhà Hàng cho tụ họp, liên hoan, tiếp khách</h2>
+                        <p>Gồm cả các nhà hàng hải sản, quán chay, món Nhật, món Thái, món Trung... Phục vụ buffet hoặc gọi món. Nhiều mức giá.</p>
+                    </div> 
                 </div>
                 
                 <div class="pagebox">
@@ -129,23 +127,20 @@
                             <div class="box2">
                                 <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
                             </div>
-                            
-                                <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
-                            
-                            
+                            <h4 style="font-size: large;" class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
                             <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
-                            <div>
+                            <div style="padding: 0px 90px;">
                                 <button type="button" class="fm-btn">Đặt bàn</button>
                             </div>
                         </a>
                     </div>
-                </div> -->
+                </div>
                 <!--Box4-->
-                <!-- <div th:if="${doiTacs.size() > 0}">
-                    <div th:if="${doiTacs.get(0).nguoiDung.mapq == 3 && doiTacs.get(0).madv == 4 && doiTacs.get(0).mabv != null }">
-                    <h2>Top QUÁN NHẬU vừa ngon vừa chill. CỰC ĐÃ!</h2>
-                    <p>
-                        Món nhậu ngon, đồ uống chất, bình dân tới cao cấp, cực chill. Nhiều góc view đẹp. Có cả rooftop. Mở cửa từ sáng đến khuya!</p>
+                <div>
+                    <div >
+                        <h2>Top QUÁN NHẬU vừa ngon vừa chill. CỰC ĐÃ!</h2>
+                        <p>Món nhậu ngon, đồ uống chất, bình dân tới cao cấp, cực chill. Nhiều góc view đẹp. Có cả rooftop. Mở cửa từ sáng đến khuya!</p>
+                    </div>
                 </div>
                 
                 <div class="pagebox">
@@ -155,42 +150,19 @@
                                 <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
                             </div>
                             
-                                <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
-                            
-                            
+                            <h4 style="font-size: large;" class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
                             <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
-                            <div>
+                            <div style="padding: 0px 90px;">
                                 <button type="button" class="fm-btn">Đặt bàn</button>
                             </div>
                         </a>
                     </div>
-                </div> -->
-                <!--Box4-->
-                <!-- <div th:if="${doiTacs.size() > 0}">
-                    <div th:if="${doiTacs.get(0).nguoiDung.mapq == 3 && doiTacs.get(0).madv == 5 && doiTacs.get(0).mabv != null }">
-                    <h2>TOP Quán ăn GIA ĐÌNH siêu ngon, các bé thích mê!</h2>
-                    <p>Đồ ăn ngon, không gian ấm cúng. Có phòng riêng hoặc khu vực riêng, ít người qua lại, phù hợp cho cả trẻ nhỏ, người già.</p>
                 </div>
                 
-                <div class="pagebox">
-                    <div class="box1" th:each="doiTac : ${doiTacs}" th:if="${doiTac.nguoiDung.mapq == 3 && doiTac.madv == 5 && doiTac.mabv != null }" >
-                        <a th:href="@{/ctnhahang/{id} (id = ${doiTac.madt})}">
-                            <div class="box2">
-                                <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
-                            </div>
-                            <h3 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h3>
-                            <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
-                            <div style="justify-content: center;width: 100%; display: flex;">
-                                <button type="button" class="fm-btn">Đặt bàn</button>
-                               </div>
-                        </a>
-                    </div>
-                </div> -->
-
             </div>
         </div>
         <!-- -----Tool Box ------- -->
-        <div style="margin: 0px;" class="pagebox manhinh3">
+        <div style="margin: 0;" class="pagebox manhinh3">
             <div class="footer">
                 <div class="div-main-ele">
                     <h3>FOLLOW US</h3>

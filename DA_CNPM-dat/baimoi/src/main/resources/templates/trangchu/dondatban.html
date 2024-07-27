@@ -60,7 +60,7 @@
             </div>
             <div class="form-group">
                 <label for="special-requests">Quý khách muốn thay đổi chi nhanh đến nhà hàng:</label>
-                <select class="form-control" name="madv" required>
+                <select class="form-control" name="madv" >
                     <option value="" disabled selected>Chọn chi nhánh</option>
                     <option th:each="chiNhanh : ${doiTac.chiNhanhs}" th:value="${chiNhanh.macn}" th:text="${chiNhanh.tencn}"></option>
                 </select>
