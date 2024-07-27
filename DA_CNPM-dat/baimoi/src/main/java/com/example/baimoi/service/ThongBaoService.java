@@ -33,5 +33,7 @@ public class ThongBaoService {
     public void deleteByNguoiDungMand(Long mand) {
         thongBaoReponsitory.deleteByNguoiDungMand(mand);
     }
-
+    public void deleteThongBao(Long id) {
+        thongBaoReponsitory.deleteById(id);
+    }
 }
