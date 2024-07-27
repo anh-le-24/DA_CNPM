@@ -3,28 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>ĐẶT BÀN THÀNH CÔNG</title>
-    <style>
-        body{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-content: center;
-        }
-
-    </style>
+    <link th:href="@{/css/datthanhcong.css}" rel="stylesheet" />
+    
 </head>
 <body>
-    <h1>
-        Quý khách đã đặt bàn thành công
-    </h1>
-    <h1>
-        Cảm ơn quý khách !!
-    </h1>
-    <h1>
-        Nhà hàng sẽ liên lạc với đối tác sớm nhất !!!!!
-    </h1>
-    <a th:href="@{/trangchu}"> Quay về trang chủ</a>
-    
+    <div class="container">
+        <h1>
+            Quý khách đã đặt bàn thành công
+        </h1>
+        <h1>
+            Cảm ơn quý khách !!
+        </h1>
+        <h1>
+            Nhà hàng sẽ liên lạc với đối tác sớm nhất !!!!!
+        </h1>
+        <a th:href="@{/trangchu}"> Quay về trang chủ</a>
+    </div>
 </body>
 </html>

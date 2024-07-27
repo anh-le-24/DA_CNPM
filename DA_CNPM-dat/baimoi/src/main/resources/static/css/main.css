@@ -330,6 +330,7 @@ body {
 /* Man Hinh 1 */
 
 .pagebox{
+  
   display: flex;
   width: 100%;
   height: auto;
@@ -343,6 +344,9 @@ body {
   scroll-snap-type: x mandatory;
   background-color: whitesmoke;
   
+}
+.pagebox a {
+  text-decoration: none;
 }
 
 /* sua lai width height */
@@ -365,37 +369,38 @@ body {
   border-radius: 10px;
 }
 .fix-img{
-  width: 100%; 
-  height: 100%; 
+  width: 100%;
+  height: 100%;
   object-fit:fill; 
   border-radius: 10px;
-} 
+}   
 .tieuDe-nhaHang{
+  font-size: large;
 font-weight: bold;
-font-size: medium;
 margin: 5px 0;
 text-decoration: none;
-height: 40px;
+height: 50px;
 }
 .box1:hover{
   transition: 0.2s;
   color: red;
 }
 .diaChi-nhaHang{
-font-size: 12px;
+font-size: 14px;
 color: #717070;
 margin: 3px 2px;
-height: 80px;
+height: 70px;
 }
 .fm-btn{
-padding: 5px;
+
 background-color: white;
 color: red;
 font-weight: 500;
 border: 2px solid red;
 border-radius: 5px;
-color: black;
+color: black; 
 text-decoration: none;
+
 cursor: pointer;
 height: 30px;
 }

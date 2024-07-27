@@ -29,5 +29,48 @@
             <button class="update-btn" type="submit">Cập Nhật</button>
         </form>
     </div>
+    <script>
+        function validatePassword(password) {
+            const minLength = 8;
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumber = /\d/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            
+            return password.length >= minLength && hasLowerCase && hasNumber && hasSpecialChar;
+        }
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const passwordError = document.getElementById('password-error');
+            const confirmPasswordError = document.getElementById('confirm-password-error');
+            let isValid = true;
+            
+            if (!validatePassword(password)) {
+                passwordError.textContent = 'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ thường, số và ký tự đặc biệt.';
+                isValid = false;
+            } else {
+                passwordError.textContent = '';
+            }
+
+            if (password !== confirmPassword) {
+                confirmPasswordError.textContent = 'Mật khẩu nhập lại không khớp.';
+                isValid = false;
+            } else {
+                confirmPasswordError.textContent = '';
+            }
+
+            return isValid;
+        }
+
+        // Kiểm tra mật khẩu khi người dùng nhập
+        document.getElementById('password').addEventListener('input', function() {
+            validateForm();
+        });
+
+        // Kiểm tra mật khẩu nhập lại khi người dùng nhập
+        document.getElementById('confirm-password').addEventListener('input', function() {
+            validateForm();
+        });
+    </script>
 </body>
 </html>

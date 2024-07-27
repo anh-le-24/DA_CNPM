@@ -49,12 +49,14 @@
                 <!---------  Loại Nhà Hàng  --------->
                 <div class="menu-container">
                     <div class="menu" th:each="loainhahang : ${loainhahangs}" th:if="${loainhahang != null}">
-                        <div class="menu-item">
+                        <a th:href="@{/loc-theo-loai/{malnh}(malnh=${loainhahang.malnh})}">
+                        <div  class="menu-item">
                             <img th:src="@{/uploads/{imgmota}(imgmota=${loainhahang.imgmota})}" alt="Mô tả ảnh">
-                            <p>
-                                <a th:href="@{/loc-theo-loai/{malnh}(malnh=${loainhahang.malnh})}" th:text="${loainhahang.tenlnh}"></a>
+                            <p th:text="${loainhahang.tenlnh}">
+                                
                             </p>
                         </div>
+                     </a>
                     </div>
                 </div>
 
@@ -177,12 +179,9 @@
                             <div class="box2">
                                 <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
                             </div>
-                            
-                                <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
-                            
-                            
+                            <h3 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h3>
                             <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
-                            <div>
+                            <div style="justify-content: center;width: 100%; display: flex;">
                                 <button type="button" class="fm-btn">Đặt bàn</button>
                             </div>
                         </a>
