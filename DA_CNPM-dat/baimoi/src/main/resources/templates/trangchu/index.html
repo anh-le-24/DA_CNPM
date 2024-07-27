@@ -72,7 +72,6 @@
             </div>
                 
                 <div class="pagebox">
-                
                     <!-- Lặp qua danh sách doiTacs để hiển thị từng đối tác thỏa mãn điều kiện -->
                     <div th:each="doiTac : ${doiTacs}">
                         <div th:if="${doiTac.nguoiDung.mapq == 3 && doiTac.madv == 1 && doiTac.mabv != null}">
@@ -81,27 +80,19 @@
                                     <div class="box2">
                                         <img class="fix-img" th:src="@{/uploads/{imgmota}(imgmota=${doiTac.imgmota})}"/>
                                     </div>
-                                    <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
+                                    <h4 style="font-size: large;" class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
                                     <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
-                                    <div>
+                                    <div style="padding: 0px 90px;">
                                         <button type="button" class="fm-btn">Đặt bàn</button>
                                     </div>
                                 </a>
                             </div>
-                            
-                                <h4 class="tieuDe-nhaHang" th:text="${doiTac.tennhahang}"></h4>
-                            
-                            
-                            <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
-                            <div style="padding: 0px 90px;">
-                                <button type="button" class="fm-btn">Đặt bàn</button>
-                            </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
                 
-                 <!--Box2-->
-                 <div th:if="${doiTacs.size() > 0}">
+                 <!-- Box2 -->
+                 <!-- <div th:if="${doiTacs.size() > 0}">
                     <div th:if="${doiTacs.get(0).nguoiDung.mapq == 3 && doiTacs.get(0).madv == 2 && doiTacs.get(0).mabv != null }">
                     <h2>Nhà Hàng da đạng giá. Ưu đãi bất ngờ!</h2>
                     <p>Buffet chay, Buffet trưa, Buffet hải sản, buffet nướng, buffet lẩu,... cho ăn gia đình, liên hoan văn phòng, tiếp khách,....</p>
@@ -123,10 +114,10 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div> -->
 
                 <!--Box3-->
-                <div th:if="${doiTacs.size() > 0}">
+                <!-- <div th:if="${doiTacs.size() > 0}">
                     <div th:if="${doiTacs.get(0).nguoiDung.mapq == 3 && doiTacs.get(0).madv == 3 && doiTacs.get(0).mabv != null }">
                     <h2>Nhà Hàng cho tụ họp, liên hoan, tiếp khách</h2>
                     <p>Gồm cả các nhà hàng hải sản, quán chay, món Nhật, món Thái, món Trung... Phục vụ buffet hoặc gọi món. Nhiều mức giá.</p>
@@ -148,9 +139,9 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div> -->
                 <!--Box4-->
-                <div th:if="${doiTacs.size() > 0}">
+                <!-- <div th:if="${doiTacs.size() > 0}">
                     <div th:if="${doiTacs.get(0).nguoiDung.mapq == 3 && doiTacs.get(0).madv == 4 && doiTacs.get(0).mabv != null }">
                     <h2>Top QUÁN NHẬU vừa ngon vừa chill. CỰC ĐÃ!</h2>
                     <p>
@@ -173,9 +164,9 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div> -->
                 <!--Box4-->
-                <div th:if="${doiTacs.size() > 0}">
+                <!-- <div th:if="${doiTacs.size() > 0}">
                     <div th:if="${doiTacs.get(0).nguoiDung.mapq == 3 && doiTacs.get(0).madv == 5 && doiTacs.get(0).mabv != null }">
                     <h2>TOP Quán ăn GIA ĐÌNH siêu ngon, các bé thích mê!</h2>
                     <p>Đồ ăn ngon, không gian ấm cúng. Có phòng riêng hoặc khu vực riêng, ít người qua lại, phù hợp cho cả trẻ nhỏ, người già.</p>
@@ -191,19 +182,19 @@
                             <p class="diaChi-nhaHang" th:text="${doiTac.getFullAddress()}"></p>
                             <div style="justify-content: center;width: 100%; display: flex;">
                                 <button type="button" class="fm-btn">Đặt bàn</button>
-                            </div>
+                               </div>
                         </a>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
         <!-- -----Tool Box ------- -->
-        <div class="pagebox manhinh3">
+        <div style="margin: 0px;" class="pagebox manhinh3">
             <div class="footer">
                 <div class="div-main-ele">
                     <h3>FOLLOW US</h3>
-                    <div class="div-follow">
+                    <div class="div-follow"> 
                         <div class="wrapper">
                             <a class="facebook icon fm-link" th:href="@{https://www.facebook.com/pasgo.vn}" target="_blank">f</a>                        
                             <a class="icon zalo fm-link" th:href="@{https://www.tiktok.com/@pasgovietnam}" target="_blank">Z</a>                       
