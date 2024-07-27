@@ -374,15 +374,18 @@ public class TrangChuController {
 
     //lọcs
     @GetMapping("/loc")
-    public String filterDoiTac(
-            @RequestParam(required = false) String thanhpho,
-            @RequestParam(required = false) String hoadon,
+    public String loc(
+            @RequestParam(value = "thanhpho", required = false) String thanhpho,
+            @RequestParam(value = "hoadon", required = false) String hoadon,
             Model model) {
 
-        List<DoiTac> filteredDoiTacs = doiTacService.filterDoiTac(thanhpho,hoadon);
-        model.addAttribute("doiTacs", filteredDoiTacs);
-        return "trangchu/index";    
-    }   
+        // Thực hiện lọc dữ liệu
+        List<DoiTac> doiTacs = doiTacService.locTheoTieuChi(thanhpho, hoadon);
+        
+        model.addAttribute("doiTacs", doiTacs);
+        
+        return "trangchu/index"; 
+    }
     
     @GetMapping("/loc-theo-loai/{malnh}")
     public String locTheoLoai(@PathVariable("malnh") Long loaiNhaHangId, Model model, HttpSession session) {
