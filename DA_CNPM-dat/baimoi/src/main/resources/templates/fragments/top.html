@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/thongbao.js"></script>
 </head>
 <body>
     <div class="navfixtop" th:fragment="top">
@@ -13,11 +14,8 @@
                 <a href="#news">News</a>
                 <a href="#contact">Contact</a>
             </div>
-
-
             <!--Thông báo-->
             <img th:if="${session.loggedInUser}" id="canhanImage" th:src="@{/images/canhan.png}">
-
             <div id="overlay" style="display: none;">
                 <form id="thongbaoForm" class="thongbao-container">
                     <div th:each="thongBao : ${thongBaos}" class="thongbao-item">
@@ -37,28 +35,22 @@
                             <span th:text="${#dates.format(thongBao.thoigian, 'HH:mm:ss')}">Thời gian</span>
                         </div>
                         <div>
-                            <a>xóa</a>
+                            <button type="button" th:onclick="'xoaThongBao(' + ${thongBao.matb} + ')'">Xóa</button>
                         </div>
                     </div>
                 </form>
             </div>
-
-
             <div class="nav_button">
                 <div th:if="${session.loggedInUser}">
                     <div class="account-menu">
                         <a th:href="@{/info}">
-                            <button  class="btnac" th:text="${'Xin chào, ' + session.loggedInUser.hoten}"></button>
+                            <button class="btnac" th:text="${'Xin chào, ' + session.loggedInUser.hoten}"></button>
                         </a>
                     </div>
                 </div>
                 <div class="fm-topright" th:unless="${session.loggedInUser}">
-                    <a class="btn-dn" th:href="@{/login}">
-                        Đăng nhập
-                    </a>
-                    <a class="btn-dk" th:href="@{/register}">
-                        Đăng ký
-                    </a>
+                    <a class="btn-dn" th:href="@{/login}">Đăng nhập</a>
+                    <a class="btn-dk" th:href="@{/register}">Đăng ký</a>
                 </div>
             </div>
         </div> 

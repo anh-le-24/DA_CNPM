@@ -24,14 +24,15 @@ public interface DoiTacRepository extends JpaRepository<DoiTac, Long> {
     //list để tìm kiếm
     List<DoiTac> findByTennhahangContainingIgnoreCase(String tennhahang);
     List<DoiTac> findBySonhanhContainingIgnoreCaseOrDuongnhContainingIgnoreCaseOrQuannhContainingIgnoreCaseOrThanhphonhContainingIgnoreCase(String sonhanh, String duongnh, String quannh, String thanhphonh);
+        // lọc
+        
+    List<DoiTac> findByThanhphonhAndHoadontb(String thanhphonh, String hoadon);
 
-    @Query("SELECT d FROM DoiTac d WHERE "
-            + "(:thanhpho IS NULL OR d.thanhphonh = :thanhpho) AND "
-            + "(:hoadon IS NULL OR d.hoadontb = :hoadon)")
-    List<DoiTac> findByCriteria(
-            @Param("thanhpho") String thanhpho,
-            @Param("hoadon") String hoadon);
+    List<DoiTac> findByThanhphonh(String thanhphonh);
 
+    List<DoiTac> findByHoadontb(String hoadon);
+    
+        // lọc theo loại 
     @Query("SELECT d FROM DoiTac d JOIN d.loaiNhaHangs lnh WHERE lnh.id = :loaiNhaHangId")
     List<DoiTac> findByLoaiNhaHang(@Param("loaiNhaHangId") Long loaiNhaHangId);    
     

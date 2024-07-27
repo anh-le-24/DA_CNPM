@@ -70,7 +70,7 @@
                                     style="background-color: red;"  class="btnXN" type="button">Hủy</button>
                                 <button th:if="${donDatBan.trangThaiDon.mattd != 1 && donDatBan.trangThaiDon.mattd != 3 || donDatBan.madg != null}"  class="btnXN" th:text="${donDatBan.trangThaiDon.noidung}" style="cursor: not-allowed;" disabled></button>
                                 <a th:if="${donDatBan.trangThaiDon.mattd == 3 && donDatBan.madg == null}" th:href = "@{/danhgia/{id}(id = ${donDatBan.maddb})}">
-                                    <button type="submit" class="btnXN" style="background-color: #f0e51b;">Đánh giá</button>
+                                    <button type="submit" class="btnXN" style="color: black ;background-color: #f0e51b;">Đánh giá</button>
                                 </a>
                             </td>
                         </tr>

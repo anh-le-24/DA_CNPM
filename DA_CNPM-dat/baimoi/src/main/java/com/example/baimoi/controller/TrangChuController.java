@@ -30,6 +30,7 @@ import com.example.baimoi.model.DonDatBan;
 import com.example.baimoi.model.LoaiNhaHang;
 import com.example.baimoi.model.NguoiDung;
 import com.example.baimoi.model.ThongBao;
+import com.example.baimoi.service.ChiNhanhService;
 import com.example.baimoi.service.ComBoMonAnService;
 import com.example.baimoi.service.DanhGiaService;
 import com.example.baimoi.service.DoiTacService;
@@ -59,6 +60,10 @@ public class TrangChuController {
     private ThongBaoService thongBaoService;
     @Autowired
     private DanhGiaService danhGiaService;
+    @Autowired
+    private ChiNhanhService chiNhanhService;
+
+
     @GetMapping("/")
     public RedirectView redirectToTrangChu() {
         return new RedirectView("/trangchu");
@@ -66,20 +71,27 @@ public class TrangChuController {
     
 
     @GetMapping("/trangchu")
-    private String getViewTrangChu(Model model, HttpSession session){
-        // Lấy mã người dùng từ phiên làm việc
-        Long mand = (Long) session.getAttribute("mand");
+private String getViewTrangChu(Model model, HttpSession session) {
+    // Lấy mã người dùng từ phiên làm việc
+    Long mand = (Long) session.getAttribute("mand");
+
+    // Nếu người dùng đã đăng nhập (có mã người dùng)
+    if (mand != null) {
+        List<ThongBao> thongBaos = thongBaoService.getThongBaosByUserId(mand);
+        model.addAttribute("thongBaos", thongBaos);
         
-        // Nếu người dùng đã đăng nhập (có mã người dùng)
-        if (mand != null) {
-            List<ThongBao> thongBaos = thongBaoService.getThongBaosByUserId(mand);
-            model.addAttribute("thongBaos", thongBaos);
-        }
-        
-        model.addAttribute("loainhahangs", loaiNhaHangService.getAllLoaiNhaHang());
-        model.addAttribute("doiTacs", doiTacService.getAllDoitac());
-        return "trangchu/index";
+        // Lấy thông tin người dùng và thêm vào mô hình
+        NguoiDung nguoiDung = nguoiDungService.getNguoiDungBy(mand);
+        model.addAttribute("nguoiDung", nguoiDung);
     }
+
+    model.addAttribute("loainhahangs", loaiNhaHangService.getAllLoaiNhaHang());
+    model.addAttribute("doiTacs", doiTacService.getAllDoitac());
+
+    // Nếu người dùng chưa đăng nhập, không thêm thông tin người dùng vào mô hình
+    return "trangchu/index";
+}
+
 
     @GetMapping("/ctnhahang/{id}")
     private String getViewCTNhaHang(@PathVariable("id") Long id, Model model)
@@ -374,15 +386,18 @@ public class TrangChuController {
 
     //lọcs
     @GetMapping("/loc")
-    public String filterDoiTac(
-            @RequestParam(required = false) String thanhpho,
-            @RequestParam(required = false) String hoadon,
+    public String loc(
+            @RequestParam(value = "thanhpho", required = false) String thanhpho,
+            @RequestParam(value = "hoadon", required = false) String hoadon,
             Model model) {
 
-        List<DoiTac> filteredDoiTacs = doiTacService.filterDoiTac(thanhpho,hoadon);
-        model.addAttribute("doiTacs", filteredDoiTacs);
-        return "trangchu/index";    
-    }   
+        // Thực hiện lọc dữ liệu
+        List<DoiTac> doiTacs = doiTacService.locTheoTieuChi(thanhpho, hoadon);
+        
+        model.addAttribute("doiTacs", doiTacs);
+        
+        return "trangchu/index"; 
+    }
     
     @GetMapping("/loc-theo-loai/{malnh}")
     public String locTheoLoai(@PathVariable("malnh") Long loaiNhaHangId, Model model, HttpSession session) {

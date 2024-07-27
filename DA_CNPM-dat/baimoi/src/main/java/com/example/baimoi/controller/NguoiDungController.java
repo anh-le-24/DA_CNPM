@@ -85,12 +85,14 @@ public class NguoiDungController {
         }
     }
 
-
     @GetMapping("/search")
     public String search(@RequestParam(value = "hoten", required = false, defaultValue = "") String hoten, Model model) {
         List<NguoiDung> results = nguoiDungService.searchByHoten(hoten); // Đảm bảo phương thức tìm kiếm đúng tên
         model.addAttribute("nguoidungs", results);
         return "quanly/khachhang"; // Thay đổi tên view cho phù hợp
     }
+
+    //đổi mật khẩu
+   
 
 }
