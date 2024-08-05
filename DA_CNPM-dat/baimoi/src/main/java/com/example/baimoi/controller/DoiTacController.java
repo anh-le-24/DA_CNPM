@@ -594,4 +594,17 @@ public String getViewDangKyDoiTac(){
         return"/doitac/thongkedoitac";
     }
 
+    // Tìm kiếm
+    @GetMapping("/search")
+    public String search(@RequestParam(name = "query", required = false) String query, Model model) {
+        List<DoiTac> results;
+        if (query != null && !query.isEmpty()) {
+            results = doiTacService.searchByName(query);
+            results.addAll(doiTacService.searchByFullAddress(query));
+        } else {
+            results = doiTacService.getAllDoitac();
+        }
+        model.addAttribute("doiTacs", results);
+        return "/doitac/qldondatban/qldondaht";
+    }
 }
