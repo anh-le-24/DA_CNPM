@@ -7,6 +7,8 @@
     <link rel="stylesheet" th:href="@{/css/chitiet.css}">
     <link th:href="@{/css/main.css}" rel="stylesheet" />
     <link th:href="@{/css/thongbao.css}" rel="stylesheet" />
+    <link rel="icon" th:href="@{/images/iconweb.png}" type="image/x-icon">
+
     <script th:src="@{/js/nav.js}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -173,13 +175,18 @@
                         <h2>Tiện ích</h2>
                         <div th:utext="${doiTac.baiVietDT.ndtienich}"></div>
                     </section>
-                    <section id="chi-duong">
-                        <h2>Chỉ đường</h2>
-                        <a th:href="${doiTac.linkggmap}" target="_blank"> Địa chỉ</a>
-                    </section>
                     <section id="chi-tiet">
                         <h2>Chi tiết</h2>
                         <div th:utext="${doiTac.baiVietDT.ndchitiet}"></div>
+                    </section>
+                    <section id="chi-duong" style="display: flex; justify-content: center; margin-top: 20px;">   
+                        <a class="learn-more" th:href="${doiTac.linkggmap}" target="_blank" style="font-size: 20px;">
+                            <span aria-hidden="true" class="circle">
+                            <span class="icon arrow"></span>
+                            </span>
+                            <span class="button-text">Chỉ đường</span>
+                          </a>
+                                       
                     </section>
                 </div>
             </div>

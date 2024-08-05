@@ -249,6 +249,7 @@ body {
   align-items: center;
   gap: 10px;
   justify-content: center;
+  margin: 30px 10px;
 }
 
 #filterForm label {
@@ -463,13 +464,14 @@ text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
     width: 100%;
     height: auto;
     background-color: #b0adac;
+
 }
 .footer{
-  width: 100%;
+  width: 1500px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -562,4 +564,9 @@ text-decoration: none;
   background-color:white ;
   text-decoration: none;
   color: red;
+}
+
+.fm-search{
+  width: 50px;
+  background-color: white;
 }

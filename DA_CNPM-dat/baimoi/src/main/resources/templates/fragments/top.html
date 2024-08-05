@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/thongbao.js"></script>
+    <link rel="icon" th:href="@{/images/iconweb.png}" type="image/x-icon">
 </head>
 <body>
     <div class="navfixtop" th:fragment="top">
         <div class="contenttop">
             <div class="topnav" id="myTopnav">
                 <a th:href="@{/trangchu}" class="active">Trang chủ</a>
-                <a href="#news">News</a>
-                <a href="#contact">Contact</a>
+                
             </div>
             <!--Thông báo-->
-            <img th:if="${session.loggedInUser}" id="canhanImage" th:src="@{/images/canhan.png}">
+            <img th:if="${session.loggedInUser}" id="canhanImage" th:src="@{/images/aic.png}">
             <div id="overlay" style="display: none;">
                 <form id="thongbaoForm" class="thongbao-container">
                     <div th:each="thongBao : ${thongBaos}" class="thongbao-item">

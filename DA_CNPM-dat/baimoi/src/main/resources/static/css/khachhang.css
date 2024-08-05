@@ -11,28 +11,30 @@ body{
     justify-content: center;
     align-items: center;
     width: 800px;
+    
 
 }
 
 .timkiem input[type="text"] {
-    padding: 10px;
+    
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 60%;
     max-width: 500px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
 }
 
 .timkiem button {
-    padding: 10px 20px;
+    
     font-size: 14px;
     color: #fff;
     background-color: #007bff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 10px;
+    padding: 0px;
     transition: background-color 0.3s ease;
 }
 
@@ -68,14 +70,15 @@ body{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
     grid-auto-rows: 350px; 
-    grid-gap: 10px; 
+    grid-gap: 20px; 
     overflow: hidden;
+    
 }
 
 /**/
 .card{
-    background-color: #d2c6c2;
-    margin: 0;
+    background-color: white;
+    margin: 0px;
     border: 1px solid rgb(208, 202, 202);
     height: 350px;
     width: 200px;
@@ -201,7 +204,7 @@ form input[type="number"],
 form input[type="email"]{
     width: calc(100% - 22px); /* Để trừ đi padding và border */
     padding: 10px; 
-    margin: 5px 0 20px; 
+    
     border: 1px solid #ccc; 
     border-radius: 4px; 
     box-sizing: border-box; 

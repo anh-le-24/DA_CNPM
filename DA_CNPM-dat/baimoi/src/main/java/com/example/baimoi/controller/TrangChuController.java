@@ -290,7 +290,7 @@ private String getViewTrangChu(Model model, HttpSession session) {
     public String datBan(@Valid @ModelAttribute("donDatBan") DonDatBan donDatBan,
                          BindingResult bindingResult,
                          @RequestParam("thoigiandat") String thoigiandat,
-                         @RequestParam("macn") Long macn,
+                         @RequestParam(value = "macn", required = false) Long macn,
                          @RequestParam("ngaydat") String ngaydat,
                          HttpSession session,
                          RedirectAttributes redirectAttributes) {
@@ -307,8 +307,10 @@ private String getViewTrangChu(Model model, HttpSession session) {
             donDatBan.setMattd(1L); // Assuming 1 is the initial status
             donDatBan.setSotien(0.0); // Initial amount
 
-            ChiNhanh chiNhanh = chiNhanhService.getChiNhanhById(macn).orElse(null);
-            donDatBan.setChiNhanh(chiNhanh);
+            if (macn != null) {
+                ChiNhanh chiNhanh = chiNhanhService.getChiNhanhById(macn).orElse(null);
+                donDatBan.setChiNhanh(chiNhanh);
+            }
                     
             donDatBanService.saveDonDatBan(donDatBan);
             redirectAttributes.addFlashAttribute("successMessage", "Đặt bàn thành công");

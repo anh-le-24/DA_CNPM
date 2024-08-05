@@ -57,9 +57,7 @@
     <div class="danhsachnguoidung">
         <div class="container">
             <div class="card" th:each="nguoidung : ${nguoidungs}">
-                <div class="anh">
-                    <img th:src="@{/imgages/icset.png}"></img>
-                </div>
+                
                 <div class="thongtin">
                     <p><span th:text="${nguoidung.hoten}"></span></p>
                     <p><span th:text="${nguoidung.sdt}"></span></p>
